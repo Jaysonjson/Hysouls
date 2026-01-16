@@ -15,6 +15,7 @@ public class EssenceHud extends CustomUIHud {
         this.souls = souls;
     }
 
+    //TODO: + Essence text, maybe on the right of the bar
     @Override
     protected void build(@NotNull UICommandBuilder var1) {
         var1.append("Souls.ui");

@@ -23,6 +23,11 @@ public class EssenceSystem extends FlockDeathSystems.EntityDeath {
         Damage damageInfo = component.getDeathInfo();
         if (damageInfo != null && damageInfo.getSource() instanceof Damage.EntitySource entitySource) {
             if(entitySource.getRef().isValid()) {
+
+               // Hysouls.LOGGER.atWarning().log(ref.getStore().getComponent(ref, EntityModule.get().getNameplateComponentType()).getText());
+               // EntityModule.get().
+               // Hysouls.LOGGER.atWarning().log( EntityModule.get().getIdentifier(npc.getClass()));
+
                 Ref<EntityStore> entityStoreRef = entitySource.getRef();
                 EssenceComponent essenceComponent = entityStoreRef.getStore().getComponent(entityStoreRef, ComponentTypes.ESSENCES);
                 if(essenceComponent != null) {

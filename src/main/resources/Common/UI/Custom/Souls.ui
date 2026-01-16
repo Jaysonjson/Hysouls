@@ -5,13 +5,17 @@ $Common = "Common.ui";
 Group {
     Group #MyPanel {
         Background: @MyTex;
-        Anchor: (Left: 25, Bottom: 25, Width: 286, Height: 57);
+        Anchor: (Left: 25, Bottom: 25, Width: 280, Height: 58);
         LayoutMode: Top;
 
 
         Label #SoulLabel {
-            Style: (FontSize: 28, Alignment: Center);
-            Anchor: (Top: 0);
+            Style: (
+                FontSize: 24,
+                VerticalAlignment: Center,
+                HorizontalAlignment: Center
+            );
+            Anchor: (Left: 8, Top: 4);
             Text: "0";
             Padding: (Full: 10);
         }

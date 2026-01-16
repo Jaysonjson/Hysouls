@@ -26,7 +26,6 @@ public class Hysouls extends JavaPlugin {
         ComponentTypes.ESSENCES = getEntityStoreRegistry().registerComponent(EssenceComponent.class, "Essences", EssenceComponent.CODEC);
 
         getEntityStoreRegistry().registerSystem(new EssenceSystem());
-
         //TODO: Mainly still just testing
         getEventRegistry().registerGlobal(PlayerConnectEvent.class, playerConnectEvent -> {
             if(playerConnectEvent.getHolder().getComponent(ComponentTypes.ESSENCES) == null) {
@@ -42,6 +41,8 @@ public class Hysouls extends JavaPlugin {
                 playerComponent.getHudManager().setCustomHud(playerConnectEvent.getPlayerRef(), new EssenceHud(playerConnectEvent.getPlayerRef(), souls));
             }
         });
-
     }
+
+
+
 }

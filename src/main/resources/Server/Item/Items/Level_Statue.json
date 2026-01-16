@@ -1,0 +1,84 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Level_Statue.name",
+    "Description": "server.items.Bench_Memories.description"
+  },
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Furniture.Benches"
+  ],
+  "Quality": "Developer",
+  "Icon": "Icons/ItemsGenerated/Bench_Memories.png",
+  "IconProperties": {
+    "Scale": 0.31,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      2.0,
+      -41.0
+    ]
+  },
+  "BlockType": {
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#bbbbaf",
+    "BlockSoundSetId": "Stone",
+    "CustomModel": "Blocks/Benches/Memory_Bench.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Benches/Memory_Bench_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "HitboxType": "Statue_Large",
+    "Material": "Solid",
+    "Opacity": "Transparent",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "VariantRotation": "NESW",
+    "Interactions": {
+      "Use": {
+        "Interactions": [
+          {
+            "Type": "OpenCustomUI"
+          }
+        ]
+      }
+    },
+    "Particles": [
+      {
+        "SystemId": "ForgottenTemple_Beam",
+        "RotationOffset": {
+          "Pitch": 0.0,
+          "Roll": -90.0,
+          "Yaw": 0.0
+        },
+        "PositionOffset": {
+          "Y": 0.0
+        }
+      }
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Bench"
+    ]
+  },
+  "Scale": 0.6,
+  "MaxStack": 1,
+  "ItemSoundSetId": "ISS_Blocks_Stone"
+}
