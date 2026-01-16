@@ -11,12 +11,12 @@ import com.hypixel.hytale.server.core.modules.entitystats.asset.DefaultEntitySta
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.flock.FlockDeathSystems;
 import json.jayson.hysouls.components.ComponentTypes;
-import json.jayson.hysouls.components.SoulsComponent;
+import json.jayson.hysouls.components.EssenceComponent;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class SoulSystem extends FlockDeathSystems.EntityDeath {
+public class EssenceSystem extends FlockDeathSystems.EntityDeath {
 
     @Override
     public void onComponentAdded(@Nonnull Ref<EntityStore> ref, @Nonnull DeathComponent component, @Nonnull Store<EntityStore> store, @Nonnull CommandBuffer<EntityStore> commandBuffer) {
@@ -24,11 +24,11 @@ public class SoulSystem extends FlockDeathSystems.EntityDeath {
         if (damageInfo != null && damageInfo.getSource() instanceof Damage.EntitySource entitySource) {
             if(entitySource.getRef().isValid()) {
                 Ref<EntityStore> entityStoreRef = entitySource.getRef();
-                SoulsComponent soulsComponent = entityStoreRef.getStore().getComponent(entityStoreRef, ComponentTypes.soulsComponentType);
-                if(soulsComponent != null) {
+                EssenceComponent essenceComponent = entityStoreRef.getStore().getComponent(entityStoreRef, ComponentTypes.ESSENCES);
+                if(essenceComponent != null) {
                     EntityStatMap statMap = ref.getStore().getComponent(ref, EntityStatsModule.get().getEntityStatMapComponentType());
                     if(statMap != null) {
-                        soulsComponent.setSouls(entityStoreRef, (int) (soulsComponent.getSouls() + statMap.get(DefaultEntityStatTypes.getHealth()).getMax()));
+                        essenceComponent.setEssences(entityStoreRef, (int) (essenceComponent.getEssences() + statMap.get(DefaultEntityStatTypes.getHealth()).getMax()));
                     }
                 }
             }

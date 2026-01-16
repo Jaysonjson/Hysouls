@@ -7,10 +7,10 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import json.jayson.hysouls.Hysouls;
 import org.jetbrains.annotations.NotNull;
 
-public class SoulsHud extends CustomUIHud {
+public class EssenceHud extends CustomUIHud {
 
     int souls = 0;
-    public SoulsHud(@NotNull PlayerRef playerRef, int souls) {
+    public EssenceHud(@NotNull PlayerRef playerRef, int souls) {
         super(playerRef);
         this.souls = souls;
     }
@@ -22,7 +22,7 @@ public class SoulsHud extends CustomUIHud {
         Hysouls.LOGGER.atWarning().log("Test1");
     }
 
-    public void setSouls(int souls) {
+    public void setEssences(int souls) {
         this.souls = souls;
         UICommandBuilder builder = new UICommandBuilder();
         builder.set("#SoulLabel.TextSpans", Message.raw(souls + ""));

@@ -6,9 +6,9 @@ import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import json.jayson.hysouls.components.ComponentTypes;
-import json.jayson.hysouls.components.SoulsComponent;
-import json.jayson.hysouls.systems.SoulSystem;
-import json.jayson.hysouls.ui.SoulsHud;
+import json.jayson.hysouls.components.EssenceComponent;
+import json.jayson.hysouls.systems.EssenceSystem;
+import json.jayson.hysouls.ui.EssenceHud;
 
 public class Hysouls extends JavaPlugin {
 
@@ -23,23 +23,23 @@ public class Hysouls extends JavaPlugin {
     @Override
     protected void setup() {
 
-        ComponentTypes.soulsComponentType = getEntityStoreRegistry().registerComponent(SoulsComponent.class, "Souls", SoulsComponent.CODEC);
+        ComponentTypes.ESSENCES = getEntityStoreRegistry().registerComponent(EssenceComponent.class, "Essences", EssenceComponent.CODEC);
 
-        getEntityStoreRegistry().registerSystem(new SoulSystem());
+        getEntityStoreRegistry().registerSystem(new EssenceSystem());
 
         //TODO: Mainly still just testing
         getEventRegistry().registerGlobal(PlayerConnectEvent.class, playerConnectEvent -> {
-            if(playerConnectEvent.getHolder().getComponent(ComponentTypes.soulsComponentType) == null) {
-                playerConnectEvent.getHolder().addComponent(ComponentTypes.soulsComponentType, new SoulsComponent());
+            if(playerConnectEvent.getHolder().getComponent(ComponentTypes.ESSENCES) == null) {
+                playerConnectEvent.getHolder().addComponent(ComponentTypes.ESSENCES, new EssenceComponent());
             }
             Player playerComponent = playerConnectEvent.getHolder().getComponent(Player.getComponentType());
             if (playerComponent != null) {
                 int souls = 0;
-                SoulsComponent soulsComponent = playerConnectEvent.getHolder().getComponent(ComponentTypes.soulsComponentType);
-                if(soulsComponent != null) {
-                    souls = soulsComponent.getSouls();
+                EssenceComponent essenceComponent = playerConnectEvent.getHolder().getComponent(ComponentTypes.ESSENCES);
+                if(essenceComponent != null) {
+                    souls = essenceComponent.getEssences();
                 }
-                playerComponent.getHudManager().setCustomHud(playerConnectEvent.getPlayerRef(), new SoulsHud(playerConnectEvent.getPlayerRef(), souls));
+                playerComponent.getHudManager().setCustomHud(playerConnectEvent.getPlayerRef(), new EssenceHud(playerConnectEvent.getPlayerRef(), souls));
             }
         });
 

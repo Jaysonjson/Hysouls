@@ -5,6 +5,6 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 
 public class ComponentTypes {
 
-    public static ComponentType<EntityStore, SoulsComponent> soulsComponentType;
+    public static ComponentType<EntityStore, EssenceComponent> ESSENCES;
 
 }
