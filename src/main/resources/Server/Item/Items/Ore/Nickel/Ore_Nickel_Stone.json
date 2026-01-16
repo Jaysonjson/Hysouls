@@ -1,0 +1,79 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Ore_Nickel_Stone.name"
+  },
+  "Categories": [
+    "Blocks.Ores"
+  ],
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "CubeWithModel",
+    "CustomModel": "Resources/Ores/Ore_Large.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Resources/Ores/Ore_Textures/Nickel.png",
+        "Weight": 1
+      }
+    ],
+    "Group": "Stone",
+    "Flags": {},
+    "RandomRotation": "YawStep90",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks",
+        "DropList": {
+          "Container": {
+            "Type": "Multiple",
+            "Containers": [
+              {
+                "Type": "Single",
+                "Item": {
+                  "ItemId": "Ore_Nickel"
+                }
+              },
+              {
+                "Type": "Single",
+                "Item": {
+                  "ItemId": "Rock_Stone_Cobble"
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "BlockParticleSetId": "Stone",
+    "Textures": [
+      {
+        "Weight": 1,
+        "All": "BlockTextures/Rock_Stone.png"
+      }
+    ],
+    "ParticleColor": "#88886a",
+    "BlockSoundSetId": "Ore"
+  },
+  "PlayerAnimationsId": "Block",
+  "Icon": "Icons/ItemsGenerated/Ore_Nickel_Stone.png",
+  "Tags": {
+    "Type": [
+      "Ore"
+    ],
+    "Family": [
+      "Adamantite"
+    ]
+  },
+  "MaxStack": 25,
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  }
+}

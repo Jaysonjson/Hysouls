@@ -1,0 +1,19 @@
+$Common = "Common.ui";
+
+@MyTex = PatchStyle(TexturePath: "Soulsbar.png");
+
+Group {
+    Group #MyPanel {
+        Background: @MyTex;
+        Anchor: (Left: 25, Bottom: 25, Width: 286, Height: 57);
+        LayoutMode: Top;
+
+
+        Label #SoulLabel {
+            Style: (FontSize: 28, Alignment: Center);
+            Anchor: (Top: 0);
+            Text: "0";
+            Padding: (Full: 10);
+        }
+    }
+}

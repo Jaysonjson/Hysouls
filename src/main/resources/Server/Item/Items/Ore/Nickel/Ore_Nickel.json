@@ -1,0 +1,53 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Ore_Nickel.name",
+    "Description": "server.items.Ore_Nickel.description"
+  },
+  "Categories": [
+    "Blocks.Ores"
+  ],
+  "Recipe": {
+    "Input": [
+      {
+        "ResourceTypeId": "Salvage_Adamantite",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Processing",
+        "Id": "Salvagebench"
+      }
+    ],
+    "TimeSeconds": 4
+  },
+  "Model": "Resources/Ores/Ore_Large.blockymodel",
+  "Texture": "Resources/Ores/Ore_Textures/Nickel.png",
+  "Quality": "Common",
+  "ItemLevel": 10,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.57323,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      -3.6,
+      -16.2
+    ]
+  },
+  "Icon": "Icons/ItemsGenerated/Ore_Nickel.png",
+  "Tags": {
+    "Type": [
+      "Ore"
+    ]
+  },
+  "ItemEntity": {
+    "ParticleSystemId": null
+  },
+  "MaxStack": 25,
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "DropOnDeath": true
+}

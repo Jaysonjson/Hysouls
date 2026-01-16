@@ -1,0 +1,8 @@
+server.items.Ingredient_Bar_Nickel.name = Nickel Ingot
+server.items.Ore_Nickel.name = Nickel Ore
+server.items.Ore_Nickel.description = WIP
+server.items.Ore_Nickel_Volcanic.name = Nickel Ore - Volcanic
+server.items.Ore_Nickel_Basalt.name = Nickel Ore - Basalt
+server.items.Ore_Nickel_Shale.name = Nickel Ore - Shale
+server.items.Ore_Nickel_Slate.name = Nickel Ore - Slate
+server.items.Ore_Nickel_Stone.name = Nickel Ore - Stone
