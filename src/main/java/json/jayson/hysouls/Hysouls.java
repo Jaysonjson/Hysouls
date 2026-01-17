@@ -7,6 +7,7 @@ import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceComponent;
+import json.jayson.hysouls.components.EssenceStatComponent;
 import json.jayson.hysouls.systems.EssenceSystem;
 import json.jayson.hysouls.ui.EssenceHud;
 
@@ -22,15 +23,15 @@ public class Hysouls extends JavaPlugin {
 
     @Override
     protected void setup() {
-
         ComponentTypes.ESSENCES = getEntityStoreRegistry().registerComponent(EssenceComponent.class, "Essences", EssenceComponent.CODEC);
+        ComponentTypes.ESSENCE_STAT = getEntityStoreRegistry().registerComponent(EssenceStatComponent.class, "EssencesStat", EssenceStatComponent.CODEC);
 
-        getEntityStoreRegistry().registerSystem(new EssenceSystem());
+        getEntityStoreRegistry().registerSystem(new EssenceSystem.EntityDeath());
         //TODO: Mainly still just testing
         getEventRegistry().registerGlobal(PlayerConnectEvent.class, playerConnectEvent -> {
-            if(playerConnectEvent.getHolder().getComponent(ComponentTypes.ESSENCES) == null) {
-                playerConnectEvent.getHolder().addComponent(ComponentTypes.ESSENCES, new EssenceComponent());
-            }
+            if(playerConnectEvent.getHolder().getComponent(ComponentTypes.ESSENCES) == null) playerConnectEvent.getHolder().addComponent(ComponentTypes.ESSENCES, new EssenceComponent());
+            if(playerConnectEvent.getHolder().getComponent(ComponentTypes.ESSENCE_STAT) == null) playerConnectEvent.getHolder().addComponent(ComponentTypes.ESSENCE_STAT, new EssenceStatComponent());
+
             Player playerComponent = playerConnectEvent.getHolder().getComponent(Player.getComponentType());
             if (playerComponent != null) {
                 int souls = 0;
@@ -38,6 +39,7 @@ public class Hysouls extends JavaPlugin {
                 if(essenceComponent != null) {
                     souls = essenceComponent.getEssences();
                 }
+                System.out.println("Custom HuD");
                 playerComponent.getHudManager().setCustomHud(playerConnectEvent.getPlayerRef(), new EssenceHud(playerConnectEvent.getPlayerRef(), souls));
             }
         });
