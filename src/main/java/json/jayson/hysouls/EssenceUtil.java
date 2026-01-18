@@ -3,7 +3,7 @@ package json.jayson.hysouls;
 public class EssenceUtil {
 
     public static int calculateRequiredEssences(int level) {
-        return (int) ((float)400 * Math.pow(1.03, level));
+        return (int) ((float)325 * Math.pow(1.03, level));
     }
 
     public static int calculateTotalRequiredEssence(int start, int wanted) {
