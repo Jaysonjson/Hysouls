@@ -4,7 +4,7 @@ $Common = "../Common.ui";
 
 $Common.@PageOverlay {
 $Common.@Container {
-Anchor: (Width: 674, Height: 425);
+Anchor: (Width: 665, Height: 430);
 #Title {
   Group {
     $Common.@Title {
