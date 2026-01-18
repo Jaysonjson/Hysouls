@@ -25,11 +25,11 @@ public class EssenceComponent implements Component<EntityStore> {
 
     @Nonnull
     public static final BuilderCodec<EssenceComponent> CODEC = BuilderCodec.builder(EssenceComponent.class, EssenceComponent::new)
-            .addField(
+            .append(
                     new KeyedCodec<>("Essences", Codec.INTEGER),
                     (essenceComponent, s) -> essenceComponent.essences = s,
                     essenceComponent -> essenceComponent.essences
-            )
+            ).add()
             .build();
 
     private int essences = 0;

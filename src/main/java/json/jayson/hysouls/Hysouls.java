@@ -5,6 +5,7 @@ import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import json.jayson.hysouls.commands.LevelUpPageCommand;
 import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceComponent;
 import json.jayson.hysouls.components.EssenceStatComponent;
@@ -26,6 +27,7 @@ public class Hysouls extends JavaPlugin {
         ComponentTypes.ESSENCES = getEntityStoreRegistry().registerComponent(EssenceComponent.class, "Essences", EssenceComponent.CODEC);
         ComponentTypes.ESSENCE_STAT = getEntityStoreRegistry().registerComponent(EssenceStatComponent.class, "EssencesStat", EssenceStatComponent.CODEC);
 
+        getCommandRegistry().registerCommand(new LevelUpPageCommand());
         getEntityStoreRegistry().registerSystem(new EssenceSystem.EntityDeath());
         //TODO: Mainly still just testing
         getEventRegistry().registerGlobal(PlayerConnectEvent.class, playerConnectEvent -> {

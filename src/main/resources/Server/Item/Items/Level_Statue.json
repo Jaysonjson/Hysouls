@@ -54,7 +54,8 @@
       "Use": {
         "Interactions": [
           {
-            "Type": "OpenCustomUI"
+            "Type": "OpenPage",
+            "Page": "None"
           }
         ]
       }

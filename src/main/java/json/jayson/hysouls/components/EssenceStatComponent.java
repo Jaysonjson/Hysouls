@@ -22,78 +22,81 @@ public class EssenceStatComponent implements Component<EntityStore> {
 
     }
 
-    public EssenceStatComponent(int vit, int dex, int inte) {
-        this.vitality = vit;
-        this.dexterity = dex;
-        this.intelligence = inte;
+    public EssenceStatComponent(int vig, int end, int mind) {
+        this.vigor = vig;
+        this.endurance = end;
+        this.mind = mind;
     }
 
     @Nonnull
     public static final BuilderCodec<EssenceStatComponent> CODEC = BuilderCodec.builder(EssenceStatComponent.class, EssenceStatComponent::new)
-            .addField(
-                    new KeyedCodec<>("Vitality", Codec.INTEGER),
-                    (essenceStatComponent, s) -> essenceStatComponent.vitality = s,
-                    essenceStatComponent -> essenceStatComponent.vitality
-            )
-            .addField(
-                    new KeyedCodec<>("Deterity", Codec.INTEGER),
-                    (essenceStatComponent, s) -> essenceStatComponent.dexterity = s,
-                    essenceStatComponent -> essenceStatComponent.dexterity
-            )
-
-            .addField(
-                    new KeyedCodec<>("Intelligence", Codec.INTEGER),
-                    (essenceStatComponent, s) -> essenceStatComponent.intelligence = s,
-                    essenceStatComponent -> essenceStatComponent.intelligence
-            )
+            .append(
+                    new KeyedCodec<>("Vigor", Codec.INTEGER),
+                    (essenceStatComponent, s) -> essenceStatComponent.vigor = s,
+                    essenceStatComponent -> essenceStatComponent.vigor
+            ).add()
+            .append(
+                    new KeyedCodec<>("Endurance", Codec.INTEGER),
+                    (essenceStatComponent, s) -> essenceStatComponent.endurance = s,
+                    essenceStatComponent -> essenceStatComponent.endurance
+            ).add()
+            .append(
+                    new KeyedCodec<>("Mind", Codec.INTEGER),
+                    (essenceStatComponent, s) -> essenceStatComponent.mind = s,
+                    essenceStatComponent -> essenceStatComponent.mind
+            ).add()
             .build();
 
 
-    private int vitality = 1;
-    private int dexterity = 1;
-    private int intelligence = 1;
+    private int vigor = 1;
+    private int endurance = 1;
+    private int mind = 1;
 
-    public int getDexterity() {
-        return dexterity;
+    public int getEndurance() {
+        return endurance;
     }
 
-    public int getVitality() {
-        return vitality;
+    public int getVigor() {
+        return vigor;
     }
 
-    public int getIntelligence() {
-        return intelligence;
+    public int getMind() {
+        return mind;
     }
 
     public int getLevel() {
-        return getVitality() + getDexterity() + getIntelligence();
+        return getVigor() + getEndurance() + getMind();
     }
 
-    public void setDexterity(int dexterity) {
-        this.dexterity = dexterity;
+    public static int calculateRequiredEssences(int level) {
+        return (int) ((float)86 * Math.pow(1.7, level - 1));
     }
 
-    public void setVitality(int vitality) {
-        this.vitality = vitality;
+    public void setEndurance(int endurance) {
+        this.endurance = endurance;
     }
 
-    public void setIntelligence(int intelligence) {
-        this.intelligence = intelligence;
+    public void setVigor(int vigor) {
+        this.vigor = vigor;
+    }
+
+    public void setMind(int mind) {
+        this.mind = mind;
     }
 
     public void apply(Ref<EntityStore> ref) {
         EntityStatMap statMap = ref.getStore().getComponent(ref, EntityStatsModule.get().getEntityStatMapComponentType());
         if(statMap != null) {
-            statMap.putModifier(DefaultEntityStatTypes.getHealth(), "Essence_Vitality", new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, getVitality() * 1.5f));
-            statMap.putModifier(DefaultEntityStatTypes.getStamina(), "Essence_Dexterity", new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, getDexterity() * 1.3f));
-            statMap.putModifier(DefaultEntityStatTypes.getMana(), "Essence_Intelligence", new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, getIntelligence() * 1.7f));
+            statMap.putModifier(DefaultEntityStatTypes.getHealth(), "Essence_Vigor", new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, getVigor() * 1.5f));
+            statMap.putModifier(DefaultEntityStatTypes.getStamina(), "Essence_Endurance", new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, getEndurance() * 1.3f));
+            statMap.putModifier(DefaultEntityStatTypes.getMana(), "Essence_Mind", new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, getMind() * 1.7f));
         }
     }
 
 
     @Override
     public @Nullable Component<EntityStore> clone() {
-        return new EssenceStatComponent(getVitality(), getDexterity(), getIntelligence());
+        return new EssenceStatComponent(getVigor(), getEndurance(), getMind());
     }
 
 }

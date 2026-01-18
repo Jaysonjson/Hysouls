@@ -1,10 +1,10 @@
 $Common = "Common.ui";
 
-@MyTex = PatchStyle(TexturePath: "Soulsbar.png");
+@BarTex = PatchStyle(TexturePath: "Soulsbar.png");
 
 Group {
     Group #MyPanel {
-        Background: @MyTex;
+        Background: @BarTex;
         Anchor: (Left: 25, Bottom: 25, Width: 280, Height: 58);
         LayoutMode: Top;
 
