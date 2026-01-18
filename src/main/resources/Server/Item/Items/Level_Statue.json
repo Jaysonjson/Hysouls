@@ -8,26 +8,26 @@
     "Furniture.Benches"
   ],
   "Quality": "Uncommon",
-  "Icon": "Icons/ItemsGenerated/Bench_Memories.png",
+  "Icon": "Icons/ItemsGenerated/Level_Statue.png",
   "IconProperties": {
     "Scale": 0.31,
     "Rotation": [
-      22.5,
-      45.0,
-      22.5
+      0,
+      197,
+      0
     ],
     "Translation": [
-      2.0,
-      -41.0
+      2,
+      -41
     ]
   },
   "BlockType": {
     "BlockParticleSetId": "Stone",
     "BlockSoundSetId": "Stone",
-    "CustomModel": "Blocks/Benches/Memory_Bench.blockymodel",
+    "CustomModel": "Blocks/Statue.blockymodel",
     "CustomModelTexture": [
       {
-        "Texture": "Blocks/Benches/Memory_Bench_Texture.png",
+        "Texture": "BlockTextures/leveling_statue_wip_texture.png",
         "Weight": 1
       }
     ],
