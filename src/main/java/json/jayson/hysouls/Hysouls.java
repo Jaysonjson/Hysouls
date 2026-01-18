@@ -26,7 +26,6 @@ public class Hysouls extends JavaPlugin {
 
     @Override
     protected void setup() {
-
         getCodecRegistry(Interaction.CODEC).register("open_level_page_interaction", OpenLevelPageInteraction.class, OpenLevelPageInteraction.CODEC);
 
         ComponentTypes.ESSENCES = getEntityStoreRegistry().registerComponent(EssenceComponent.class, "Essences", EssenceComponent.CODEC);
@@ -34,7 +33,6 @@ public class Hysouls extends JavaPlugin {
 
         //getCommandRegistry().registerCommand(new LevelUpPageCommand());
 
-        getEntityStoreRegistry().registerSystem(new EssenceSystem.EntityDeath());
         //TODO: Mainly still just testing
         getEventRegistry().registerGlobal(PlayerConnectEvent.class, playerConnectEvent -> {
             if(playerConnectEvent.getHolder().getComponent(ComponentTypes.ESSENCES) == null) playerConnectEvent.getHolder().addComponent(ComponentTypes.ESSENCES, new EssenceComponent());
@@ -53,5 +51,9 @@ public class Hysouls extends JavaPlugin {
     }
 
 
-
+    @Override
+    protected void start() {
+        getEntityStoreRegistry().registerSystem(new EssenceSystem.EntityDeath());
+        getEntityStoreRegistry().registerSystem(new EssenceSystem.PlayerDeath());
+    }
 }

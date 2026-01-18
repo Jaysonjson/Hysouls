@@ -11,8 +11,6 @@ import com.hypixel.hytale.server.core.modules.entitystats.EntityStatMap;
 import com.hypixel.hytale.server.core.modules.entitystats.EntityStatsModule;
 import com.hypixel.hytale.server.core.modules.entitystats.asset.DefaultEntityStatTypes;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import com.hypixel.hytale.server.flock.FlockDeathSystems;
-import com.hypixel.hytale.server.flock.FlockMembership;
 import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceComponent;
 
@@ -24,7 +22,7 @@ public class EssenceSystem {
 
         @Nonnull
         public Query<EntityStore> getQuery() {
-            return AllLegacyLivingEntityTypesQuery.INSTANCE;
+            return Query.and(AllLegacyLivingEntityTypesQuery.INSTANCE, Query.not(Player.getComponentType()));
         }
 
         @Override
@@ -32,11 +30,6 @@ public class EssenceSystem {
             Damage damageInfo = component.getDeathInfo();
             if (damageInfo != null && damageInfo.getSource() instanceof Damage.EntitySource entitySource) {
                 if(entitySource.getRef().isValid()) {
-
-                    // Hysouls.LOGGER.atWarning().log(ref.getStore().getComponent(ref, EntityModule.get().getNameplateComponentType()).getText());
-                    // EntityModule.get().
-                    // Hysouls.LOGGER.atWarning().log( EntityModule.get().getIdentifier(npc.getClass()));
-
                     Ref<EntityStore> entityStoreRef = entitySource.getRef();
                     EssenceComponent essenceComponent = entityStoreRef.getStore().getComponent(entityStoreRef, ComponentTypes.ESSENCES);
                     if(essenceComponent != null) {
@@ -57,7 +50,12 @@ public class EssenceSystem {
         }
 
         public void onComponentAdded(@Nonnull Ref<EntityStore> ref, @Nonnull DeathComponent component, @Nonnull Store<EntityStore> store, @Nonnull CommandBuffer<EntityStore> commandBuffer) {
-
+            if(ref.isValid()) {
+                EssenceComponent essenceComponent = store.getComponent(ref, ComponentTypes.ESSENCES);
+                if(essenceComponent != null) {
+                    essenceComponent.setEssences(ref, 0);
+                }
+            }
         }
     }
 

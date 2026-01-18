@@ -68,10 +68,6 @@ public class EssenceStatComponent implements Component<EntityStore> {
         return getVigor() + getEndurance() + getMind();
     }
 
-    public static int calculateRequiredEssences(int level) {
-        return (int) ((float)1200 * Math.pow(1.17, level + 1) - (float)1200 * Math.pow(1.17, level));
-    }
-
     public void setEndurance(int endurance) {
         this.endurance = endurance;
     }
@@ -87,10 +83,14 @@ public class EssenceStatComponent implements Component<EntityStore> {
     public void apply(Ref<EntityStore> ref) {
         EntityStatMap statMap = ref.getStore().getComponent(ref, EntityStatsModule.get().getEntityStatMapComponentType());
         if(statMap != null) {
-            statMap.putModifier(DefaultEntityStatTypes.getHealth(), "Essence_Vigor", new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, getVigor() * 2.1f));
-            statMap.putModifier(DefaultEntityStatTypes.getStamina(), "Essence_Endurance", new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, getEndurance() * 2f));
-            statMap.putModifier(DefaultEntityStatTypes.getMana(), "Essence_Mind", new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, getMind() * 2.3f));
+            putStatModifier(statMap, DefaultEntityStatTypes.getHealth(), getVigor(), EssenceStats.VIGOR);
+            putStatModifier(statMap, DefaultEntityStatTypes.getStamina(), getEndurance(), EssenceStats.ENDURANCE);
+            putStatModifier(statMap, DefaultEntityStatTypes.getMana(), getMind(), EssenceStats.MIND);
         }
+    }
+
+    public void putStatModifier(EntityStatMap map, int target, int base, EssenceStats stats) {
+        map.putModifier(target, "Essence_" + stats.named, new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, base * stats.modifierBuff));
     }
 
 

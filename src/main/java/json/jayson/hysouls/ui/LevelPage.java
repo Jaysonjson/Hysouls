@@ -14,13 +14,15 @@ import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import json.jayson.hysouls.EssenceUtil;
 import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceComponent;
 import json.jayson.hysouls.components.EssenceStatComponent;
+import json.jayson.hysouls.components.EssenceStats;
 import org.jetbrains.annotations.NotNull;
 
 
-//InteractiveCustomUIPage
+//Needs a major rework
 public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData> {
 
     public int wantedLevel = 0;
@@ -37,16 +39,16 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
         uiCommandBuilder.append("Pages/LevelUpPage.ui");
         setVars(ref, uiCommandBuilder);
 
-        statAction(uiEventBuilder, "Vigor");
-        statAction(uiEventBuilder, "Endurance");
-        statAction(uiEventBuilder, "Mind");
+        statAction(uiEventBuilder, EssenceStats.VIGOR);
+        statAction(uiEventBuilder, EssenceStats.ENDURANCE);
+        statAction(uiEventBuilder, EssenceStats.MIND);
 
         uiEventBuilder.addEventBinding(CustomUIEventBindingType.Activating, "#ConfirmButton", EventData.of("Action", "Confirm"));
     }
 
-    public void statAction(UIEventBuilder builder, String type) {
-        builder.addEventBinding(CustomUIEventBindingType.Activating, "#" + type + "Minus", EventData.of("Action", type + "Minus"));
-        builder.addEventBinding(CustomUIEventBindingType.Activating, "#" + type + "Plus", EventData.of("Action", type + "Plus"));
+    public void statAction(UIEventBuilder builder, EssenceStats stats) {
+        builder.addEventBinding(CustomUIEventBindingType.Activating, "#" + stats.getNamed() + "Minus", EventData.of("Action", stats.getNamed() + "Minus"));
+        builder.addEventBinding(CustomUIEventBindingType.Activating, "#" + stats.getNamed() + "Plus", EventData.of("Action", stats.getNamed() + "Plus"));
     }
 
 
@@ -55,7 +57,7 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
             EssenceComponent essenceComponent = ref.getStore().getComponent(ref, ComponentTypes.ESSENCES);
             EssenceStatComponent essenceStatComponent = ref.getStore().getComponent(ref, ComponentTypes.ESSENCE_STAT);
             if(essenceComponent != null && essenceStatComponent != null) {
-                int requiredEssences = EssenceStatComponent.calculateRequiredEssences(essenceStatComponent.getLevel() + wantedLevel);
+                int requiredEssences = EssenceUtil.calculateTotalRequiredEssence(essenceStatComponent.getLevel(), wantedLevel);
                 builder.set("#EssencesHeld.TextSpans", Message.raw("" + essenceComponent.getEssences()));
                 builder.set("#CurrentLevel.TextSpans", Message.raw("" + essenceStatComponent.getLevel()));
                 builder.set("#NextLevel.TextSpans", Message.raw("" + (essenceStatComponent.getLevel() + wantedLevel)));
@@ -72,16 +74,16 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
                     builder.set("#EssencesNeeded.Style.TextColor", "#ffffff");
                 }
 
-                statText(builder, "Vigor", essenceStatComponent.getVigor(), wantedVigor);
-                statText(builder, "Endurance", essenceStatComponent.getEndurance(), wantedEndurance);
-                statText(builder, "Mind", essenceStatComponent.getMind(), wantedMind);
+                statText(builder, EssenceStats.VIGOR, essenceStatComponent.getVigor(), wantedVigor);
+                statText(builder, EssenceStats.ENDURANCE, essenceStatComponent.getEndurance(), wantedEndurance);
+                statText(builder, EssenceStats.MIND, essenceStatComponent.getMind(), wantedMind);
             }
         }
     }
 
-    public void statText(UICommandBuilder builder, String type, int current, int wanted) {
-        builder.set("#Next" + type + ".TextSpans", Message.raw("" + (current + wanted)));
-        builder.set("#Current" + type + ".TextSpans", Message.raw("" + (current)));
+    public void statText(UICommandBuilder builder, EssenceStats stats, int current, int wanted) {
+        builder.set("#Next" + stats.getNamed() + ".TextSpans", Message.raw("" + (current + wanted)));
+        builder.set("#Current" + stats.getNamed() + ".TextSpans", Message.raw("" + (current)));
     }
 
     @Override
@@ -136,7 +138,7 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
                 }
 
                 case "Confirm" -> {
-                    int requiredEssences = EssenceStatComponent.calculateRequiredEssences(essenceStatComponent.getLevel() + wantedLevel);
+                    int requiredEssences = EssenceUtil.calculateTotalRequiredEssence(essenceStatComponent.getLevel(), wantedLevel);
                     if(essenceComponent.getEssences() >= requiredEssences) {
                         essenceStatComponent.setVigor(essenceStatComponent.getVigor() + wantedVigor);
                         essenceStatComponent.setEndurance(essenceStatComponent.getEndurance() + wantedEndurance);
