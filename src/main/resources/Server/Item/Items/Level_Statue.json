@@ -54,8 +54,7 @@
       "Use": {
         "Interactions": [
           {
-            "Type": "OpenPage",
-            "Page": "None"
+            "Type": "open_level_page_interaction"
           }
         ]
       }

@@ -4,7 +4,7 @@ $Common = "../Common.ui";
 
 $Common.@PageOverlay {
 $Common.@Container {
-Anchor: (Width: 820, Height: 520);
+Anchor: (Width: 674, Height: 425);
 #Title {
   Group {
     $Common.@Title {
@@ -233,9 +233,10 @@ Anchor: (Width: 820, Height: 520);
 
 Group #ButtonGroup {
       LayoutMode: Left;
+      Anchor: (Height: 40);
         $Common.@TextButton #ConfirmButton {
               Text: "Confirm";
-              Anchor: (Width: 130);
+              Anchor: (Width: 130, Height: 40);
     }
 
 
