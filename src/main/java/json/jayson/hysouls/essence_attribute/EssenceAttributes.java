@@ -3,9 +3,10 @@ package json.jayson.hysouls.essence_attribute;
 import com.hypixel.hytale.server.core.modules.entitystats.asset.DefaultEntityStatTypes;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class EssenceAttributes {
-    private static HashMap<String, EssenceAttribute> statsMap = new HashMap<>();
+    private static LinkedHashMap<String, EssenceAttribute> statsMap = new LinkedHashMap<>();
 
     public static EssenceAttribute VIGOR = add(new EssenceAttribute("Vigor", 1.8f, 5) {
         @Override
@@ -67,7 +68,7 @@ public class EssenceAttributes {
     }
 
 
-    public static HashMap<String, EssenceAttribute> getAttributeMap() {
+    public static LinkedHashMap<String, EssenceAttribute> getAttributeMap() {
         return statsMap;
     }
 

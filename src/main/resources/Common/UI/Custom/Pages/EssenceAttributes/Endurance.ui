@@ -1,0 +1,45 @@
+$Common = "../../Common.ui";
+
+@LeftArrow = PatchStyle(TexturePath: "../LeftArrow.png");
+
+Group #EnduranceGroup {
+    LayoutMode: Left;
+    Anchor: (Height: 44);
+
+    Label {
+      Text: "Endurance";
+      Anchor: (Width: 220, Height: 44);
+      Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
+    }
+
+    Label #CurrentEndurance {
+      Text: "0";
+      Anchor: (Width: 100, Height: 44);
+      Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+    }
+
+    Panel {
+      Background: @LeftArrow;
+      Anchor: (Width: 22, Height: 12);
+    }
+
+    Group {
+      Anchor: (Width: 80);
+    }
+
+    $Common.@SmallSecondaryTextButton #EnduranceMinus {
+      Text: "-";
+      Anchor: (Width: 35, Height: 35);
+    }
+
+    Label #NextEndurance {
+      Text: "99";
+      Anchor: (Width: 80, Height: 44);
+      Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+    }
+
+    $Common.@SmallSecondaryTextButton #EndurancePlus {
+      Text: "+";
+      Anchor: (Width: 35, Height: 35);
+    }
+  }
