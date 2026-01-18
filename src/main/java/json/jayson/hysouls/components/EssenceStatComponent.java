@@ -31,17 +31,17 @@ public class EssenceStatComponent implements Component<EntityStore> {
     @Nonnull
     public static final BuilderCodec<EssenceStatComponent> CODEC = BuilderCodec.builder(EssenceStatComponent.class, EssenceStatComponent::new)
             .append(
-                    new KeyedCodec<>("Vigor", Codec.INTEGER),
+                    EssenceStats.VIGOR.keyedCodec(),
                     (essenceStatComponent, s) -> essenceStatComponent.vigor = s,
                     essenceStatComponent -> essenceStatComponent.vigor
             ).add()
             .append(
-                    new KeyedCodec<>("Endurance", Codec.INTEGER),
+                    EssenceStats.ENDURANCE.keyedCodec(),
                     (essenceStatComponent, s) -> essenceStatComponent.endurance = s,
                     essenceStatComponent -> essenceStatComponent.endurance
             ).add()
             .append(
-                    new KeyedCodec<>("Mind", Codec.INTEGER),
+                    EssenceStats.MIND.keyedCodec(),
                     (essenceStatComponent, s) -> essenceStatComponent.mind = s,
                     essenceStatComponent -> essenceStatComponent.mind
             ).add()
@@ -90,9 +90,8 @@ public class EssenceStatComponent implements Component<EntityStore> {
     }
 
     public void putStatModifier(EntityStatMap map, int target, int base, EssenceStats stats) {
-        map.putModifier(target, "Essence_" + stats.named, new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, base * stats.modifierBuff));
+        map.putModifier(target, "Essence_" + stats.getNamed(), new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, base * stats.getModifierBuff()));
     }
-
 
     @Override
     public @Nullable Component<EntityStore> clone() {
