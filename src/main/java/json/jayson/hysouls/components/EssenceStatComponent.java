@@ -87,9 +87,9 @@ public class EssenceStatComponent implements Component<EntityStore> {
     public void apply(Ref<EntityStore> ref) {
         EntityStatMap statMap = ref.getStore().getComponent(ref, EntityStatsModule.get().getEntityStatMapComponentType());
         if(statMap != null) {
-            statMap.putModifier(DefaultEntityStatTypes.getHealth(), "Essence_Vigor", new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, getVigor() * 1.5f));
-            statMap.putModifier(DefaultEntityStatTypes.getStamina(), "Essence_Endurance", new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, getEndurance() * 1.3f));
-            statMap.putModifier(DefaultEntityStatTypes.getMana(), "Essence_Mind", new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, getMind() * 1.7f));
+            statMap.putModifier(DefaultEntityStatTypes.getHealth(), "Essence_Vigor", new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, getVigor() * 2.1f));
+            statMap.putModifier(DefaultEntityStatTypes.getStamina(), "Essence_Endurance", new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, getEndurance() * 2f));
+            statMap.putModifier(DefaultEntityStatTypes.getMana(), "Essence_Mind", new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, getMind() * 2.3f));
         }
     }
 

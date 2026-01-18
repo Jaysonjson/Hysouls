@@ -84,7 +84,7 @@ Anchor: (Width: 820, Height: 520);
 
     Label {
       Text: "Essences Needed";
-      Anchor: (Width: 430, Height: 44);
+      Anchor: (Width: 385, Height: 44);
       Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
     }
 
@@ -100,9 +100,13 @@ Anchor: (Width: 820, Height: 520);
     }
   }
 
+  Group {
+    Anchor: (Height: 60);
+  }
+
   Group #VigorGroup {
     LayoutMode: Left;
-    Anchor: (Height: 75);
+    Anchor: (Height: 44);
 
     Label {
       Text: "Vigor";
@@ -141,6 +145,102 @@ Anchor: (Width: 820, Height: 520);
       Anchor: (Width: 35, Height: 35);
     }
   }
+
+
+  Group #EnduranceGroup {
+    LayoutMode: Left;
+    Anchor: (Height: 44);
+
+    Label {
+      Text: "Endurance";
+      Anchor: (Width: 220, Height: 44);
+      Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
+    }
+
+    Label #CurrentEndurance {
+      Text: "0";
+      Anchor: (Width: 100, Height: 44);
+      Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+    }
+
+    Panel {
+      Background: @LeftArrow;
+      Anchor: (Width: 22, Height: 12);
+    }
+
+    Group {
+      Anchor: (Width: 80);
+    }
+
+    $Common.@SmallSecondaryTextButton #EnduranceMinus {
+      Text: "-";
+      Anchor: (Width: 35, Height: 35);
+    }
+
+    Label #NextEndurance {
+      Text: "99";
+      Anchor: (Width: 80, Height: 44);
+      Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+    }
+
+    $Common.@SmallSecondaryTextButton #EndurancePlus {
+      Text: "+";
+      Anchor: (Width: 35, Height: 35);
+    }
+  }
+
+   Group #MindGroup {
+      LayoutMode: Left;
+      Anchor: (Height: 44);
+
+      Label {
+        Text: "Mind";
+        Anchor: (Width: 220, Height: 44);
+        Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
+      }
+
+      Label #CurrentMind {
+        Text: "0";
+        Anchor: (Width: 100, Height: 44);
+        Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+      }
+
+      Panel {
+        Background: @LeftArrow;
+        Anchor: (Width: 22, Height: 12);
+      }
+
+      Group {
+        Anchor: (Width: 80);
+      }
+
+      $Common.@SmallSecondaryTextButton #MindMinus {
+        Text: "-";
+        Anchor: (Width: 35, Height: 35);
+      }
+
+      Label #NextMind {
+        Text: "99";
+        Anchor: (Width: 80, Height: 44);
+        Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+      }
+
+      $Common.@SmallSecondaryTextButton #MindPlus {
+        Text: "+";
+        Anchor: (Width: 35, Height: 35);
+      }
+    }
+
+Group #ButtonGroup {
+      LayoutMode: Left;
+        $Common.@TextButton #ConfirmButton {
+              Text: "Confirm";
+              Anchor: (Width: 130);
+    }
+
+
+
+}
 }
 }
 }
