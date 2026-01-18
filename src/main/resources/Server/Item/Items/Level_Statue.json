@@ -53,7 +53,7 @@
       "Use": {
         "Interactions": [
           {
-            "Type": "open_level_page_interaction"
+            "Type": "OpenLevelUpUI"
           }
         ]
       }

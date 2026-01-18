@@ -19,6 +19,6 @@ public class LevelUpPageCommand extends AbstractPlayerCommand {
 
     @Override
     protected void execute(@NotNull CommandContext commandContext, @NotNull Store<EntityStore> store, @NotNull Ref<EntityStore> ref, @NotNull PlayerRef playerRef, @NotNull World world) {
-        store.getComponent(ref, Player.getComponentType()).getPageManager().openCustomPage(ref, store, new LevelPage(playerRef));
+        store.getComponent(ref, Player.getComponentType()).getPageManager().openCustomPage(ref, store, new LevelPage(playerRef, 999));
     }
 }

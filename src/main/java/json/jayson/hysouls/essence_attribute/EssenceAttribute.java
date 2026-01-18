@@ -15,12 +15,18 @@ public abstract class EssenceAttribute {
 
     private String named;
     private float modifierBuff;
+    //Used to debuff the DefaultStats, so it doesnt get too OP at the start
+    private int modifierDebuff;
     private int defaultStatType = -1;
-    public EssenceAttribute(String named, float modifierBuff) {
+    public EssenceAttribute(String named, float modifierBuff, int modifierDebuff) {
         this.named = named;
         this.modifierBuff = modifierBuff;
+        this.modifierDebuff = modifierDebuff;
     }
 
+    public int getModifierDebuff() {
+        return modifierDebuff;
+    }
 
     public String getNamed() {
         return named;
@@ -48,6 +54,7 @@ public abstract class EssenceAttribute {
     public void applyModifierBuff(EntityStatMap map, int input) {
         refreshStatType();
         if(defaultStatType != -1) {
+            map.putModifier(getDefaultStatType(), "Essence_" + getNamed(), new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, -modifierDebuff));
             map.putModifier(getDefaultStatType(), "Essence_" + getNamed(), new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, input * getModifierBuff()));
         }
     }

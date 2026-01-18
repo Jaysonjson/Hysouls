@@ -1,5 +1,7 @@
 package json.jayson.hysouls.interactions;
 
+import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
@@ -10,14 +12,27 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHa
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import json.jayson.hysouls.essence_attribute.EssenceAttributes;
 import json.jayson.hysouls.ui.LevelPage;
 import org.jetbrains.annotations.NotNull;
 
 public class OpenLevelPageInteraction extends SimpleInstantInteraction {
 
+    int statueLevelCap = 999;
+    public OpenLevelPageInteraction() {
+
+    }
+
     public static final BuilderCodec<OpenLevelPageInteraction> CODEC = BuilderCodec.builder(
             OpenLevelPageInteraction.class, OpenLevelPageInteraction::new, SimpleInstantInteraction.CODEC
-    ).build();
+    )
+            .append(
+                    new KeyedCodec<>("Level Cap", Codec.INTEGER),
+                    (openLevelPageInteraction, s) -> openLevelPageInteraction.statueLevelCap = s,
+                    openLevelPageInteraction -> openLevelPageInteraction.statueLevelCap
+            ).add()
+
+            .build();
 
     @Override
     protected void firstRun(@NotNull InteractionType interactionType, @NotNull InteractionContext interactionContext, @NotNull CooldownHandler cooldownHandler) {
@@ -29,7 +44,7 @@ public class OpenLevelPageInteraction extends SimpleInstantInteraction {
                 if(player != null) {
                     PlayerRef playerRef = commandBuffer.getComponent(ref, PlayerRef.getComponentType());
                     if(playerRef != null) {
-                        player.getPageManager().openCustomPage(ref, ref.getStore(), new LevelPage(playerRef));
+                        player.getPageManager().openCustomPage(ref, ref.getStore(), new LevelPage(playerRef, statueLevelCap));
                     }
                 }
             }

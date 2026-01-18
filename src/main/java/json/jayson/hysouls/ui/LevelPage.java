@@ -31,9 +31,11 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
     public int wantedVigor = 0;
     public int wantedEndurance = 0;
     public int wantedMind = 0;
+    public int statueLevelCap;
 
-    public LevelPage(@NotNull PlayerRef playerRef) {
+    public LevelPage(@NotNull PlayerRef playerRef, int statueLevelCap) {
         super(playerRef, CustomPageLifetime.CanDismiss, LevelEventData.CODEC);
+        this.statueLevelCap = statueLevelCap;
     }
 
     @Override
@@ -86,7 +88,7 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
         if(essenceAttributeComponent != null && essenceComponent != null) {
             if(data.action.equalsIgnoreCase("Confirm")) {
                 int requiredEssences = EssenceUtil.calculateTotalRequiredEssence(essenceAttributeComponent.getLevel(), wantedLevel);
-                if(essenceComponent.getEssences() >= requiredEssences) {
+                if(essenceComponent.getEssences() >= requiredEssences && statueLevelCap >= essenceAttributeComponent.getLevel() + wantedLevel ) {
                     for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
                         value.set(essenceAttributeComponent, value.get(essenceAttributeComponent) + value.get(this));
                     }

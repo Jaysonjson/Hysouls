@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class EssenceAttributes {
     private static HashMap<String, EssenceAttribute> statsMap = new HashMap<>();
 
-    public static EssenceAttribute VIGOR = add(new EssenceAttribute("Vigor", 1.8f) {
+    public static EssenceAttribute VIGOR = add(new EssenceAttribute("Vigor", 1.8f, 5) {
         @Override
         public void refreshStatType() {
             setDefaultStatType(DefaultEntityStatTypes.getHealth());
@@ -25,7 +25,7 @@ public class EssenceAttributes {
 
     });
 
-    public static EssenceAttribute ENDURANCE = add(new EssenceAttribute("Endurance", 1.2f) {
+    public static EssenceAttribute ENDURANCE = add(new EssenceAttribute("Endurance", 1.2f, 2) {
         @Override
         public void refreshStatType() {
             setDefaultStatType(DefaultEntityStatTypes.getStamina());
@@ -43,7 +43,7 @@ public class EssenceAttributes {
 
     });
 
-    public static EssenceAttribute MIND = add(new EssenceAttribute("Mind", 1.4f) {
+    public static EssenceAttribute MIND = add(new EssenceAttribute("Mind", 1.4f, 0) {
         @Override
         public void refreshStatType() {
             setDefaultStatType(DefaultEntityStatTypes.getMana());

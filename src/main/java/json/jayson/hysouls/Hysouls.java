@@ -27,7 +27,7 @@ public class Hysouls extends JavaPlugin {
 
     @Override
     protected void setup() {
-        getCodecRegistry(Interaction.CODEC).register("open_level_page_interaction", OpenLevelPageInteraction.class, OpenLevelPageInteraction.CODEC);
+        getCodecRegistry(Interaction.CODEC).register("OpenLevelUpUI", OpenLevelPageInteraction.class, OpenLevelPageInteraction.CODEC);
 
         ComponentTypes.ESSENCES = getEntityStoreRegistry().registerComponent(EssenceComponent.class, "Essences", EssenceComponent.CODEC);
         ComponentTypes.ESSENCE_ATTRIBUTE = getEntityStoreRegistry().registerComponent(EssenceAttributeComponent.class, "EssenceAttributes", EssenceAttributeComponent.CODEC);
