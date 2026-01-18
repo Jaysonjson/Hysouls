@@ -6,11 +6,10 @@ import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
-import json.jayson.hysouls.commands.LevelUpPageCommand;
 import json.jayson.hysouls.components.ComponentTypes;
+import json.jayson.hysouls.components.EssenceAttributeComponent;
 import json.jayson.hysouls.components.EssenceComponent;
-import json.jayson.hysouls.components.EssenceStatComponent;
-import json.jayson.hysouls.essence_stat.EssenceStats;
+import json.jayson.hysouls.essence_attribute.EssenceAttributes;
 import json.jayson.hysouls.interactions.OpenLevelPageInteraction;
 import json.jayson.hysouls.systems.EssenceSystem;
 import json.jayson.hysouls.ui.EssenceHud;
@@ -23,7 +22,7 @@ public class Hysouls extends JavaPlugin {
     public Hysouls(JavaPluginInit init) {
         super(init);
         VERSION = getManifest().getVersion().toString();
-        EssenceStats.init();
+        EssenceAttributes.init();
     }
 
     @Override
@@ -31,14 +30,14 @@ public class Hysouls extends JavaPlugin {
         getCodecRegistry(Interaction.CODEC).register("open_level_page_interaction", OpenLevelPageInteraction.class, OpenLevelPageInteraction.CODEC);
 
         ComponentTypes.ESSENCES = getEntityStoreRegistry().registerComponent(EssenceComponent.class, "Essences", EssenceComponent.CODEC);
-        ComponentTypes.ESSENCE_STAT = getEntityStoreRegistry().registerComponent(EssenceStatComponent.class, "EssencesStat", EssenceStatComponent.CODEC);
+        ComponentTypes.ESSENCE_ATTRIBUTE = getEntityStoreRegistry().registerComponent(EssenceAttributeComponent.class, "EssenceAttributes", EssenceAttributeComponent.CODEC);
 
         //getCommandRegistry().registerCommand(new LevelUpPageCommand());
 
         //TODO: Mainly still just testing
         getEventRegistry().registerGlobal(PlayerConnectEvent.class, playerConnectEvent -> {
             if(playerConnectEvent.getHolder().getComponent(ComponentTypes.ESSENCES) == null) playerConnectEvent.getHolder().addComponent(ComponentTypes.ESSENCES, new EssenceComponent());
-            if(playerConnectEvent.getHolder().getComponent(ComponentTypes.ESSENCE_STAT) == null) playerConnectEvent.getHolder().addComponent(ComponentTypes.ESSENCE_STAT, new EssenceStatComponent());
+            if(playerConnectEvent.getHolder().getComponent(ComponentTypes.ESSENCE_ATTRIBUTE) == null) playerConnectEvent.getHolder().addComponent(ComponentTypes.ESSENCE_ATTRIBUTE, new EssenceAttributeComponent());
 
             Player playerComponent = playerConnectEvent.getHolder().getComponent(Player.getComponentType());
             if (playerComponent != null) {

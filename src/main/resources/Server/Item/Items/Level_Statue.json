@@ -1,13 +1,13 @@
 {
   "TranslationProperties": {
     "Name": "server.items.Level_Statue.name",
-    "Description": "server.items.Bench_Memories.description"
+    "Description": "server.items.Level_Statue.description"
   },
   "PlayerAnimationsId": "Block",
   "Categories": [
     "Furniture.Benches"
   ],
-  "Quality": "Developer",
+  "Quality": "Uncommon",
   "Icon": "Icons/ItemsGenerated/Bench_Memories.png",
   "IconProperties": {
     "Scale": 0.31,
@@ -23,7 +23,6 @@
   },
   "BlockType": {
     "BlockParticleSetId": "Stone",
-    "ParticleColor": "#bbbbaf",
     "BlockSoundSetId": "Stone",
     "CustomModel": "Blocks/Benches/Memory_Bench.blockymodel",
     "CustomModelTexture": [
@@ -58,20 +57,7 @@
           }
         ]
       }
-    },
-    "Particles": [
-      {
-        "SystemId": "ForgottenTemple_Beam",
-        "RotationOffset": {
-          "Pitch": 0.0,
-          "Roll": -90.0,
-          "Yaw": 0.0
-        },
-        "PositionOffset": {
-          "Y": 0.0
-        }
-      }
-    ]
+    }
   },
   "Tags": {
     "Type": [

@@ -1,61 +1,61 @@
-package json.jayson.hysouls.essence_stat;
+package json.jayson.hysouls.essence_attribute;
 
 import com.hypixel.hytale.server.core.modules.entitystats.asset.DefaultEntityStatTypes;
 
 import java.util.HashMap;
 
-public class EssenceStats {
-    private static HashMap<String, EssenceStat> statsMap = new HashMap<>();
+public class EssenceAttributes {
+    private static HashMap<String, EssenceAttribute> statsMap = new HashMap<>();
 
-    public static EssenceStat VIGOR = add(new EssenceStat("Vigor", 1.8f) {
+    public static EssenceAttribute VIGOR = add(new EssenceAttribute("Vigor", 1.8f) {
         @Override
         public void refreshStatType() {
             setDefaultStatType(DefaultEntityStatTypes.getHealth());
         }
 
         @Override
-        public int get(IEssenceStated stated) {
+        public int get(EssenceAttributeHolder stated) {
             return stated.getVigor();
         }
 
         @Override
-        public void set(IEssenceStated stated, int value) {
+        public void set(EssenceAttributeHolder stated, int value) {
             stated.setVigor(value);
         }
 
     });
 
-    public static EssenceStat ENDURANCE = add(new EssenceStat("Endurance", 1.2f) {
+    public static EssenceAttribute ENDURANCE = add(new EssenceAttribute("Endurance", 1.2f) {
         @Override
         public void refreshStatType() {
             setDefaultStatType(DefaultEntityStatTypes.getStamina());
         }
 
         @Override
-        public int get(IEssenceStated stated) {
+        public int get(EssenceAttributeHolder stated) {
             return stated.getEndurance();
         }
 
         @Override
-        public void set(IEssenceStated stated, int value) {
+        public void set(EssenceAttributeHolder stated, int value) {
             stated.setEndurance(value);
         }
 
     });
 
-    public static EssenceStat MIND = add(new EssenceStat("Mind", 1.4f) {
+    public static EssenceAttribute MIND = add(new EssenceAttribute("Mind", 1.4f) {
         @Override
         public void refreshStatType() {
             setDefaultStatType(DefaultEntityStatTypes.getMana());
         }
 
         @Override
-        public int get(IEssenceStated stated) {
+        public int get(EssenceAttributeHolder stated) {
             return stated.getMind();
         }
 
         @Override
-        public void set(IEssenceStated stated, int value) {
+        public void set(EssenceAttributeHolder stated, int value) {
             stated.setMind(value);
         }
     });
@@ -67,13 +67,13 @@ public class EssenceStats {
     }
 
 
-    public static HashMap<String, EssenceStat> getStatsMap() {
+    public static HashMap<String, EssenceAttribute> getAttributeMap() {
         return statsMap;
     }
 
 
-    private static EssenceStat add(EssenceStat stat) {
-        getStatsMap().put(stat.getNamed(), stat);
+    private static EssenceAttribute add(EssenceAttribute stat) {
+        getAttributeMap().put(stat.getNamed(), stat);
         return stat;
     }
 }

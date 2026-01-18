@@ -6,3 +6,5 @@ server.items.Ore_Nickel_Basalt.name = Nickel Ore - Basalt
 server.items.Ore_Nickel_Shale.name = Nickel Ore - Shale
 server.items.Ore_Nickel_Slate.name = Nickel Ore - Slate
 server.items.Ore_Nickel_Stone.name = Nickel Ore - Stone
+server.items.Level_Statue.name = Essence Offering Statue
+server.items.Level_Statue.description = Use to spend your Essences to level up, will be removed in the future

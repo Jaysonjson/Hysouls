@@ -1,4 +1,4 @@
-package json.jayson.hysouls.essence_stat;
+package json.jayson.hysouls.essence_attribute;
 
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.KeyedCodec;
@@ -10,15 +10,13 @@ import com.hypixel.hytale.server.core.modules.entitystats.modifier.StaticModifie
 import com.hypixel.hytale.server.core.ui.builder.EventData;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
-import json.jayson.hysouls.components.EssenceStatComponent;
-import json.jayson.hysouls.ui.LevelPage;
 
-public abstract class EssenceStat {
+public abstract class EssenceAttribute {
 
     private String named;
     private float modifierBuff;
     private int defaultStatType = -1;
-    public EssenceStat(String named, float modifierBuff) {
+    public EssenceAttribute(String named, float modifierBuff) {
         this.named = named;
         this.modifierBuff = modifierBuff;
     }
@@ -42,7 +40,7 @@ public abstract class EssenceStat {
 
     public abstract void refreshStatType();
 
-    public void applyModifierBuff(EntityStatMap map, IEssenceStated input) {
+    public void applyModifierBuff(EntityStatMap map, EssenceAttributeHolder input) {
         applyModifierBuff(map, get(input));
     }
 
@@ -58,8 +56,8 @@ public abstract class EssenceStat {
         return new KeyedCodec<T>(getNamed(), (Codec<T>) Codec.INTEGER);
     }
 
-    public abstract int get(IEssenceStated stated);
-    public abstract void set(IEssenceStated stated, int value);
+    public abstract int get(EssenceAttributeHolder stated);
+    public abstract void set(EssenceAttributeHolder stated, int value);
 
 
     /* Interface stuff */
@@ -68,12 +66,12 @@ public abstract class EssenceStat {
         builder.addEventBinding(CustomUIEventBindingType.Activating, "#" + getNamed() + "Plus", EventData.of("Action", getNamed() + "Plus"));
     }
 
-    public void levelUiText(UICommandBuilder builder, IEssenceStated component, IEssenceStated page) {
+    public void levelUiText(UICommandBuilder builder, EssenceAttributeHolder component, EssenceAttributeHolder page) {
         builder.set("#Next" + getNamed() + ".TextSpans", Message.raw("" + (get(component) + get(page))));
         builder.set("#Current" + getNamed() + ".TextSpans", Message.raw("" + (get(component))));
     }
 
-    public void levelUiEventAction(IEssenceStated page, String action) {
+    public void levelUiEventAction(EssenceAttributeHolder page, String action) {
         if(action.equalsIgnoreCase(getNamed() + "Minus")) {
             if (get(page) != 0) {
                 set(page, get(page) - 1);

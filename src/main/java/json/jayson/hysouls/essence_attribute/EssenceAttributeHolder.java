@@ -1,8 +1,8 @@
-package json.jayson.hysouls.essence_stat;
+package json.jayson.hysouls.essence_attribute;
 
 import json.jayson.hysouls.Hysouls;
 
-public interface IEssenceStated {
+public interface EssenceAttributeHolder {
 
     int getVigor();
     int getEndurance();

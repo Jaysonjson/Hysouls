@@ -16,16 +16,16 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import json.jayson.hysouls.EssenceUtil;
 import json.jayson.hysouls.components.ComponentTypes;
+import json.jayson.hysouls.components.EssenceAttributeComponent;
 import json.jayson.hysouls.components.EssenceComponent;
-import json.jayson.hysouls.components.EssenceStatComponent;
-import json.jayson.hysouls.essence_stat.EssenceStat;
-import json.jayson.hysouls.essence_stat.EssenceStats;
-import json.jayson.hysouls.essence_stat.IEssenceStated;
+import json.jayson.hysouls.essence_attribute.EssenceAttribute;
+import json.jayson.hysouls.essence_attribute.EssenceAttributes;
+import json.jayson.hysouls.essence_attribute.EssenceAttributeHolder;
 import org.jetbrains.annotations.NotNull;
 
 
-//Needs a major rework
-public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData> implements IEssenceStated {
+//Needs a major rework, plan is to make the UI dynamically with the EssenceStats in mind
+public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData> implements EssenceAttributeHolder {
 
     public int wantedLevel = 0;
     public int wantedVigor = 0;
@@ -41,7 +41,7 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
         uiCommandBuilder.append("Pages/LevelUpPage.ui");
         setVars(ref, uiCommandBuilder);
 
-        for (EssenceStat value : EssenceStats.getStatsMap().values()) {
+        for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
             value.levelUiAction(uiEventBuilder);
         }
 
@@ -53,12 +53,12 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
     public void setVars(Ref<EntityStore> ref, UICommandBuilder builder) {
         if(ref.isValid()) {
             EssenceComponent essenceComponent = ref.getStore().getComponent(ref, ComponentTypes.ESSENCES);
-            EssenceStatComponent essenceStatComponent = ref.getStore().getComponent(ref, ComponentTypes.ESSENCE_STAT);
-            if(essenceComponent != null && essenceStatComponent != null) {
-                int requiredEssences = EssenceUtil.calculateTotalRequiredEssence(essenceStatComponent.getLevel(), wantedLevel);
+            EssenceAttributeComponent essenceAttributeComponent = ref.getStore().getComponent(ref, ComponentTypes.ESSENCE_ATTRIBUTE);
+            if(essenceComponent != null && essenceAttributeComponent != null) {
+                int requiredEssences = EssenceUtil.calculateTotalRequiredEssence(essenceAttributeComponent.getLevel(), wantedLevel);
                 builder.set("#EssencesHeld.TextSpans", Message.raw("" + essenceComponent.getEssences()));
-                builder.set("#CurrentLevel.TextSpans", Message.raw("" + essenceStatComponent.getLevel()));
-                builder.set("#NextLevel.TextSpans", Message.raw("" + (essenceStatComponent.getLevel() + wantedLevel)));
+                builder.set("#CurrentLevel.TextSpans", Message.raw("" + essenceAttributeComponent.getLevel()));
+                builder.set("#NextLevel.TextSpans", Message.raw("" + (essenceAttributeComponent.getLevel() + wantedLevel)));
                 builder.set("#EssencesNeeded.TextSpans", Message.raw("" + requiredEssences));
                 if(wantedLevel == 0) {
                     builder.set("#EssencesHeldMinus.TextSpans", Message.raw("" + (essenceComponent.getEssences())));
@@ -72,9 +72,8 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
                     builder.set("#EssencesNeeded.Style.TextColor", "#ffffff");
                 }
 
-                System.out.println(EssenceStats.getStatsMap().values().size());
-                for (EssenceStat value : EssenceStats.getStatsMap().values()) {
-                    value.levelUiText(builder, essenceStatComponent, this);
+                for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
+                    value.levelUiText(builder, essenceAttributeComponent, this);
                 }
             }
         }
@@ -82,21 +81,21 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
 
     @Override
     public void handleDataEvent(@NotNull Ref<EntityStore> ref, @NotNull Store<EntityStore> store, @NotNull LevelPage.LevelEventData data) {
-        EssenceStatComponent essenceStatComponent = ref.getStore().getComponent(ref, ComponentTypes.ESSENCE_STAT);
+        EssenceAttributeComponent essenceAttributeComponent = ref.getStore().getComponent(ref, ComponentTypes.ESSENCE_ATTRIBUTE);
         EssenceComponent essenceComponent = ref.getStore().getComponent(ref, ComponentTypes.ESSENCES);
-        if(essenceStatComponent != null && essenceComponent != null) {
+        if(essenceAttributeComponent != null && essenceComponent != null) {
             if(data.action.equalsIgnoreCase("Confirm")) {
-                int requiredEssences = EssenceUtil.calculateTotalRequiredEssence(essenceStatComponent.getLevel(), wantedLevel);
+                int requiredEssences = EssenceUtil.calculateTotalRequiredEssence(essenceAttributeComponent.getLevel(), wantedLevel);
                 if(essenceComponent.getEssences() >= requiredEssences) {
-                    for (EssenceStat value : EssenceStats.getStatsMap().values()) {
-                        value.set(essenceStatComponent, value.get(essenceStatComponent) + value.get(this));
+                    for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
+                        value.set(essenceAttributeComponent, value.get(essenceAttributeComponent) + value.get(this));
                     }
                     essenceComponent.setEssences(ref, essenceComponent.getEssences() - requiredEssences);
-                    essenceStatComponent.apply(ref);
+                    essenceAttributeComponent.apply(ref);
                 }
                 close();
             } else {
-                for (EssenceStat value : EssenceStats.getStatsMap().values()) {
+                for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
                     value.levelUiEventAction(this, data.action);
                 }
             }
