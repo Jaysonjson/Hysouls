@@ -3,12 +3,14 @@ package json.jayson.hysouls;
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
+import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import json.jayson.hysouls.commands.LevelUpPageCommand;
 import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceComponent;
 import json.jayson.hysouls.components.EssenceStatComponent;
+import json.jayson.hysouls.interactions.OpenLevelPageInteraction;
 import json.jayson.hysouls.systems.EssenceSystem;
 import json.jayson.hysouls.ui.EssenceHud;
 
@@ -24,10 +26,14 @@ public class Hysouls extends JavaPlugin {
 
     @Override
     protected void setup() {
+
+        getCodecRegistry(Interaction.CODEC).register("open_level_page_interaction", OpenLevelPageInteraction.class, OpenLevelPageInteraction.CODEC);
+
         ComponentTypes.ESSENCES = getEntityStoreRegistry().registerComponent(EssenceComponent.class, "Essences", EssenceComponent.CODEC);
         ComponentTypes.ESSENCE_STAT = getEntityStoreRegistry().registerComponent(EssenceStatComponent.class, "EssencesStat", EssenceStatComponent.CODEC);
 
-        getCommandRegistry().registerCommand(new LevelUpPageCommand());
+        //getCommandRegistry().registerCommand(new LevelUpPageCommand());
+
         getEntityStoreRegistry().registerSystem(new EssenceSystem.EntityDeath());
         //TODO: Mainly still just testing
         getEventRegistry().registerGlobal(PlayerConnectEvent.class, playerConnectEvent -> {
@@ -41,7 +47,6 @@ public class Hysouls extends JavaPlugin {
                 if(essenceComponent != null) {
                     souls = essenceComponent.getEssences();
                 }
-                System.out.println("Custom HuD");
                 playerComponent.getHudManager().setCustomHud(playerConnectEvent.getPlayerRef(), new EssenceHud(playerConnectEvent.getPlayerRef(), souls));
             }
         });

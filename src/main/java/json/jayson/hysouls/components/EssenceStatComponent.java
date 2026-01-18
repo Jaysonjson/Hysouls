@@ -69,7 +69,7 @@ public class EssenceStatComponent implements Component<EntityStore> {
     }
 
     public static int calculateRequiredEssences(int level) {
-        return (int) ((float)86 * Math.pow(1.7, level - 1));
+        return (int) ((float)1200 * Math.pow(1.17, level + 1) - (float)1200 * Math.pow(1.17, level));
     }
 
     public void setEndurance(int endurance) {

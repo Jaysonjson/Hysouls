@@ -92,7 +92,7 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
             switch (data.action) {
 
                 case "VigorMinus" -> {
-                    if (wantedVigor != essenceStatComponent.getVigor() - 1) {
+                    if (wantedVigor != 0) {
                         wantedVigor--;
                         wantedLevel--;
                     }
@@ -108,7 +108,7 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
                 }
 
                 case "EnduranceMinus" -> {
-                    if (wantedEndurance != essenceStatComponent.getEndurance() - 1) {
+                    if (wantedEndurance != 0) {
                         wantedEndurance--;
                         wantedLevel--;
                     }
@@ -122,7 +122,7 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
                 }
 
                 case "MindMinus" -> {
-                    if (wantedMind != essenceStatComponent.getMind() - 1) {
+                    if (wantedMind != 0) {
                         wantedMind--;
                         wantedLevel--;
                     }
