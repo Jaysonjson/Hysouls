@@ -11,11 +11,15 @@ import com.hypixel.hytale.server.core.modules.entitystats.asset.DefaultEntitySta
 import com.hypixel.hytale.server.core.modules.entitystats.modifier.Modifier;
 import com.hypixel.hytale.server.core.modules.entitystats.modifier.StaticModifier;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import json.jayson.hysouls.Hysouls;
+import json.jayson.hysouls.essence_stat.EssenceStat;
+import json.jayson.hysouls.essence_stat.EssenceStats;
+import json.jayson.hysouls.essence_stat.IEssenceStated;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-public class EssenceStatComponent implements Component<EntityStore> {
+public class EssenceStatComponent implements Component<EntityStore>, IEssenceStated {
 
 
     public EssenceStatComponent() {
@@ -83,14 +87,10 @@ public class EssenceStatComponent implements Component<EntityStore> {
     public void apply(Ref<EntityStore> ref) {
         EntityStatMap statMap = ref.getStore().getComponent(ref, EntityStatsModule.get().getEntityStatMapComponentType());
         if(statMap != null) {
-            putStatModifier(statMap, DefaultEntityStatTypes.getHealth(), getVigor(), EssenceStats.VIGOR);
-            putStatModifier(statMap, DefaultEntityStatTypes.getStamina(), getEndurance(), EssenceStats.ENDURANCE);
-            putStatModifier(statMap, DefaultEntityStatTypes.getMana(), getMind(), EssenceStats.MIND);
+            for (EssenceStat value : EssenceStats.getStatsMap().values()) {
+                value.applyModifierBuff(statMap, this);
+            }
         }
-    }
-
-    public void putStatModifier(EntityStatMap map, int target, int base, EssenceStats stats) {
-        map.putModifier(target, "Essence_" + stats.getNamed(), new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, base * stats.getModifierBuff()));
     }
 
     @Override

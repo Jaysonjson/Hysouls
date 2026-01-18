@@ -18,12 +18,14 @@ import json.jayson.hysouls.EssenceUtil;
 import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceComponent;
 import json.jayson.hysouls.components.EssenceStatComponent;
-import json.jayson.hysouls.components.EssenceStats;
+import json.jayson.hysouls.essence_stat.EssenceStat;
+import json.jayson.hysouls.essence_stat.EssenceStats;
+import json.jayson.hysouls.essence_stat.IEssenceStated;
 import org.jetbrains.annotations.NotNull;
 
 
 //Needs a major rework
-public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData> {
+public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData> implements IEssenceStated {
 
     public int wantedLevel = 0;
     public int wantedVigor = 0;
@@ -39,17 +41,13 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
         uiCommandBuilder.append("Pages/LevelUpPage.ui");
         setVars(ref, uiCommandBuilder);
 
-        statAction(uiEventBuilder, EssenceStats.VIGOR);
-        statAction(uiEventBuilder, EssenceStats.ENDURANCE);
-        statAction(uiEventBuilder, EssenceStats.MIND);
+        for (EssenceStat value : EssenceStats.getStatsMap().values()) {
+            value.levelUiAction(uiEventBuilder);
+        }
 
         uiEventBuilder.addEventBinding(CustomUIEventBindingType.Activating, "#ConfirmButton", EventData.of("Action", "Confirm"));
     }
 
-    public void statAction(UIEventBuilder builder, EssenceStats stats) {
-        builder.addEventBinding(CustomUIEventBindingType.Activating, "#" + stats.getNamed() + "Minus", EventData.of("Action", stats.getNamed() + "Minus"));
-        builder.addEventBinding(CustomUIEventBindingType.Activating, "#" + stats.getNamed() + "Plus", EventData.of("Action", stats.getNamed() + "Plus"));
-    }
 
 
     public void setVars(Ref<EntityStore> ref, UICommandBuilder builder) {
@@ -74,16 +72,12 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
                     builder.set("#EssencesNeeded.Style.TextColor", "#ffffff");
                 }
 
-                statText(builder, EssenceStats.VIGOR, essenceStatComponent.getVigor(), wantedVigor);
-                statText(builder, EssenceStats.ENDURANCE, essenceStatComponent.getEndurance(), wantedEndurance);
-                statText(builder, EssenceStats.MIND, essenceStatComponent.getMind(), wantedMind);
+                System.out.println(EssenceStats.getStatsMap().values().size());
+                for (EssenceStat value : EssenceStats.getStatsMap().values()) {
+                    value.levelUiText(builder, essenceStatComponent, this);
+                }
             }
         }
-    }
-
-    public void statText(UICommandBuilder builder, EssenceStats stats, int current, int wanted) {
-        builder.set("#Next" + stats.getNamed() + ".TextSpans", Message.raw("" + (current + wanted)));
-        builder.set("#Current" + stats.getNamed() + ".TextSpans", Message.raw("" + (current)));
     }
 
     @Override
@@ -91,70 +85,65 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
         EssenceStatComponent essenceStatComponent = ref.getStore().getComponent(ref, ComponentTypes.ESSENCE_STAT);
         EssenceComponent essenceComponent = ref.getStore().getComponent(ref, ComponentTypes.ESSENCES);
         if(essenceStatComponent != null && essenceComponent != null) {
-            switch (data.action) {
-
-                case "VigorMinus" -> {
-                    if (wantedVigor != 0) {
-                        wantedVigor--;
-                        wantedLevel--;
+            if(data.action.equalsIgnoreCase("Confirm")) {
+                int requiredEssences = EssenceUtil.calculateTotalRequiredEssence(essenceStatComponent.getLevel(), wantedLevel);
+                if(essenceComponent.getEssences() >= requiredEssences) {
+                    for (EssenceStat value : EssenceStats.getStatsMap().values()) {
+                        value.set(essenceStatComponent, value.get(essenceStatComponent) + value.get(this));
                     }
+                    essenceComponent.setEssences(ref, essenceComponent.getEssences() - requiredEssences);
+                    essenceStatComponent.apply(ref);
                 }
-
-                case "VigorPlus" -> {
-                    if (wantedVigor != 99) {
-                       // if(EssenceStatComponent.calculateRequiredEssences(essenceStatComponent.getLevel() + wantedLevel + 1) <= essenceComponent.getEssences()) {
-                            wantedVigor++;
-                            wantedLevel++;
-                      //  }
-                    }
+                close();
+            } else {
+                for (EssenceStat value : EssenceStats.getStatsMap().values()) {
+                    value.levelUiEventAction(this, data.action);
                 }
-
-                case "EnduranceMinus" -> {
-                    if (wantedEndurance != 0) {
-                        wantedEndurance--;
-                        wantedLevel--;
-                    }
-                }
-
-                case "EndurancePlus" -> {
-                    if (wantedEndurance != 99) {
-                        wantedEndurance++;
-                        wantedLevel++;
-                    }
-                }
-
-                case "MindMinus" -> {
-                    if (wantedMind != 0) {
-                        wantedMind--;
-                        wantedLevel--;
-                    }
-                }
-
-                case "MindPlus" -> {
-                    if (wantedMind != 99) {
-                        wantedMind++;
-                        wantedLevel++;
-                    }
-                }
-
-                case "Confirm" -> {
-                    int requiredEssences = EssenceUtil.calculateTotalRequiredEssence(essenceStatComponent.getLevel(), wantedLevel);
-                    if(essenceComponent.getEssences() >= requiredEssences) {
-                        essenceStatComponent.setVigor(essenceStatComponent.getVigor() + wantedVigor);
-                        essenceStatComponent.setEndurance(essenceStatComponent.getEndurance() + wantedEndurance);
-                        essenceStatComponent.setMind(essenceStatComponent.getMind() + wantedMind);
-                        essenceComponent.setEssences(ref, essenceComponent.getEssences() - requiredEssences);
-                        essenceStatComponent.apply(ref);
-                    }
-
-                    close();
-                }
-
             }
         }
         UICommandBuilder builder = new UICommandBuilder();
         setVars(ref, builder);
         sendUpdate(builder);
+    }
+
+    @Override
+    public int getVigor() {
+        return wantedVigor;
+    }
+
+    @Override
+    public int getEndurance() {
+        return wantedEndurance;
+    }
+
+    @Override
+    public int getMind() {
+        return wantedMind;
+    }
+
+    @Override
+    public int getLevel() {
+        return wantedLevel;
+    }
+
+    @Override
+    public void setLevel(int level) {
+        this.wantedLevel = level;
+    }
+
+    @Override
+    public void setEndurance(int endurance) {
+        this.wantedEndurance = endurance;
+    }
+
+    @Override
+    public void setMind(int mind) {
+        this.wantedMind = mind;
+    }
+
+    @Override
+    public void setVigor(int vigor) {
+        this.wantedVigor = vigor;
     }
 
     public static class LevelEventData {

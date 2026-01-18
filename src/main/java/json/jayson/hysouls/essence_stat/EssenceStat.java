@@ -1,0 +1,91 @@
+package json.jayson.hysouls.essence_stat;
+
+import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.codec.KeyedCodec;
+import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
+import com.hypixel.hytale.server.core.Message;
+import com.hypixel.hytale.server.core.modules.entitystats.EntityStatMap;
+import com.hypixel.hytale.server.core.modules.entitystats.modifier.Modifier;
+import com.hypixel.hytale.server.core.modules.entitystats.modifier.StaticModifier;
+import com.hypixel.hytale.server.core.ui.builder.EventData;
+import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
+import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
+import json.jayson.hysouls.components.EssenceStatComponent;
+import json.jayson.hysouls.ui.LevelPage;
+
+public abstract class EssenceStat {
+
+    private String named;
+    private float modifierBuff;
+    private int defaultStatType = -1;
+    public EssenceStat(String named, float modifierBuff) {
+        this.named = named;
+        this.modifierBuff = modifierBuff;
+    }
+
+
+    public String getNamed() {
+        return named;
+    }
+
+    public float getModifierBuff() {
+        return modifierBuff;
+    }
+
+    public int getDefaultStatType() {
+        return defaultStatType;
+    }
+
+    public void setDefaultStatType(int defaultStatType) {
+        this.defaultStatType = defaultStatType;
+    }
+
+    public abstract void refreshStatType();
+
+    public void applyModifierBuff(EntityStatMap map, IEssenceStated input) {
+        applyModifierBuff(map, get(input));
+    }
+
+
+    public void applyModifierBuff(EntityStatMap map, int input) {
+        refreshStatType();
+        if(defaultStatType != -1) {
+            map.putModifier(getDefaultStatType(), "Essence_" + getNamed(), new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, input * getModifierBuff()));
+        }
+    }
+
+    public <T> KeyedCodec<T> keyedCodec() {
+        return new KeyedCodec<T>(getNamed(), (Codec<T>) Codec.INTEGER);
+    }
+
+    public abstract int get(IEssenceStated stated);
+    public abstract void set(IEssenceStated stated, int value);
+
+
+    /* Interface stuff */
+    public void levelUiAction(UIEventBuilder builder) {
+        builder.addEventBinding(CustomUIEventBindingType.Activating, "#" + getNamed() + "Minus", EventData.of("Action", getNamed() + "Minus"));
+        builder.addEventBinding(CustomUIEventBindingType.Activating, "#" + getNamed() + "Plus", EventData.of("Action", getNamed() + "Plus"));
+    }
+
+    public void levelUiText(UICommandBuilder builder, IEssenceStated component, IEssenceStated page) {
+        builder.set("#Next" + getNamed() + ".TextSpans", Message.raw("" + (get(component) + get(page))));
+        builder.set("#Current" + getNamed() + ".TextSpans", Message.raw("" + (get(component))));
+    }
+
+    public void levelUiEventAction(IEssenceStated page, String action) {
+        if(action.equalsIgnoreCase(getNamed() + "Minus")) {
+            if (get(page) != 0) {
+                set(page, get(page) - 1);
+                page.setLevel(page.getLevel() - 1);
+            }
+        } else if(action.equalsIgnoreCase(getNamed() + "Plus")) {
+            if (get(page) != 99) {
+                set(page, get(page) + 1);
+                page.setLevel(page.getLevel() + 1);
+            }
+        }
+    }
+
+
+}

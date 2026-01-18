@@ -10,6 +10,7 @@ import json.jayson.hysouls.commands.LevelUpPageCommand;
 import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceComponent;
 import json.jayson.hysouls.components.EssenceStatComponent;
+import json.jayson.hysouls.essence_stat.EssenceStats;
 import json.jayson.hysouls.interactions.OpenLevelPageInteraction;
 import json.jayson.hysouls.systems.EssenceSystem;
 import json.jayson.hysouls.ui.EssenceHud;
@@ -22,6 +23,7 @@ public class Hysouls extends JavaPlugin {
     public Hysouls(JavaPluginInit init) {
         super(init);
         VERSION = getManifest().getVersion().toString();
+        EssenceStats.init();
     }
 
     @Override
