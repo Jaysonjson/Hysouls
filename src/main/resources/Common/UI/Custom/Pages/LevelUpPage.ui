@@ -3,118 +3,258 @@ $Common = "../Common.ui";
 @LeftArrow = PatchStyle(TexturePath: "LeftArrow.png");
 
 $Common.@PageOverlay {
-$Common.@Container #LevelUpContainer {
-Anchor: (Width: 665, Height: 550);
-#Title {
-  Group {
-    $Common.@Title {
-      @Text = "Level Up";
+$Common.@Container {
+    Anchor: (Width: 665, Height: 550);
+
+    #Title {
+        Group {
+            $Common.@Title {
+                @Text = "Level Up";
+            }
+        }
     }
-  }
+
+    #Content {
+
+        Group {
+            LayoutMode: Left;
+            Anchor: (Height: 44);
+
+            Label {
+                Text: "Level";
+                Anchor: (Width: 220, Height: 44);
+                Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
+            }
+
+            Label #CurrentLevel {
+                Text: "999";
+                Anchor: (Width: 100, Height: 44);
+                Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+            }
+
+            Panel {
+                Background: @LeftArrow;
+                Anchor: (Width: 22, Height: 12);
+            }
+
+            Group {
+                Anchor: (Width: 105);
+            }
+
+            Label #NextLevel {
+                Text: "999";
+                Anchor: (Width: 100, Height: 44);
+                Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+            }
+        }
+
+        Group {
+            LayoutMode: Left;
+            Anchor: (Height: 44);
+
+            Label {
+                Text: "Essences Held";
+                Anchor: (Width: 220, Height: 44);
+                Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
+            }
+
+            Label #EssencesHeld {
+                Text: "0";
+                Anchor: (Width: 100, Height: 44);
+                Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+            }
+
+            Panel {
+                Background: @LeftArrow;
+                Anchor: (Width: 22, Height: 12);
+            }
+
+            Group {
+                Anchor: (Width: 105);
+            }
+
+            Label #EssencesHeldMinus {
+                Text: "1";
+                Anchor: (Width: 100, Height: 44);
+                Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+            }
+        }
+
+        Group {
+            LayoutMode: Left;
+            Anchor: (Height: 44);
+
+            Label {
+                Text: "Essences Needed";
+                Anchor: (Width: 385, Height: 44);
+                Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
+            }
+
+            Label #EssencesNeeded {
+                Text: "6543";
+                Anchor: (Width: 230, Height: 44);
+                Style: (
+                    FontSize: 18,
+                    TextColor: #ffffff,
+                    VerticalAlignment: Center,
+                    HorizontalAlignment: Center
+                );
+            }
+        }
+
+        Group {
+            Anchor: (Height: 60);
+        }
+
+        Group #ButtonGroup {
+            LayoutMode: Left;
+            Anchor: (Height: 40);
+
+            $Common.@TextButton #ConfirmButton {
+                Text: "Confirm";
+                Anchor: (Width: 130, Height: 40);
+            }
+        }
+    }
 }
 
-#Content {
-  Group #LevelGroup {
-    LayoutMode: Left;
-    Anchor: (Height: 44);
+$Common.@Container {
+    Anchor: (Right: 175, Width: 500, Height: 550);
 
-    Label {
-      Text: "Level";
-      Anchor: (Width: 220, Height: 44);
-      Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
+    #Title {
+        Group {
+            $Common.@Title {
+                @Text = "Attribute Bonuses";
+            }
+        }
     }
 
-    Label #CurrentLevel {
-      Text: "999";
-      Anchor: (Width: 100, Height: 44);
-      Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+    #Content {
+        Group {
+            LayoutMode: Left;
+            Anchor: (Height: 44);
+
+            Label {
+                Text: "Extra Health";
+                Anchor: (Width: 180, Height: 44);
+                Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
+            }
+
+            Label #CurrentHealth {
+                Text: "4";
+                Anchor: (Width: 100, Height: 44);
+                Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+            }
+
+            Panel {
+                Background: @LeftArrow;
+                Anchor: (Width: 22, Height: 12);
+            }
+
+            Group {
+                Anchor: (Width: 45);
+            }
+
+            Label #NextHealth {
+                Text: "6";
+                Anchor: (Width: 100, Height: 44);
+                Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+            }
+        }
+
+        Group {
+            LayoutMode: Left;
+            Anchor: (Height: 44);
+
+            Label {
+                Text: "Extra Stamina";
+                Anchor: (Width: 180, Height: 44);
+                Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
+            }
+
+            Label #CurrentStamina {
+                Text: "4";
+                Anchor: (Width: 100, Height: 44);
+                Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+            }
+
+            Panel {
+                Background: @LeftArrow;
+                Anchor: (Width: 22, Height: 12);
+            }
+
+            Group {
+                Anchor: (Width: 45);
+            }
+
+            Label #NextStamina {
+                Text: "6";
+                Anchor: (Width: 100, Height: 44);
+                Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+            }
+        }
+        Group {
+            LayoutMode: Left;
+            Anchor: (Height: 44);
+
+            Label {
+                Text: "Extra Mana";
+                Anchor: (Width: 180, Height: 44);
+                Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
+            }
+
+            Label #CurrentMana {
+                Text: "4";
+                Anchor: (Width: 100, Height: 44);
+                Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+            }
+
+            Panel {
+                Background: @LeftArrow;
+                Anchor: (Width: 22, Height: 12);
+            }
+
+            Group {
+                Anchor: (Width: 45);
+            }
+
+            Label #NextMana {
+                Text: "6";
+                Anchor: (Width: 100, Height: 44);
+                Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+            }
+        }
+        Group {
+            LayoutMode: Left;
+            Anchor: (Height: 44);
+
+            Label {
+                Text: "Extra Damage";
+                Anchor: (Width: 180, Height: 44);
+                Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
+            }
+
+            Label #CurrentDamage {
+                Text: "4";
+                Anchor: (Width: 100, Height: 44);
+                Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+            }
+
+            Panel {
+                Background: @LeftArrow;
+                Anchor: (Width: 22, Height: 12);
+            }
+
+            Group {
+                Anchor: (Width: 45);
+            }
+
+            Label #NextDamage {
+                Text: "6";
+                Anchor: (Width: 100, Height: 44);
+                Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+            }
+        }
     }
-
-    Panel {
-      Background: @LeftArrow;
-      Anchor: (Width: 22, Height: 12);
-    }
-
-    Group {
-      Anchor: (Width: 105);
-    }
-
-    Label #NextLevel {
-      Text: "999";
-      Anchor: (Width: 100, Height: 44);
-      Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
-    }
-  }
-
-  Group #EssenceHeldGroup {
-    LayoutMode: Left;
-    Anchor: (Height: 44);
-
-    Label {
-      Text: "Essences Held";
-      Anchor: (Width: 220, Height: 44);
-      Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
-    }
-
-    Label #EssencesHeld {
-      Text: "0";
-      Anchor: (Width: 100, Height: 44);
-      Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
-    }
-
-    Panel {
-      Background: @LeftArrow;
-      Anchor: (Width: 22, Height: 12);
-    }
-
-    Group {
-      Anchor: (Width: 105);
-    }
-
-    Label #EssencesHeldMinus {
-      Text: "1";
-      Anchor: (Width: 100, Height: 44);
-      Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
-    }
-  }
-
-  Group #EssenceNeededGroup {
-    LayoutMode: Left;
-    Anchor: (Height: 44);
-
-    Label {
-      Text: "Essences Needed";
-      Anchor: (Width: 385, Height: 44);
-      Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
-    }
-
-    Label #EssencesNeeded {
-      Text: "6543";
-      Anchor: (Width: 230, Height: 44);
-      Style: (
-        FontSize: 18,
-        TextColor: #ffffff,
-        VerticalAlignment: Center,
-        HorizontalAlignment: Center
-      );
-    }
-  }
-
-  Group {
-    Anchor: (Height: 60);
-  }
-
-Group #ButtonGroup {
-      LayoutMode: Left;
-      Anchor: (Height: 40);
-        $Common.@TextButton #ConfirmButton {
-              Text: "Confirm";
-              Anchor: (Width: 130, Height: 40);
-    }
-
-
-
-}
-}
 }
 }

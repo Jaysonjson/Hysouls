@@ -19,6 +19,7 @@ import java.util.List;
 public abstract class EssenceAttribute {
 
     private String named;
+    private int cap = 99;
     private List<EssenceAttributeModifier> modifiers = new ArrayList<>();
 
     public EssenceAttribute(String named, @Nullable EssenceAttributeModifier... modifier) {
@@ -26,6 +27,18 @@ public abstract class EssenceAttribute {
         if(modifier != null) {
             this.modifiers.addAll(Arrays.asList(modifier));
         }
+    }
+
+    public EssenceAttribute(String named, int cap, @Nullable EssenceAttributeModifier... modifier) {
+        this.named = named;
+        this.cap = cap;
+        if(modifier != null) {
+            this.modifiers.addAll(Arrays.asList(modifier));
+        }
+    }
+
+    public int getCap() {
+        return cap;
     }
 
     public String getNamed() {

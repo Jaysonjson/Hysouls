@@ -87,7 +87,11 @@ public class EssenceAttributeComponent implements Component<EntityStore>, Essenc
     }
 
     public int getLevel() {
-        return getVigor() + getEndurance() + getMind();
+        int level = 0;
+        for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
+            level += value.get(this);
+        }
+        return level;
     }
 
 

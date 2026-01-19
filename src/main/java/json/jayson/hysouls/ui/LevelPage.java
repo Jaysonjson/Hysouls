@@ -9,6 +9,7 @@ import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
+import com.hypixel.hytale.server.core.modules.entitystats.asset.DefaultEntityStatTypes;
 import com.hypixel.hytale.server.core.ui.builder.EventData;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
@@ -19,9 +20,12 @@ import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceAttributeComponent;
 import json.jayson.hysouls.components.EssenceComponent;
 import json.jayson.hysouls.essence_attribute.EssenceAttribute;
+import json.jayson.hysouls.essence_attribute.EssenceAttributeModifier;
 import json.jayson.hysouls.essence_attribute.EssenceAttributes;
 import json.jayson.hysouls.essence_attribute.EssenceAttributeHolder;
 import org.jetbrains.annotations.NotNull;
+
+import java.text.DecimalFormat;
 
 
 //Needs a major rework, plan is to make the UI dynamically with the EssenceStats in mind
@@ -81,13 +85,60 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
                 } else {
                     builder.set("#EssencesNeeded.Style.TextColor", "#ffffff");
                 }
-
                 for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
                     value.levelUiText(builder, essenceAttributeComponent, this);
                 }
+
+                float currentHealth = calculateStat(essenceAttributeComponent, DefaultEntityStatTypes.getHealth());
+                float currentStamina = calculateStat(essenceAttributeComponent, DefaultEntityStatTypes.getStamina());
+                float currentMana = calculateStat(essenceAttributeComponent, DefaultEntityStatTypes.getMana());
+                float currentDamage = calculateDamage(essenceAttributeComponent);
+                DecimalFormat dformat = new DecimalFormat("#0.0");
+
+                builder.set("#CurrentHealth.TextSpans", Message.raw(dformat.format(currentHealth)));
+                builder.set("#CurrentStamina.TextSpans", Message.raw(dformat.format(currentStamina)));
+                builder.set("#CurrentMana.TextSpans", Message.raw(dformat.format(currentMana)));
+                builder.set("#CurrentDamage.TextSpans", Message.raw(dformat.format(currentDamage)));
+                builder.set("#NextHealth.TextSpans", Message.raw(dformat.format(currentHealth + calculateStat(this, DefaultEntityStatTypes.getHealth()))));
+                builder.set("#NextStamina.TextSpans", Message.raw(dformat.format(currentStamina + calculateStat(this, DefaultEntityStatTypes.getStamina()))));
+                builder.set("#NextMana.TextSpans", Message.raw(dformat.format(currentMana + calculateStat(this, DefaultEntityStatTypes.getMana()))));
+                builder.set("#NextDamage.TextSpans", Message.raw(dformat.format(currentDamage + calculateDamage(this))));
             }
         }
     }
+
+
+    public float calculateDamage(EssenceAttributeHolder holder) {
+        float dmg = 0;
+        for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
+            for (EssenceAttributeModifier modifier : value.getModifiers()) {
+                if(modifier.getType() == EssenceAttributeModifier.Type.DMG_BUFF) {
+                    dmg += value.get(holder) * modifier.getValue();
+                }
+            }
+        }
+        return dmg;
+    }
+
+
+
+    public float calculateStat(EssenceAttributeHolder holder, int stat) {
+        float health = 0;
+        for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
+            for (EssenceAttributeModifier modifier : value.getModifiers()) {
+                if(modifier.getStatIndex() == stat) {
+                    if(modifier.getType() == EssenceAttributeModifier.Type.STAT_DEBUFF) {
+                       // health -= modifier.getValue();
+                    } else {
+                        health += value.get(holder) * modifier.getValue();
+                    }
+                }
+            }
+        }
+        return health;
+    }
+
+
 
     @Override
     public void handleDataEvent(@NotNull Ref<EntityStore> ref, @NotNull Store<EntityStore> store, @NotNull LevelPage.LevelEventData data) {
