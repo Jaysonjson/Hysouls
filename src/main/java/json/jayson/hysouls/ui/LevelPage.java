@@ -15,7 +15,7 @@ import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import json.jayson.hysouls.EssenceUtil;
+import json.jayson.hysouls.util.EssenceUtil;
 import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceAttributeComponent;
 import json.jayson.hysouls.components.EssenceComponent;

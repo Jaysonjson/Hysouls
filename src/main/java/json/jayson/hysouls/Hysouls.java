@@ -1,11 +1,8 @@
 package json.jayson.hysouls;
 
 import com.hypixel.hytale.logger.HytaleLogger;
-import com.hypixel.hytale.protocol.packets.assets.UpdateEntityStatTypes;
-import com.hypixel.hytale.server.core.command.commands.player.stats.PlayerStatsGetCommand;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
-import com.hypixel.hytale.server.core.modules.entity.damage.DamageSystems;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
@@ -18,7 +15,7 @@ import json.jayson.hysouls.interactions.OpenLevelPageInteraction;
 import json.jayson.hysouls.systems.EssenceDamageSystem;
 import json.jayson.hysouls.systems.EssenceParticleSystem;
 import json.jayson.hysouls.systems.EssenceSystem;
-import json.jayson.hysouls.ui.EssenceHud;
+import json.jayson.hysouls.util.EssenceUtil;
 
 public class Hysouls extends JavaPlugin {
 

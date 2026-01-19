@@ -3,12 +3,17 @@ package json.jayson.hysouls.systems;
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.protocol.packets.player.DamageInfo;
+import com.hypixel.hytale.server.core.entity.Entity;
+import com.hypixel.hytale.server.core.entity.EntityUtils;
+import com.hypixel.hytale.server.core.entity.LivingEntity;
 import com.hypixel.hytale.server.core.entity.damage.DamageDataComponent;
 import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.inventory.Inventory;
 import com.hypixel.hytale.server.core.modules.entity.AllLegacyLivingEntityTypesQuery;
 import com.hypixel.hytale.server.core.modules.entity.damage.Damage;
 import com.hypixel.hytale.server.core.modules.entity.damage.DamageEventSystem;
 import com.hypixel.hytale.server.core.modules.entity.damage.DamageModule;
+import com.hypixel.hytale.server.core.modules.entity.damage.DamageSystems;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceAttributeComponent;
@@ -26,11 +31,14 @@ public class EssenceDamageSystem extends DamageEventSystem {
 
     @Override
     public void handle(int i, @NotNull ArchetypeChunk<EntityStore> archetypeChunk, @NotNull Store<EntityStore> store, @NotNull CommandBuffer<EntityStore> commandBuffer, @NotNull Damage damage) {
-
         if(damage.getSource() instanceof Damage.EntitySource entitySource) {
             Ref<EntityStore> damager = entitySource.getRef();
             if (damager.isValid()) {
                 EssenceAttributeComponent essenceAttributeComponent = damager.getStore().getComponent(damager, ComponentTypes.ESSENCE_ATTRIBUTE);
+                Entity damagerEntity = EntityUtils.getEntity(damager, commandBuffer);
+                if (damagerEntity instanceof LivingEntity livingEntity) {
+                    String itemId = livingEntity.getInventory().getActiveHotbarItem().getItemId();
+                }
                 if(essenceAttributeComponent != null) {
                     float extraDamage = 0;
                     for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {

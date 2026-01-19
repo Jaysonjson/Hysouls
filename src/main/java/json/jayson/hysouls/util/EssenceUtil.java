@@ -1,8 +1,6 @@
-package json.jayson.hysouls;
+package json.jayson.hysouls.util;
 
-import com.hypixel.hytale.common.plugin.PluginIdentifier;
 import com.hypixel.hytale.server.core.entity.entities.Player;
-import com.hypixel.hytale.server.core.plugin.PluginManager;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import json.jayson.hysouls.ui.EssenceHud;
 

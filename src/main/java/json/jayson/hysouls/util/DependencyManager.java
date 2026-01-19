@@ -1,4 +1,4 @@
-package json.jayson.hysouls;
+package json.jayson.hysouls.util;
 
 import com.buuz135.mhud.MultipleCustomUIHud;
 import com.buuz135.mhud.MultipleHUD;
