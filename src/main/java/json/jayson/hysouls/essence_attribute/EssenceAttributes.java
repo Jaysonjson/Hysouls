@@ -7,17 +7,9 @@ import java.util.LinkedHashMap;
 public class EssenceAttributes {
     private static LinkedHashMap<String, EssenceAttribute> statsMap = new LinkedHashMap<>();
 
-    public static EssenceAttribute VIGOR = add(new EssenceAttribute("Vigor") {
-        @Override
-        public void initialize() {
-            setModifierType(0, 1.8f, ModifierType.BUFF);
-            setModifierType(0, 5f, ModifierType.DEBUFF);
-        }
-
-        @Override
-        public void refreshStatType() {
-            setDefaultStatType(0, DefaultEntityStatTypes.getHealth());
-        }
+    public static EssenceAttribute VIGOR = add(new EssenceAttribute("Vigor",
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.BUFF, 1.8f, DefaultEntityStatTypes::getHealth),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DEBUFF, 5f, DefaultEntityStatTypes::getHealth)) {
 
         @Override
         public int get(EssenceAttributeHolder stated) {
@@ -31,20 +23,9 @@ public class EssenceAttributes {
 
     });
 
-    public static EssenceAttribute ENDURANCE = add(new EssenceAttribute("Endurance") {
-        @Override
-        public void initialize() {
-            setModifierType(0, 1.2f, ModifierType.BUFF);
-            setModifierType(0, 2f, ModifierType.DEBUFF);
-
-            setModifierType(1, 0.25f, ModifierType.BUFF);
-        }
-
-        @Override
-        public void refreshStatType() {
-            setDefaultStatType(0, DefaultEntityStatTypes.getStamina());
-            setDefaultStatType(1, DefaultEntityStatTypes.getOxygen());
-        }
+    public static EssenceAttribute ENDURANCE = add(new EssenceAttribute("Endurance",
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.BUFF, 1.2f, DefaultEntityStatTypes::getStamina),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DEBUFF, 5f, DefaultEntityStatTypes::getStamina)) {
 
         @Override
         public int get(EssenceAttributeHolder stated) {
@@ -58,17 +39,10 @@ public class EssenceAttributes {
 
     });
 
-    public static EssenceAttribute MIND = add(new EssenceAttribute("Mind") {
-        @Override
-        public void initialize() {
-            setModifierType(0, 1.4f, ModifierType.BUFF);
-            setModifierType(0, 0, ModifierType.DEBUFF);
-        }
-
-        @Override
-        public void refreshStatType() {
-            setDefaultStatType(0, DefaultEntityStatTypes.getMana());
-        }
+    public static EssenceAttribute MIND = add(new EssenceAttribute("Mind",
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.BUFF, 1.4f, DefaultEntityStatTypes::getMana),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DEBUFF, 1f, DefaultEntityStatTypes::getMana)
+            ) {
 
         @Override
         public int get(EssenceAttributeHolder stated) {

@@ -10,104 +10,54 @@ import com.hypixel.hytale.server.core.modules.entitystats.modifier.StaticModifie
 import com.hypixel.hytale.server.core.ui.builder.EventData;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class EssenceAttribute {
 
     private String named;
-    private List<Integer> defaultStatTypes = new ArrayList<>();
-    //Used to debuff the DefaultStats, so it doesnt get too OP at the start
-    private List<Float> modifierDebuffs = new ArrayList<>();
-    private List<Float> modifierBuffs = new ArrayList<>();
+    private List<EssenceAttributeModifier> modifiers = new ArrayList<>();
 
-    public EssenceAttribute(String named) {
+    public EssenceAttribute(String named, @Nullable EssenceAttributeModifier... modifier) {
         this.named = named;
-        initialize0();
-    }
-    public void initialize0() {
-        refreshStatType();
-        initialize();
-    }
-    public abstract void initialize();
-
-
-
-    public float getModifierType(int index, ModifierType type) {
-        switch (type) {
-            case BUFF -> {
-                if (index < modifierBuffs.size()) {
-                    return modifierBuffs.get(index);
-                }
-            }
-
-            case DEBUFF -> {
-                if (index < modifierDebuffs.size()) {
-                    return modifierDebuffs.get(index);
-                }
-            }
+        if(modifier != null) {
+            this.modifiers.addAll(Arrays.asList(modifier));
         }
-        return 0;
     }
-
-    public float setModifierType(int index, float value, ModifierType type) {
-        switch (type) {
-            case BUFF -> {
-                while (modifierBuffs.size() <= index) {
-                    modifierBuffs.add(0f);
-                }
-                modifierBuffs.set(index, value);
-            }
-
-            case DEBUFF -> {
-
-                while (modifierDebuffs.size() <= index) {
-                    modifierDebuffs.add(0f);
-                }
-                modifierDebuffs.set(index, value);
-            }
-        }
-        return 0;
-    }
-
-
 
     public String getNamed() {
         return named;
     }
 
-    public int getDefaultStatType(int index) {
-        if (index < defaultStatTypes.size()) {
-            return defaultStatTypes.get(index);
-        }
-        return 0;
+    public List<EssenceAttributeModifier> getModifiers() {
+        return modifiers;
     }
 
-    public void setDefaultStatType(int index, int defaultStatType) {
-        while (defaultStatTypes.size() <= index) {
-            defaultStatTypes.add(0);
-        }
-        defaultStatTypes.set(index, defaultStatType);
+    public void addModifier(EssenceAttributeModifier modifier) {
+        modifiers.add(modifier);
     }
-
-    public abstract void refreshStatType();
 
     public void applyModifierBuff(EntityStatMap map, EssenceAttributeHolder input) {
         applyModifierBuff(map, get(input));
     }
 
-
     public void applyModifierBuff(EntityStatMap map, int input) {
-        refreshStatType();
-        for (int i = 0; i < defaultStatTypes.size(); i++) {
-            map.putModifier(getDefaultStatType(i), "Essence_" + getNamed(), new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, -getModifierType(i, ModifierType.DEBUFF)));
-            map.putModifier(getDefaultStatType(i), "Essence_" + getNamed(), new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, input * getModifierType(i, ModifierType.BUFF)));
+        for (EssenceAttributeModifier modifier : modifiers) {
+            if(modifier.getTarget() == EssenceAttributeModifier.Target.PLAYER) {
+                float amount = input * modifier.getValue();
+                if(modifier.getType() == EssenceAttributeModifier.Type.DEBUFF) {
+                    amount = -modifier.getValue();
+                }
+                map.putModifier(modifier.getStatIndex(), "Essence_" + getNamed() + "_" + modifier.getType().name(), new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, amount));
+            }
         }
     }
 
     public <T> KeyedCodec<T> keyedCodec() {
-        return new KeyedCodec<T>(getNamed(), (Codec<T>) Codec.INTEGER);
+        return new KeyedCodec<>(getNamed(), (Codec<T>) Codec.INTEGER);
     }
 
     public abstract int get(EssenceAttributeHolder stated);
@@ -147,11 +97,6 @@ public abstract class EssenceAttribute {
     //This is ugly and lazy but I dont care
     public String asLevelPageUI(String parent) {
         return parent.replaceAll("ATTRIBUTEINS", getNamed());
-    }
-
-    public enum ModifierType {
-        BUFF,
-        DEBUFF
     }
 
 }
