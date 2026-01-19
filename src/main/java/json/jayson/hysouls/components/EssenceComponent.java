@@ -47,14 +47,9 @@ public class EssenceComponent implements Component<EntityStore> {
         if (ref != null && ref.isValid()) {
             Player playerComponent = ref.getStore().getComponent(ref, Player.getComponentType());
             if (playerComponent != null) {
-                if(playerComponent.getHudManager().getCustomHud() instanceof EssenceHud essenceHud) {
-                    essenceHud.setEssences(this.essences);
-                } else if(DependencyManager.multiHud()) {
-                    if(playerComponent.getHudManager().getCustomHud() instanceof MultipleCustomUIHud multipleCustomUIHud) {
-                        if(multipleCustomUIHud.getCustomHuds().get("HysoulsHud") instanceof EssenceHud essenceHud) {
-                            essenceHud.setEssences(this.essences);
-                        }
-                    }
+                EssenceHud hud = DependencyManager.getEssenceHud(playerComponent);
+                if(hud != null) {
+                    hud.setEssences(essences);
                 }
             }
         }
