@@ -8,7 +8,7 @@ public class EssenceAttributes {
     private static LinkedHashMap<String, EssenceAttribute> statsMap = new LinkedHashMap<>();
 
     public static EssenceAttribute VIGOR = add(new EssenceAttribute("Vigor",
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.BUFF, 1.8f, DefaultEntityStatTypes::getHealth),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.BUFF, 1.4f, DefaultEntityStatTypes::getHealth),
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DEBUFF, 5f, DefaultEntityStatTypes::getHealth)) {
 
         @Override
@@ -24,7 +24,7 @@ public class EssenceAttributes {
     });
 
     public static EssenceAttribute ENDURANCE = add(new EssenceAttribute("Endurance",
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.BUFF, 1.2f, DefaultEntityStatTypes::getStamina),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.BUFF, 1.1f, DefaultEntityStatTypes::getStamina),
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DEBUFF, 5f, DefaultEntityStatTypes::getStamina)) {
 
         @Override

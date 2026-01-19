@@ -1,5 +1,7 @@
 package json.jayson.hysouls.components;
 
+import com.buuz135.mhud.MultipleCustomUIHud;
+import com.buuz135.mhud.MultipleHUD;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
@@ -7,6 +9,7 @@ import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import json.jayson.hysouls.DependencyManager;
 import json.jayson.hysouls.ui.EssenceHud;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,6 +49,12 @@ public class EssenceComponent implements Component<EntityStore> {
             if (playerComponent != null) {
                 if(playerComponent.getHudManager().getCustomHud() instanceof EssenceHud essenceHud) {
                     essenceHud.setEssences(this.essences);
+                } else if(DependencyManager.multiHud()) {
+                    if(playerComponent.getHudManager().getCustomHud() instanceof MultipleCustomUIHud multipleCustomUIHud) {
+                        if(multipleCustomUIHud.getCustomHuds().get("HysoulsHud") instanceof EssenceHud essenceHud) {
+                            essenceHud.setEssences(this.essences);
+                        }
+                    }
                 }
             }
         }

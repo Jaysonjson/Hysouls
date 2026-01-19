@@ -16,9 +16,15 @@ repositories {
     maven("https://maven.hytale-modding.info/releases") {
         name = "HytaleModdingReleases"
     }
+
+    maven("https://maven.hytale-modding.info/") {
+        name = "MultiHUD"
+    }
+
 }
 
 dependencies {
+    implementation("com.buuz135:MultipleHUD:1.0.2")
     compileOnly(libs.jetbrains.annotations)
     compileOnly(libs.jspecify)
 

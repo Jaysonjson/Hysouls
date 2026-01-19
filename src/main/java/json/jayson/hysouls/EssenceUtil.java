@@ -1,5 +1,11 @@
 package json.jayson.hysouls;
 
+import com.hypixel.hytale.common.plugin.PluginIdentifier;
+import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.plugin.PluginManager;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
+import json.jayson.hysouls.ui.EssenceHud;
+
 public class EssenceUtil {
 
     public static int calculateRequiredEssences(int level) {
@@ -12,6 +18,14 @@ public class EssenceUtil {
             total += calculateRequiredEssences(start + i);
         }
         return total;
+    }
+
+    public static void applyHud(Player player, PlayerRef playerRef, int souls) {
+        if(DependencyManager.multiHud()) {
+            DependencyManager.applyMultiHud(player, playerRef, souls);
+        } else {
+            player.getHudManager().setCustomHud(playerRef, new EssenceHud(playerRef, souls));
+        }
     }
 
 }

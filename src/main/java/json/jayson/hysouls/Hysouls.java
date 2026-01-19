@@ -47,7 +47,7 @@ public class Hysouls extends JavaPlugin {
                 if(essenceComponent != null) {
                     souls = essenceComponent.getEssences();
                 }
-                playerComponent.getHudManager().setCustomHud(playerConnectEvent.getPlayerRef(), new EssenceHud(playerConnectEvent.getPlayerRef(), souls));
+                EssenceUtil.applyHud(playerComponent, playerConnectEvent.getPlayerRef(), souls);
             }
         });
     }
