@@ -2,16 +2,21 @@ package json.jayson.hysouls.essence_attribute;
 
 import com.hypixel.hytale.server.core.modules.entitystats.asset.DefaultEntityStatTypes;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class EssenceAttributes {
     private static LinkedHashMap<String, EssenceAttribute> statsMap = new LinkedHashMap<>();
 
-    public static EssenceAttribute VIGOR = add(new EssenceAttribute("Vigor", 1.8f, 5) {
+    public static EssenceAttribute VIGOR = add(new EssenceAttribute("Vigor") {
+        @Override
+        public void initialize() {
+            setModifierType(0, 1.8f, ModifierType.BUFF);
+            setModifierType(0, 5f, ModifierType.DEBUFF);
+        }
+
         @Override
         public void refreshStatType() {
-            setDefaultStatType(DefaultEntityStatTypes.getHealth());
+            setDefaultStatType(0, DefaultEntityStatTypes.getHealth());
         }
 
         @Override
@@ -26,10 +31,19 @@ public class EssenceAttributes {
 
     });
 
-    public static EssenceAttribute ENDURANCE = add(new EssenceAttribute("Endurance", 1.2f, 2) {
+    public static EssenceAttribute ENDURANCE = add(new EssenceAttribute("Endurance") {
+        @Override
+        public void initialize() {
+            setModifierType(0, 1.2f, ModifierType.BUFF);
+            setModifierType(0, 2f, ModifierType.DEBUFF);
+
+            setModifierType(1, 0.25f, ModifierType.BUFF);
+        }
+
         @Override
         public void refreshStatType() {
-            setDefaultStatType(DefaultEntityStatTypes.getStamina());
+            setDefaultStatType(0, DefaultEntityStatTypes.getStamina());
+            setDefaultStatType(1, DefaultEntityStatTypes.getOxygen());
         }
 
         @Override
@@ -44,10 +58,16 @@ public class EssenceAttributes {
 
     });
 
-    public static EssenceAttribute MIND = add(new EssenceAttribute("Mind", 1.4f, 0) {
+    public static EssenceAttribute MIND = add(new EssenceAttribute("Mind") {
+        @Override
+        public void initialize() {
+            setModifierType(0, 1.4f, ModifierType.BUFF);
+            setModifierType(0, 0, ModifierType.DEBUFF);
+        }
+
         @Override
         public void refreshStatType() {
-            setDefaultStatType(DefaultEntityStatTypes.getMana());
+            setDefaultStatType(0, DefaultEntityStatTypes.getMana());
         }
 
         @Override
@@ -59,12 +79,12 @@ public class EssenceAttributes {
         public void set(EssenceAttributeHolder stated, int value) {
             stated.setMind(value);
         }
+
     });
 
 
 
     public static void init() {
-
     }
 
 

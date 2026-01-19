@@ -11,40 +11,84 @@ import com.hypixel.hytale.server.core.ui.builder.EventData;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class EssenceAttribute {
 
     private String named;
-    private float modifierBuff;
+    private List<Integer> defaultStatTypes = new ArrayList<>();
     //Used to debuff the DefaultStats, so it doesnt get too OP at the start
-    private int modifierDebuff;
-    private int defaultStatType = -1;
-    public EssenceAttribute(String named, float modifierBuff, int modifierDebuff) {
+    private List<Float> modifierDebuffs = new ArrayList<>();
+    private List<Float> modifierBuffs = new ArrayList<>();
+
+    public EssenceAttribute(String named) {
         this.named = named;
-        this.modifierBuff = modifierBuff;
-        this.modifierDebuff = modifierDebuff;
+        initialize0();
+    }
+    public void initialize0() {
+        refreshStatType();
+        initialize();
+    }
+    public abstract void initialize();
+
+
+
+    public float getModifierType(int index, ModifierType type) {
+        switch (type) {
+            case BUFF -> {
+                if (index < modifierBuffs.size()) {
+                    return modifierBuffs.get(index);
+                }
+            }
+
+            case DEBUFF -> {
+                if (index < modifierDebuffs.size()) {
+                    return modifierDebuffs.get(index);
+                }
+            }
+        }
+        return 0;
     }
 
-    public int getModifierDebuff() {
-        return modifierDebuff;
+    public float setModifierType(int index, float value, ModifierType type) {
+        switch (type) {
+            case BUFF -> {
+                while (modifierBuffs.size() <= index) {
+                    modifierBuffs.add(0f);
+                }
+                modifierBuffs.set(index, value);
+            }
+
+            case DEBUFF -> {
+
+                while (modifierDebuffs.size() <= index) {
+                    modifierDebuffs.add(0f);
+                }
+                modifierDebuffs.set(index, value);
+            }
+        }
+        return 0;
     }
+
+
 
     public String getNamed() {
         return named;
     }
 
-    public float getModifierBuff() {
-        return modifierBuff;
+    public int getDefaultStatType(int index) {
+        if (index < defaultStatTypes.size()) {
+            return defaultStatTypes.get(index);
+        }
+        return 0;
     }
 
-    public int getDefaultStatType() {
-        return defaultStatType;
-    }
-
-    public void setDefaultStatType(int defaultStatType) {
-        this.defaultStatType = defaultStatType;
+    public void setDefaultStatType(int index, int defaultStatType) {
+        while (defaultStatTypes.size() <= index) {
+            defaultStatTypes.add(0);
+        }
+        defaultStatTypes.set(index, defaultStatType);
     }
 
     public abstract void refreshStatType();
@@ -56,9 +100,9 @@ public abstract class EssenceAttribute {
 
     public void applyModifierBuff(EntityStatMap map, int input) {
         refreshStatType();
-        if(defaultStatType != -1) {
-            map.putModifier(getDefaultStatType(), "Essence_" + getNamed(), new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, -modifierDebuff));
-            map.putModifier(getDefaultStatType(), "Essence_" + getNamed(), new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, input * getModifierBuff()));
+        for (int i = 0; i < defaultStatTypes.size(); i++) {
+            map.putModifier(getDefaultStatType(i), "Essence_" + getNamed(), new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, -getModifierType(i, ModifierType.DEBUFF)));
+            map.putModifier(getDefaultStatType(i), "Essence_" + getNamed(), new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, input * getModifierType(i, ModifierType.BUFF)));
         }
     }
 
@@ -103,6 +147,11 @@ public abstract class EssenceAttribute {
     //This is ugly and lazy but I dont care
     public String asLevelPageUI(String parent) {
         return parent.replaceAll("ATTRIBUTEINS", getNamed());
+    }
+
+    public enum ModifierType {
+        BUFF,
+        DEBUFF
     }
 
 }
