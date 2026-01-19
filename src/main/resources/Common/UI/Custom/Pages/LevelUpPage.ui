@@ -103,23 +103,26 @@ $Common.@Container {
         }
 
         Group {
-            Anchor: (Height: 60);
+            Anchor: (Height: 50);
         }
 
         Group #ButtonGroup {
-            LayoutMode: Left;
-            Anchor: (Height: 40);
+            Anchor: (Height: 20);
+        }
+
+        Group {
+            Anchor: (Height: 60);
 
             $Common.@TextButton #ConfirmButton {
                 Text: "Confirm";
-                Anchor: (Width: 130, Height: 40);
+                Anchor: (Width: 175, Height: 45);
             }
         }
     }
 }
 
 $Common.@Container {
-    Anchor: (Right: 175, Width: 500, Height: 550);
+    Anchor: (Right: 175, Width: 500, Height: 244);
 
     #Title {
         Group {

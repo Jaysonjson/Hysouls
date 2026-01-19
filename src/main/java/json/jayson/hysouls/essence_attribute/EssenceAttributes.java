@@ -8,7 +8,7 @@ public class EssenceAttributes {
     private static LinkedHashMap<String, EssenceAttribute> statsMap = new LinkedHashMap<>();
 
     public static EssenceAttribute VIGOR = add(new EssenceAttribute("Vigor",
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.4f, DefaultEntityStatTypes::getHealth),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.75f, DefaultEntityStatTypes::getHealth),
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 5f, DefaultEntityStatTypes::getHealth)) {
 
         @Override
@@ -24,7 +24,7 @@ public class EssenceAttributes {
     });
 
     public static EssenceAttribute ENDURANCE = add(new EssenceAttribute("Endurance",
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.1f, DefaultEntityStatTypes::getStamina),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.2f, DefaultEntityStatTypes::getStamina),
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 5f, DefaultEntityStatTypes::getStamina)) {
 
         @Override
@@ -57,9 +57,9 @@ public class EssenceAttributes {
     });
 
     public static EssenceAttribute DEXTERITY = add(new EssenceAttribute("Dexterity",
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.2f, DefaultEntityStatTypes::getStamina),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.1f, DefaultEntityStatTypes::getStamina),
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 1f, DefaultEntityStatTypes::getStamina),
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DMG_BUFF, 0.2f)
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DMG_BUFF, 0.25f)
             ) {
 
         @Override
@@ -78,7 +78,7 @@ public class EssenceAttributes {
     public static EssenceAttribute STRENGTH = add(new EssenceAttribute("Strength",
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.05f, DefaultEntityStatTypes::getHealth),
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 1f, DefaultEntityStatTypes::getHealth),
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DMG_BUFF, 0.4f)
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DMG_BUFF, 0.5f)
     ) {
 
         @Override
