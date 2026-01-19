@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "json.jayson"
-version = "0.0.1"
+version = "0.0.2"
 val javaVersion = 25
 
 val appData = System.getenv("APPDATA") ?: ""
