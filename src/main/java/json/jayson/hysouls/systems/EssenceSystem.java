@@ -61,16 +61,16 @@ public class EssenceSystem {
                 if(essenceComponent != null) {
                     int essences =  essenceComponent.getEssences();
                     essenceComponent.setEssences(ref, 0);
-
-                    if(damageInfo != null && damageInfo.getSource() instanceof Damage.EntitySource entitySource) {
-                        Ref<EntityStore> killer = entitySource.getRef();
-                        if (killer.isValid()) {
-                            EssenceComponent existing = store.getComponent(killer, ComponentTypes.ESSENCES);
-                            int totalEssences = essences + (existing != null ? existing.getEssences() : 0);
-                            commandBuffer.putComponent(killer, ComponentTypes.ESSENCES, new EssenceComponent(totalEssences));
+                    if(essences != 0) {
+                        if (damageInfo != null && damageInfo.getSource() instanceof Damage.EntitySource entitySource) {
+                            Ref<EntityStore> killer = entitySource.getRef();
+                            if (killer.isValid()) {
+                                EssenceComponent existing = store.getComponent(killer, ComponentTypes.ESSENCES);
+                                int totalEssences = essences + (existing != null ? existing.getEssences() : 0);
+                                commandBuffer.putComponent(killer, ComponentTypes.ESSENCES, new EssenceComponent(totalEssences));
+                            }
                         }
                     }
-
                 }
             }
         }
