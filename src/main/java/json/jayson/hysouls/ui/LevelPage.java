@@ -43,7 +43,7 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
         uiCommandBuilder.append("Pages/LevelUpPage.ui");
 
         for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
-            uiCommandBuilder.insertBefore("#ButtonGroup", "Pages/EssenceAttributes/" + value.getNamed() + ".ui");
+            uiCommandBuilder.insertBefore("#ButtonGroup", value.getLevelPageUIPath());
         }
 
         //uiCommandBuilder.set("#LevelUpContainer.Anchor", "Anchor(Width: 665, Height: " + (250 * 60 * EssenceAttributes.getAttributeMap().size()) + ")");

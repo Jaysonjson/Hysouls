@@ -11,6 +11,9 @@ import com.hypixel.hytale.server.core.ui.builder.EventData;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public abstract class EssenceAttribute {
 
     private String named;
@@ -92,5 +95,14 @@ public abstract class EssenceAttribute {
         }
     }
 
+    public String getLevelPageUIPath() {
+        return "Pages/EssenceAttributes/" + getNamed() + ".ui";
+    }
+
+    //Only call this with gradle
+    //This is ugly and lazy but I dont care
+    public String asLevelPageUI(String parent) {
+        return parent.replaceAll("ATTRIBUTEINS", getNamed());
+    }
 
 }

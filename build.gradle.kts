@@ -129,3 +129,10 @@ afterEvaluate {
         logger.warn("⚠️ Could not find 'runServer' or 'server' task to hook auto-sync into.")
     }
 }
+
+tasks.register<JavaExec>("generateEssenceUI") {
+    group = "hysouls"
+    description = "Generates the Essence Attribute .ui files"
+    classpath = sourceSets.main.get().runtimeClasspath
+    mainClass.set("json.jayson.hysouls.datagen.EssenceAttributeUIGen")
+}

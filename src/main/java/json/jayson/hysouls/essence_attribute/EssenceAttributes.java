@@ -72,7 +72,6 @@ public class EssenceAttributes {
         return statsMap;
     }
 
-
     private static EssenceAttribute add(EssenceAttribute stat) {
         getAttributeMap().put(stat.getNamed(), stat);
         return stat;
