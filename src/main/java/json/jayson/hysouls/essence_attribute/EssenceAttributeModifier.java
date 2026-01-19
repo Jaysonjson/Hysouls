@@ -21,6 +21,11 @@ public class EssenceAttributeModifier {
         return new EssenceAttributeModifier(type, Target.PLAYER, value, statIndex);
     }
 
+
+    public static EssenceAttributeModifier ofPlayer(Type type, float value) {
+        return new EssenceAttributeModifier(type, Target.PLAYER, value, EssenceAttributes::emptyStat);
+    }
+
     public static EssenceAttributeModifier ofItem(Type type, float value,Supplier<Integer> statIndex) {
         return new EssenceAttributeModifier(type, Target.ITEM, value, statIndex);
     }
@@ -42,8 +47,9 @@ public class EssenceAttributeModifier {
     }
 
     public enum Type {
-        BUFF,
-        DEBUFF
+        STAT_BUFF,
+        STAT_DEBUFF,
+        DMG_BUFF
     }
 
     public enum Target {

@@ -46,14 +46,24 @@ public abstract class EssenceAttribute {
 
     public void applyModifierBuff(EntityStatMap map, int input) {
         for (EssenceAttributeModifier modifier : modifiers) {
-            if(modifier.getTarget() == EssenceAttributeModifier.Target.PLAYER) {
+            if(modifier.getTarget() == EssenceAttributeModifier.Target.PLAYER && (modifier.getType() == EssenceAttributeModifier.Type.STAT_BUFF || modifier.getType() == EssenceAttributeModifier.Type.STAT_DEBUFF)) {
                 float amount = input * modifier.getValue();
-                if(modifier.getType() == EssenceAttributeModifier.Type.DEBUFF) {
+                if(modifier.getType() == EssenceAttributeModifier.Type.STAT_DEBUFF) {
                     amount = -modifier.getValue();
                 }
                 map.putModifier(modifier.getStatIndex(), "Essence_" + getNamed() + "_" + modifier.getType().name(), new StaticModifier(Modifier.ModifierTarget.MAX, StaticModifier.CalculationType.ADDITIVE, amount));
             }
         }
+    }
+
+    public float getExtraDamage(EssenceAttributeHolder input) {
+        float extraDamage = 0;
+        for (EssenceAttributeModifier modifier : modifiers) {
+            if(modifier.getType() == EssenceAttributeModifier.Type.DMG_BUFF) {
+                extraDamage += get(input) * modifier.getValue();
+            }
+        }
+        return extraDamage;
     }
 
     public <T> KeyedCodec<T> keyedCodec() {

@@ -1,0 +1,45 @@
+$Common = "../../Common.ui";
+
+@LeftArrow = PatchStyle(TexturePath: "../LeftArrow.png");
+
+Group #StrengthGroup {
+    LayoutMode: Left;
+    Anchor: (Height: 44);
+
+    Label {
+      Text: "Strength";
+      Anchor: (Width: 220, Height: 44);
+      Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
+    }
+
+    Label #CurrentStrength {
+      Text: "0";
+      Anchor: (Width: 100, Height: 44);
+      Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+    }
+
+    Panel {
+      Background: @LeftArrow;
+      Anchor: (Width: 22, Height: 12);
+    }
+
+    Group {
+      Anchor: (Width: 80);
+    }
+
+    $Common.@SmallSecondaryTextButton #StrengthMinus {
+      Text: "-";
+      Anchor: (Width: 35, Height: 35);
+    }
+
+    Label #NextStrength {
+      Text: "99";
+      Anchor: (Width: 80, Height: 44);
+      Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
+    }
+
+    $Common.@SmallSecondaryTextButton #StrengthPlus {
+      Text: "+";
+      Anchor: (Width: 35, Height: 35);
+    }
+  }

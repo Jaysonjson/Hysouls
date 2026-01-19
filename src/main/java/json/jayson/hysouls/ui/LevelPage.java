@@ -31,6 +31,8 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
     public int wantedVigor = 0;
     public int wantedEndurance = 0;
     public int wantedMind = 0;
+    public int wantedDex = 0;
+    public int wantedStr = 0;
     public int statueLevelCap;
 
     public LevelPage(@NotNull PlayerRef playerRef, int statueLevelCap) {
@@ -134,6 +136,16 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
     }
 
     @Override
+    public int getDexterity() {
+        return wantedDex;
+    }
+
+    @Override
+    public int getStrength() {
+        return wantedStr;
+    }
+
+    @Override
     public void setLevel(int level) {
         this.wantedLevel = level;
     }
@@ -146,6 +158,16 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
     @Override
     public void setMind(int mind) {
         this.wantedMind = mind;
+    }
+
+    @Override
+    public void setDexterity(int dexterity) {
+        wantedDex = dexterity;
+    }
+
+    @Override
+    public void setStrength(int strength) {
+        wantedStr = strength;
     }
 
     @Override

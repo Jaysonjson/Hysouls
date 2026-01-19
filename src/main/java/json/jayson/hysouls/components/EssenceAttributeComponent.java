@@ -20,10 +20,12 @@ public class EssenceAttributeComponent implements Component<EntityStore>, Essenc
 
     }
 
-    public EssenceAttributeComponent(int vig, int end, int mind) {
+    public EssenceAttributeComponent(int vig, int end, int mind, int dex, int str) {
         this.vigor = vig;
         this.endurance = end;
         this.mind = mind;
+        this.dexterity = dex;
+        this.strength = str;
     }
 
     @Nonnull
@@ -43,12 +45,24 @@ public class EssenceAttributeComponent implements Component<EntityStore>, Essenc
                     (essenceAttributeComponent, s) -> essenceAttributeComponent.mind = s,
                     essenceAttributeComponent -> essenceAttributeComponent.mind
             ).add()
+            .append(
+                    EssenceAttributes.DEXTERITY.keyedCodec(),
+                    (essenceAttributeComponent, s) -> essenceAttributeComponent.dexterity = s,
+                    essenceAttributeComponent -> essenceAttributeComponent.dexterity
+            ).add()
+            .append(
+                    EssenceAttributes.STRENGTH.keyedCodec(),
+                    (essenceAttributeComponent, s) -> essenceAttributeComponent.strength = s,
+                    essenceAttributeComponent -> essenceAttributeComponent.strength
+            ).add()
             .build();
 
 
     private int vigor = 1;
     private int endurance = 1;
     private int mind = 1;
+    private int strength = 1;
+    private int dexterity = 1;
 
     public int getEndurance() {
         return endurance;
@@ -62,8 +76,29 @@ public class EssenceAttributeComponent implements Component<EntityStore>, Essenc
         return mind;
     }
 
+    @Override
+    public int getDexterity() {
+        return dexterity;
+    }
+
+    @Override
+    public int getStrength() {
+        return strength;
+    }
+
     public int getLevel() {
         return getVigor() + getEndurance() + getMind();
+    }
+
+
+    @Override
+    public void setDexterity(int dexterity) {
+        this.dexterity = dexterity;
+    }
+
+    @Override
+    public void setStrength(int strength) {
+        this.strength = strength;
     }
 
     public void setEndurance(int endurance) {
@@ -89,7 +124,7 @@ public class EssenceAttributeComponent implements Component<EntityStore>, Essenc
 
     @Override
     public @Nullable Component<EntityStore> clone() {
-        return new EssenceAttributeComponent(getVigor(), getEndurance(), getMind());
+        return new EssenceAttributeComponent(getVigor(), getEndurance(), getMind(), getDexterity(), getStrength());
     }
 
 }

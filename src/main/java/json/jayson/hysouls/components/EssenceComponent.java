@@ -1,7 +1,5 @@
 package json.jayson.hysouls.components;
 
-import com.buuz135.mhud.MultipleCustomUIHud;
-import com.buuz135.mhud.MultipleHUD;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;

@@ -8,8 +8,8 @@ public class EssenceAttributes {
     private static LinkedHashMap<String, EssenceAttribute> statsMap = new LinkedHashMap<>();
 
     public static EssenceAttribute VIGOR = add(new EssenceAttribute("Vigor",
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.BUFF, 1.4f, DefaultEntityStatTypes::getHealth),
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DEBUFF, 5f, DefaultEntityStatTypes::getHealth)) {
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.4f, DefaultEntityStatTypes::getHealth),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 5f, DefaultEntityStatTypes::getHealth)) {
 
         @Override
         public int get(EssenceAttributeHolder stated) {
@@ -24,8 +24,8 @@ public class EssenceAttributes {
     });
 
     public static EssenceAttribute ENDURANCE = add(new EssenceAttribute("Endurance",
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.BUFF, 1.1f, DefaultEntityStatTypes::getStamina),
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DEBUFF, 5f, DefaultEntityStatTypes::getStamina)) {
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.1f, DefaultEntityStatTypes::getStamina),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 5f, DefaultEntityStatTypes::getStamina)) {
 
         @Override
         public int get(EssenceAttributeHolder stated) {
@@ -40,8 +40,8 @@ public class EssenceAttributes {
     });
 
     public static EssenceAttribute MIND = add(new EssenceAttribute("Mind",
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.BUFF, 1.4f, DefaultEntityStatTypes::getMana),
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DEBUFF, 1f, DefaultEntityStatTypes::getMana)
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 2.1f, DefaultEntityStatTypes::getMana),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 1f, DefaultEntityStatTypes::getMana)
             ) {
 
         @Override
@@ -56,6 +56,47 @@ public class EssenceAttributes {
 
     });
 
+    public static EssenceAttribute DEXTERITY = add(new EssenceAttribute("Dexterity",
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.2f, DefaultEntityStatTypes::getStamina),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 1f, DefaultEntityStatTypes::getStamina),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DMG_BUFF, 0.2f)
+            ) {
+
+        @Override
+        public int get(EssenceAttributeHolder stated) {
+            return stated.getDexterity();
+        }
+
+        @Override
+        public void set(EssenceAttributeHolder stated, int value) {
+            stated.setDexterity(value);
+        }
+
+    });
+
+
+    public static EssenceAttribute STRENGTH = add(new EssenceAttribute("Strength",
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.05f, DefaultEntityStatTypes::getHealth),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 1f, DefaultEntityStatTypes::getHealth),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DMG_BUFF, 0.4f)
+    ) {
+
+        @Override
+        public int get(EssenceAttributeHolder stated) {
+            return stated.getStrength();
+        }
+
+        @Override
+        public void set(EssenceAttributeHolder stated, int value) {
+            stated.setStrength(value);
+        }
+
+    });
+
+
+    public static int emptyStat() {
+        return -1;
+    }
 
 
     public static void init() {
