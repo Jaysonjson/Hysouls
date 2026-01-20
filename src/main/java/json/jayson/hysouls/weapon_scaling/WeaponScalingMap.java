@@ -13,7 +13,7 @@ public class WeaponScalingMap {
 
     private static HashMap<String, Scaling> scalingMap = new  HashMap<>();
 
-    private static String[] materials = new  String[]{"Iron, Thorium, Cobalt, Adamantite", "Mithril"};
+    private static String[] materials = new String[] {"Iron", "Thorium", "Cobalt", "Adamantite", "Mithril"};
 
     //TODO: Allow changes via server config/json (or both)
     public static void init() {
