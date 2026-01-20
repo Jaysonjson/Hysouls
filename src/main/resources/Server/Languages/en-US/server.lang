@@ -8,3 +8,14 @@ items.Ore_Nickel_Slate.name = Nickel Ore - Slate
 items.Ore_Nickel_Stone.name = Nickel Ore - Stone
 items.Level_Statue.name = Essence Offering Statue
 items.Level_Statue.description = Use to spend your Essences to level up, will be removed in the future
+
+items.Ingredient_Soul_Essence.name = Soul Essence
+items.Ingredient_Soul_Essence.description = Use to gain <color is="#ffffff">1 Essence</color>.
+items.Ingredient_Soul_Essence_Concentrated.name = Greater Soul Essence
+items.Ingredient_Soul_Essence_Concentrated.description = An amalgamation equivalent to <color is="#ffffff">100 Essences of Soul</color>.
+items.Ingredient_Soul_Essence_Grand.name = Grand Soul Essence
+items.Ingredient_Soul_Essence_Grand.description = An amalgamation equivalent to <color is="#ffffff">10 000 Essences of Soul</color>.
+items.Ingredient_Soul_Essence_Vast.name = Vast Soul Essence"
+items.Ingredient_Soul_Essence_Vast.description = An amalgamation equivalent to <color is="#ffffff">1 000 000 Essences of Soul</color>.
+items.Ingredient_Soul_Essence_Singularity.name = Soul Essence Singularity
+items.Ingredient_Soul_Essence_Singularity.description = An amalgamation equivalent to <color is="#ffffff">1 000 000 000 Essences of Soul</color>.

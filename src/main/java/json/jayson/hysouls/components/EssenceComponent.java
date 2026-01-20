@@ -15,6 +15,8 @@ import javax.annotation.Nonnull;
 
 public class EssenceComponent implements Component<EntityStore> {
 
+    public static final int ESSENCE_LIMIT = 1000000000;
+
     public EssenceComponent() {
 
     }
@@ -41,6 +43,9 @@ public class EssenceComponent implements Component<EntityStore> {
     }
 
     public void setEssences(@Nullable Ref<EntityStore> ref, int souls) {
+        if(souls > ESSENCE_LIMIT) {
+            souls = ESSENCE_LIMIT;
+        }
         this.essences = souls;
         if (ref != null && ref.isValid()) {
             Player playerComponent = ref.getStore().getComponent(ref, Player.getComponentType());
