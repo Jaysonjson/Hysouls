@@ -1,6 +1,14 @@
 - Fixed Statue Hitbox
+
 - Added prototype Weapon Scaling:
  - Swords: Dex: D, Strength: C
  - Maces: Dex: D, Strength: A
  - Battleaxxes: Dex: D, Strength: A,
  - Daggers: Dex: A, Strength: D
+
+- Added Hysouls Commands
+ - /hysouls essences get <player>
+ - /hysouls essences set <player> <essences>
+ - /hysouls essences attribute get <player> <attribute>
+ - /hysouls essences attribute set <player> <attribute> <value>
+ - /hysouls version
