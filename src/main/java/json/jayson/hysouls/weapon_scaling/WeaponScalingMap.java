@@ -3,6 +3,7 @@ package json.jayson.hysouls.weapon_scaling;
 import json.jayson.hysouls.essence_attribute.EssenceAttribute;
 import json.jayson.hysouls.essence_attribute.EssenceAttributes;
 import json.jayson.hysouls.util.Pair;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 
@@ -12,9 +13,16 @@ public class WeaponScalingMap {
 
     private static HashMap<String, Scaling> scalingMap = new  HashMap<>();
 
+    private static String[] materials = new  String[]{"Iron, Thorium, Cobalt, Adamantite", "Mithril"};
 
+    //TODO: Allow changes via server config/json (or both)
     public static void init() {
-        scalingMap.put("Weapon_Sword_Iron", new Scaling(new Pair<>(ScalingType.D, EssenceAttributes.DEXTERITY), new Pair<>(ScalingType.C, EssenceAttributes.STRENGTH)));
+        for (String material : materials) {
+            scalingMap.put("Weapon_Sword_" + material, new Scaling(new Pair<>(ScalingType.D, EssenceAttributes.DEXTERITY), new Pair<>(ScalingType.C, EssenceAttributes.STRENGTH)));
+            scalingMap.put("Weapon_Mace_" + material, new Scaling(new Pair<>(ScalingType.D, EssenceAttributes.DEXTERITY), new Pair<>(ScalingType.A, EssenceAttributes.STRENGTH)));
+            scalingMap.put("Weapon_Battleaxe_" + material, new Scaling(new Pair<>(ScalingType.D, EssenceAttributes.DEXTERITY), new Pair<>(ScalingType.A, EssenceAttributes.STRENGTH)));
+            scalingMap.put("Weapon_Daggers_" + material, new Scaling(new Pair<>(ScalingType.A, EssenceAttributes.DEXTERITY), new Pair<>(ScalingType.D, EssenceAttributes.STRENGTH)));
+        }
     }
 
     public static HashMap<String, Scaling> getScalingMap() {
@@ -26,22 +34,27 @@ public class WeaponScalingMap {
     }
 
     public static class Scaling {
-        private HashMap<ScalingType, String> map = new HashMap<>();
+        private HashMap<String, ScalingType> map = new HashMap<>();
 
         @SafeVarargs
         public Scaling(Pair<ScalingType, EssenceAttribute>... pairs) {
             for (Pair<ScalingType, EssenceAttribute> pair : pairs) {
-                map.put(pair.key(), pair.value().getNamed());
+                map.put(pair.value().getNamed(), pair.key());
             }
+        }
+
+        @Nullable
+        public ScalingType get(EssenceAttribute attribute) {
+            return map.get(attribute.getNamed());
         }
 
     }
 
-    enum ScalingType {
-        A(1.18f),
-        B(1.15f),
-        C(1.12f),
-        D(1f);
+    public enum ScalingType {
+        A(0.4f),
+        B(0.3f),
+        C(0.2f),
+        D(0.1f);
 
 
         float modifier = 1f;

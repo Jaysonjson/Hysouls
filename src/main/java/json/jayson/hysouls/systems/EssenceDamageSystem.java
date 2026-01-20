@@ -2,6 +2,7 @@ package json.jayson.hysouls.systems;
 
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
+import com.hypixel.hytale.protocol.IncrementCooldownInteraction;
 import com.hypixel.hytale.protocol.packets.player.DamageInfo;
 import com.hypixel.hytale.server.core.entity.Entity;
 import com.hypixel.hytale.server.core.entity.EntityUtils;
@@ -19,6 +20,7 @@ import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceAttributeComponent;
 import json.jayson.hysouls.essence_attribute.EssenceAttribute;
 import json.jayson.hysouls.essence_attribute.EssenceAttributes;
+import json.jayson.hysouls.weapon_scaling.WeaponScalingMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,15 +38,24 @@ public class EssenceDamageSystem extends DamageEventSystem {
             if (damager.isValid()) {
                 EssenceAttributeComponent essenceAttributeComponent = damager.getStore().getComponent(damager, ComponentTypes.ESSENCE_ATTRIBUTE);
                 Entity damagerEntity = EntityUtils.getEntity(damager, commandBuffer);
-                if (damagerEntity instanceof LivingEntity livingEntity) {
-                    String itemId = livingEntity.getInventory().getActiveHotbarItem().getItemId();
-                }
                 if(essenceAttributeComponent != null) {
                     float extraDamage = 0;
                     for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
                         extraDamage += value.getExtraDamage(essenceAttributeComponent);
                     }
+
                     damage.setAmount(damage.getAmount() + extraDamage);
+
+                    if (damagerEntity instanceof LivingEntity livingEntity) {
+                        String itemId = livingEntity.getInventory().getActiveHotbarItem().getItemId();
+                        WeaponScalingMap.Scaling scaling = WeaponScalingMap.getScaling(itemId);
+                        for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
+                            if(scaling.get(value) != null) {
+                                damage.setAmount((float) (damage.getAmount() + Math.pow(value.get(essenceAttributeComponent), scaling.get(value).getModifier())));
+                            }
+                        }
+                    }
+
                 }
             }
         }

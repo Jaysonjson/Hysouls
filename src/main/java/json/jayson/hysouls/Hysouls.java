@@ -16,6 +16,7 @@ import json.jayson.hysouls.systems.EssenceDamageSystem;
 import json.jayson.hysouls.systems.EssenceParticleSystem;
 import json.jayson.hysouls.systems.EssenceSystem;
 import json.jayson.hysouls.util.EssenceUtil;
+import json.jayson.hysouls.weapon_scaling.WeaponScalingMap;
 
 public class Hysouls extends JavaPlugin {
 
@@ -26,6 +27,7 @@ public class Hysouls extends JavaPlugin {
         super(init);
         VERSION = getManifest().getVersion().toString();
         EssenceAttributes.init();
+        WeaponScalingMap.init();
     }
 
     @Override
