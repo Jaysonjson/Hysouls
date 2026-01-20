@@ -75,7 +75,7 @@ public class EssenceAttributes {
     public static EssenceAttribute STRENGTH = add(new EssenceAttribute("Strength",
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.05f, DefaultEntityStatTypes::getHealth),
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 1f, DefaultEntityStatTypes::getHealth),
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DMG_BUFF, 0.35f)
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DMG_BUFF, 0.45f)
     ) {
 
         @Override

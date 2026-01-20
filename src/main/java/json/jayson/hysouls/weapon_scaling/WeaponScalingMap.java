@@ -51,10 +51,10 @@ public class WeaponScalingMap {
     }
 
     public enum ScalingType {
-        A(0.4f),
-        B(0.3f),
-        C(0.2f),
-        D(0.1f);
+        A(0.8f),
+        B(0.6f),
+        C(0.5f),
+        D(0.2f);
 
 
         float modifier = 1f;
