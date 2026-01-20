@@ -99,7 +99,6 @@ public class EssenceAttributeCommand extends AbstractCommandCollection {
             EssenceAttributeComponent essenceComponent = store.getComponent(player.getReference(), ComponentTypes.ESSENCE_ATTRIBUTE);
             if (essenceComponent != null) {
                 essenceAttribute.set(essenceComponent, essencesArg.get(commandContext));
-                essenceAttribute.applyModifierBuff(null, essenceComponent);
                 playerRef.sendMessage(Message.raw("set " + player.getUsername() + "s " + essenceAttribute.getNamed() + " to " + essenceAttribute.get(essenceComponent)));
 
                 EntityStatMap statMap = ref.getStore().getComponent(ref, EntityStatsModule.get().getEntityStatMapComponentType());
