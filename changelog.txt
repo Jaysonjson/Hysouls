@@ -1,5 +1,5 @@
 - Fixed Statue Hitbox
-- The Model/Texture for the Statue still isnt fixed, but I made everything gray for now
+- The Model/Texture for the Statue still isnt fixed, but I made everything gray for now and fixed the rotation
 
 - Added prototype Weapon Scaling:
  - Swords: Dex: D, Strength: C
