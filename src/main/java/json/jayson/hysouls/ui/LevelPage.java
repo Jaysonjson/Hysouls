@@ -89,19 +89,16 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
                     value.levelUiText(builder, essenceAttributeComponent, this);
                 }
 
-                float currentHealth = calculateStat(essenceAttributeComponent, DefaultEntityStatTypes.getHealth());
-                float currentStamina = calculateStat(essenceAttributeComponent, DefaultEntityStatTypes.getStamina());
-                float currentMana = calculateStat(essenceAttributeComponent, DefaultEntityStatTypes.getMana());
                 float currentDamage = calculateDamage(essenceAttributeComponent);
                 DecimalFormat dformat = new DecimalFormat("#0.0");
 
-                builder.set("#CurrentHealth.TextSpans", Message.raw(dformat.format(currentHealth)));
-                builder.set("#CurrentStamina.TextSpans", Message.raw(dformat.format(currentStamina)));
-                builder.set("#CurrentMana.TextSpans", Message.raw(dformat.format(currentMana)));
+                builder.set("#CurrentHealth.TextSpans", Message.raw(dformat.format(calculateStat(essenceAttributeComponent, DefaultEntityStatTypes.getHealth()))));
+                builder.set("#CurrentStamina.TextSpans", Message.raw(dformat.format(calculateStat(essenceAttributeComponent, DefaultEntityStatTypes.getStamina()))));
+                builder.set("#CurrentMana.TextSpans", Message.raw(dformat.format(calculateStat(essenceAttributeComponent, DefaultEntityStatTypes.getMana()))));
                 builder.set("#CurrentDamage.TextSpans", Message.raw(dformat.format(currentDamage)));
-                builder.set("#NextHealth.TextSpans", Message.raw(dformat.format(currentHealth + calculateStat(this, DefaultEntityStatTypes.getHealth()))));
-                builder.set("#NextStamina.TextSpans", Message.raw(dformat.format(currentStamina + calculateStat(this, DefaultEntityStatTypes.getStamina()))));
-                builder.set("#NextMana.TextSpans", Message.raw(dformat.format(currentMana + calculateStat(this, DefaultEntityStatTypes.getMana()))));
+                builder.set("#NextHealth.TextSpans", Message.raw(dformat.format(calculateNextStat(essenceAttributeComponent, DefaultEntityStatTypes.getHealth()))));
+                builder.set("#NextStamina.TextSpans", Message.raw(dformat.format(calculateNextStat(essenceAttributeComponent, DefaultEntityStatTypes.getStamina()))));
+                builder.set("#NextMana.TextSpans", Message.raw(dformat.format(calculateNextStat(essenceAttributeComponent, DefaultEntityStatTypes.getMana()))));
                 builder.set("#NextDamage.TextSpans", Message.raw(dformat.format(currentDamage + calculateDamage(this))));
             }
         }
@@ -126,17 +123,27 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
         float health = 0;
         for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
             for (EssenceAttributeModifier modifier : value.getModifiers()) {
-                if(modifier.getStatIndex() == stat) {
-                    if(modifier.getType() == EssenceAttributeModifier.Type.STAT_DEBUFF) {
-                       // health -= modifier.getValue();
-                    } else {
-                        health += value.get(holder) * modifier.getValue();
-                    }
+                if(modifier.getStatIndex() == stat && modifier.getType() == EssenceAttributeModifier.Type.STAT_BUFF) {
+                    health += (float) Math.pow(value.get(holder), modifier.getValue());
                 }
             }
         }
         return health;
     }
+
+
+    public float calculateNextStat(EssenceAttributeHolder holder, int stat) {
+        float health = 0;
+        for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
+            for (EssenceAttributeModifier modifier : value.getModifiers()) {
+                if(modifier.getStatIndex() == stat && modifier.getType() == EssenceAttributeModifier.Type.STAT_BUFF) {
+                    health += (float) Math.pow(value.get(holder) + value.get(this), modifier.getValue());
+                }
+            }
+        }
+        return health;
+    }
+
 
 
 
@@ -157,7 +164,7 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
                 close();
             } else {
                 for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
-                    value.levelUiEventAction(this, data.action);
+                    value.levelUiEventAction(this, essenceAttributeComponent, data.action);
                 }
             }
         }

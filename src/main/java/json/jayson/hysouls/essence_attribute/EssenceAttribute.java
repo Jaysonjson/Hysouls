@@ -60,7 +60,7 @@ public abstract class EssenceAttribute {
     public void applyModifierBuff(EntityStatMap map, int input) {
         for (EssenceAttributeModifier modifier : modifiers) {
             if(modifier.getTarget() == EssenceAttributeModifier.Target.PLAYER && (modifier.getType() == EssenceAttributeModifier.Type.STAT_BUFF || modifier.getType() == EssenceAttributeModifier.Type.STAT_DEBUFF)) {
-                float amount = input * modifier.getValue();
+                float amount = (float) Math.pow(input, modifier.getValue());
                 if(modifier.getType() == EssenceAttributeModifier.Type.STAT_DEBUFF) {
                     amount = -modifier.getValue();
                 }
@@ -98,14 +98,14 @@ public abstract class EssenceAttribute {
         builder.set("#Current" + getNamed() + ".TextSpans", Message.raw("" + (get(component))));
     }
 
-    public void levelUiEventAction(EssenceAttributeHolder page, String action) {
+    public void levelUiEventAction(EssenceAttributeHolder page, EssenceAttributeHolder essenceAttributeComp,String action) {
         if(action.equalsIgnoreCase(getNamed() + "Minus")) {
             if (get(page) != 0) {
                 set(page, get(page) - 1);
                 page.setLevel(page.getLevel() - 1);
             }
         } else if(action.equalsIgnoreCase(getNamed() + "Plus")) {
-            if (get(page) != 99) {
+            if (get(essenceAttributeComp) + get(page) < getCap()) {
                 set(page, get(page) + 1);
                 page.setLevel(page.getLevel() + 1);
             }

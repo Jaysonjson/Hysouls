@@ -14,3 +14,9 @@
  - /hysouls essences attribute set <player> <attribute> <value>
  - /hysouls version
 
+- Fixed Attribute Cap being ignored
+- Dexterity doesnt give a damage buff anymore like strength (replaced with weapon scaling)
+- Strengths damage buff is decreased
+- Added a max essence cap
+- Stamina given Attributes have been debuffed, given you almost have infinite stamina if you level than all up to 99
+- Lowered the Essence to Level curve a bit

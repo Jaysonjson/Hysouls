@@ -8,7 +8,7 @@ public class EssenceAttributes {
     private static LinkedHashMap<String, EssenceAttribute> statsMap = new LinkedHashMap<>();
 
     public static EssenceAttribute VIGOR = add(new EssenceAttribute("Vigor",
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.75f, DefaultEntityStatTypes::getHealth),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.2f, DefaultEntityStatTypes::getHealth),
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 5f, DefaultEntityStatTypes::getHealth)) {
 
         @Override
@@ -24,7 +24,7 @@ public class EssenceAttributes {
     });
 
     public static EssenceAttribute ENDURANCE = add(new EssenceAttribute("Endurance",
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.2f, DefaultEntityStatTypes::getStamina),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 0.75f, DefaultEntityStatTypes::getStamina),
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 5f, DefaultEntityStatTypes::getStamina)) {
 
         @Override
@@ -40,7 +40,7 @@ public class EssenceAttributes {
     });
 
     public static EssenceAttribute MIND = add(new EssenceAttribute("Mind",
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 2.1f, DefaultEntityStatTypes::getMana),
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.06f, DefaultEntityStatTypes::getMana),
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 1f, DefaultEntityStatTypes::getMana)
             ) {
 
@@ -57,10 +57,7 @@ public class EssenceAttributes {
     });
 
     public static EssenceAttribute DEXTERITY = add(new EssenceAttribute("Dexterity",
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.1f, DefaultEntityStatTypes::getStamina),
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 1f, DefaultEntityStatTypes::getStamina),
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DMG_BUFF, 0.15f)
-            ) {
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 0.5f, DefaultEntityStatTypes::getStamina)) {
 
         @Override
         public int get(EssenceAttributeHolder stated) {
