@@ -38,7 +38,7 @@
         "GatherType": "Rocks"
       }
     },
-    "HitboxType": "Statue_Large",
+    "HitboxType": "Level_Statue",
     "Material": "Solid",
     "Opacity": "Transparent",
     "Support": {
