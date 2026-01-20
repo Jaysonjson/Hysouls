@@ -27,7 +27,7 @@ public class HysoulsCommandBase extends AbstractCommandCollection {
 
         @Override
         protected void execute(@NotNull CommandContext commandContext, @NotNull Store<EntityStore> store, @NotNull Ref<EntityStore> ref, @NotNull PlayerRef playerRef, @NotNull World world) {
-            playerRef.sendMessage(Message.raw("Hytale is running on Version " + Hysouls.VERSION));
+            playerRef.sendMessage(Message.raw("Hysouls is running on Version " + Hysouls.VERSION));
         }
     }
 
