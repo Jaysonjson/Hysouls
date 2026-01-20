@@ -49,9 +49,11 @@ public class EssenceDamageSystem extends DamageEventSystem {
                     if (damagerEntity instanceof LivingEntity livingEntity) {
                         String itemId = livingEntity.getInventory().getActiveHotbarItem().getItemId();
                         WeaponScalingMap.Scaling scaling = WeaponScalingMap.getScaling(itemId);
-                        for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
-                            if(scaling.get(value) != null) {
-                                damage.setAmount((float) (damage.getAmount() + Math.pow(value.get(essenceAttributeComponent), scaling.get(value).getModifier())));
+                        if(scaling != null) {
+                            for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
+                                if (scaling.get(value) != null) {
+                                    damage.setAmount((float) (damage.getAmount() + Math.pow(value.get(essenceAttributeComponent), scaling.get(value).getModifier())));
+                                }
                             }
                         }
                     }

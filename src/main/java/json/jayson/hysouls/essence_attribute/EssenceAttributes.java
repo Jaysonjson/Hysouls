@@ -107,8 +107,12 @@ public class EssenceAttributes {
         return statsMap;
     }
 
+    public static EssenceAttribute getAttribute(String attributeName) {
+        return statsMap.get(attributeName.toLowerCase());
+    }
+
     private static EssenceAttribute add(EssenceAttribute stat) {
-        getAttributeMap().put(stat.getNamed(), stat);
+        getAttributeMap().put(stat.getNamed().toLowerCase(), stat);
         return stat;
     }
 }

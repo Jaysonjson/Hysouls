@@ -1,0 +1,6 @@
+- Fixed Statue Hitbox
+- Added prototype Weapon Scaling:
+ - Swords: Dex: D, Strength: C
+ - Maces: Dex: D, Strength: A
+ - Battleaxxes: Dex: D, Strength: A,
+ - Daggers: Dex: A, Strength: D

@@ -36,6 +36,6 @@ public class EssenceParticleSystem extends EntityTickingSystem<EntityStore> {
 
     @Override
     public @Nullable Query<EntityStore> getQuery() {
-        return Query.and(AllLegacyLivingEntityTypesQuery.INSTANCE, Query.not(Player.getComponentType()));
+        return Query.and(Query.and(AllLegacyLivingEntityTypesQuery.INSTANCE, Query.not(Player.getComponentType())), ComponentTypes.ESSENCES);
     }
 }
