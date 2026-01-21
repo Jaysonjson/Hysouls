@@ -38,5 +38,14 @@
   },
   "ItemSoundSetId": "ISS_Items_Gems",
   "MaxStack": 100,
-  "DropOnDeath": true
+  "DropOnDeath": true,
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "SoulEssence"
+        }
+      ]
+    }
+  }
 }

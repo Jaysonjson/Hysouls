@@ -13,6 +13,7 @@ import json.jayson.hysouls.components.EssenceAttributeComponent;
 import json.jayson.hysouls.components.EssenceComponent;
 import json.jayson.hysouls.essence_attribute.EssenceAttributes;
 import json.jayson.hysouls.interactions.OpenLevelPageInteraction;
+import json.jayson.hysouls.interactions.SecondarySoulEssenceInteraction;
 import json.jayson.hysouls.systems.EssenceDamageSystem;
 import json.jayson.hysouls.systems.EssenceParticleSystem;
 import json.jayson.hysouls.systems.EssenceSystem;
@@ -34,6 +35,7 @@ public class Hysouls extends JavaPlugin {
     @Override
     protected void setup() {
         getCodecRegistry(Interaction.CODEC).register("OpenLevelUpUI", OpenLevelPageInteraction.class, OpenLevelPageInteraction.CODEC);
+        getCodecRegistry(Interaction.CODEC).register("SoulEssence", SecondarySoulEssenceInteraction.class, SecondarySoulEssenceInteraction.CODEC);
 
         ComponentTypes.ESSENCES = getEntityStoreRegistry().registerComponent(EssenceComponent.class, "Essences", EssenceComponent.CODEC);
         ComponentTypes.ESSENCE_ATTRIBUTE = getEntityStoreRegistry().registerComponent(EssenceAttributeComponent.class, "EssenceAttributes", EssenceAttributeComponent.CODEC);
