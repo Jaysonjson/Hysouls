@@ -1,22 +1,3 @@
-- Fixed Statue Hitbox
-- The Model/Texture for the Statue still isnt fixed, but I made everything gray for now and fixed the rotation
-
-- Added prototype Weapon Scaling:
- - Swords: Dex: D, Strength: C
- - Maces: Dex: D, Strength: A
- - Battleaxes: Dex: D, Strength: A,
- - Daggers: Dex: A, Strength: D
-
-- Added Hysouls Commands
- - /hysouls essences get <player>
- - /hysouls essences set <player> <essences>
- - /hysouls essences attribute get <player> <attribute>
- - /hysouls essences attribute set <player> <attribute> <value>
- - /hysouls version
-
-- Fixed Attribute Cap being ignored
-- Dexterity doesnt give a damage buff anymore like strength (replaced with weapon scaling)
-- Strengths damage buff is decreased
-- Added a max essence cap
-- Stamina given Attributes have been debuffed, given you almost have infinite stamina if you level than all up to 99
-- Lowered the Essence to Level curve a bit
+- Added Soul Essences
+ - Can be used with Secondary (Right Click) to consume
+- On Death, those Soul Essences will be dropped (but not if killed by entity)

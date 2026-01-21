@@ -8,9 +8,11 @@ import com.hypixel.hytale.server.core.command.system.arguments.system.RequiredAr
 import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractCommandCollection;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
+import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import json.jayson.hysouls.SoulEssenceMap;
 import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceComponent;
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +24,7 @@ public class EssencesCommand extends AbstractCommandCollection {
         super("essences", "Essences command base");
         addSubCommand(new Set());
         addSubCommand(new Get());
+        addSubCommand(new Give());
         addSubCommand(new EssenceAttributeCommand());
     }
 
@@ -60,7 +63,7 @@ public class EssencesCommand extends AbstractCommandCollection {
         }
 
         RequiredArg<PlayerRef> playerArg = withRequiredArg("player", "Target", ArgTypes.PLAYER_REF);
-        RequiredArg<Integer> essencesArg = withRequiredArg("essences", "Essences to give", ArgTypes.INTEGER);
+        RequiredArg<Integer> essencesArg = withRequiredArg("essences", "Essences to set", ArgTypes.INTEGER);
 
 
         @Override
@@ -79,4 +82,29 @@ public class EssencesCommand extends AbstractCommandCollection {
             }
         }
     }
+
+
+    public static class Give extends AbstractPlayerCommand {
+
+        public Give() {
+            super("give", "Give the amount of essences to the players inventory");
+        }
+
+        RequiredArg<PlayerRef> playerArg = withRequiredArg("player", "Target", ArgTypes.PLAYER_REF);
+        RequiredArg<Integer> essencesArg = withRequiredArg("essences", "Essences to give", ArgTypes.INTEGER);
+
+
+        @Override
+        protected void execute(@NotNull CommandContext commandContext, @NotNull Store<EntityStore> store, @NotNull Ref<EntityStore> ref, @NotNull PlayerRef playerRef, @NotNull World world) {
+            PlayerRef player = playerArg.get(commandContext);
+
+            if(!player.isValid() || player.getReference() == null) {
+                playerRef.sendMessage(Message.raw("Couldnt find player"));
+                return;
+            }
+
+            SoulEssenceMap.give(store.getComponent(player.getReference(), Player.getComponentType()), essencesArg.get(commandContext));
+        }
+    }
+
 }
