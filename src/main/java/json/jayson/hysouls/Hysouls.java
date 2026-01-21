@@ -7,7 +7,6 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Int
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import json.jayson.hysouls.commands.HysoulsCommandBase;
-import json.jayson.hysouls.commands.LevelUpPageCommand;
 import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceAttributeComponent;
 import json.jayson.hysouls.components.EssenceComponent;
@@ -30,6 +29,7 @@ public class Hysouls extends JavaPlugin {
         VERSION = getManifest().getVersion().toString();
         EssenceAttributes.init();
         WeaponScalingMap.init();
+        SoulEssenceMap.init();
     }
 
     @Override
