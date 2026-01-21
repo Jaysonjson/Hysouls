@@ -26,5 +26,15 @@
   },
   "MaxStack": 100,
   "DropOnDeath": true,
-  "Texture": "Resources/Ingredients/Essence_Textures/Soul_Essence_Texture.png"
+  "Texture": "Resources/Ingredients/Essence_Textures/Soul_Essence_Texture.png",
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "SoulEssence",
+          "Souls": 10000
+        }
+      ]
+    }
+  }
 }
