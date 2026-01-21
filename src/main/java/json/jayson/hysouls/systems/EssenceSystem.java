@@ -90,7 +90,7 @@ public class EssenceSystem {
                     for (Pair<String, Integer> pair : SoulEssenceMap.getFor(essences)) {
                         ItemStack itemStack = new ItemStack(pair.key(), pair.value());
                         Holder<EntityStore> itemEntityHolder = ItemComponent.generateItemDrop(store, itemStack, ref.getStore().getComponent(ref, TransformComponent.getComponentType()).getPosition(), Vector3f.ZERO, 0, 0, 0);
-                        store.addEntity(itemEntityHolder, AddReason.SPAWN);
+                        commandBuffer.addEntity(itemEntityHolder, AddReason.SPAWN);
                     }
                 }
             }
