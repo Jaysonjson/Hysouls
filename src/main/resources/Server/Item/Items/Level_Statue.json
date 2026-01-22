@@ -24,10 +24,10 @@
   "BlockType": {
     "BlockParticleSetId": "Stone",
     "BlockSoundSetId": "Stone",
-    "CustomModel": "Blocks/Statue.blockymodel",
+    "CustomModel": "Blocks/Solemn_Statue.blockymodel",
     "CustomModelTexture": [
       {
-        "Texture": "BlockTextures/leveling_statue_wip_texture.png",
+        "Texture": "BlockTextures/solemn_statue.png",
         "Weight": 1
       }
     ],
@@ -88,5 +88,7 @@
         "Quantity": 8
       }
     ]
-  }
+  },
+  "Model": "Blocks/Solemn_Statue.blockymodel",
+  "Texture": "BlockTextures/solemn_statue.png"
 }

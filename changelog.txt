@@ -1,3 +1,7 @@
 - Added Soul Essences
  - Can be used with Secondary (Right Click) to consume
 - On Death, those Soul Essences will be dropped (but not if killed by entity)
+- Added Command:
+ - /hysouls essences give <player> <essences>
+    - Gives the essences as Soul Essences into the players inventory
+- Statue has an actual texture now
