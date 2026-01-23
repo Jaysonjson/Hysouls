@@ -20,12 +20,13 @@ public class EssenceAttributeComponent implements Component<EntityStore>, Essenc
 
     }
 
-    public EssenceAttributeComponent(int vig, int end, int mind, int dex, int str) {
+    public EssenceAttributeComponent(int vig, int end, int mind, int dex, int str, int luck) {
         this.vigor = vig;
         this.endurance = end;
         this.mind = mind;
         this.dexterity = dex;
         this.strength = str;
+        this.luck = luck;
     }
 
     @Nonnull
@@ -55,6 +56,11 @@ public class EssenceAttributeComponent implements Component<EntityStore>, Essenc
                     (essenceAttributeComponent, s) -> essenceAttributeComponent.strength = s,
                     essenceAttributeComponent -> essenceAttributeComponent.strength
             ).add()
+            .append(
+                    EssenceAttributes.LUCK.keyedCodec(),
+                    (essenceAttributeComponent, s) -> essenceAttributeComponent.luck = s,
+                    essenceAttributeComponent -> essenceAttributeComponent.luck
+            ).add()
             .build();
 
 
@@ -63,6 +69,7 @@ public class EssenceAttributeComponent implements Component<EntityStore>, Essenc
     private int mind = 1;
     private int strength = 1;
     private int dexterity = 1;
+    private int luck = 1;
 
     public int getEndurance() {
         return endurance;
@@ -86,6 +93,11 @@ public class EssenceAttributeComponent implements Component<EntityStore>, Essenc
         return strength;
     }
 
+    @Override
+    public int getLuck() {
+        return luck;
+    }
+
     public int getLevel() {
         int level = 0;
         for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
@@ -103,6 +115,11 @@ public class EssenceAttributeComponent implements Component<EntityStore>, Essenc
     @Override
     public void setStrength(int strength) {
         this.strength = strength;
+    }
+
+    @Override
+    public void setLuck(int luck) {
+        this.luck = luck;
     }
 
     public void setEndurance(int endurance) {
@@ -128,7 +145,7 @@ public class EssenceAttributeComponent implements Component<EntityStore>, Essenc
 
     @Override
     public @Nullable Component<EntityStore> clone() {
-        return new EssenceAttributeComponent(getVigor(), getEndurance(), getMind(), getDexterity(), getStrength());
+        return new EssenceAttributeComponent(getVigor(), getEndurance(), getMind(), getDexterity(), getStrength(), getLuck());
     }
 
 }

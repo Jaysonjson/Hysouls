@@ -37,6 +37,11 @@ public abstract class EssenceAttribute {
         }
     }
 
+    public EssenceAttribute(String named, int cap) {
+        this.named = named;
+        this.cap = cap;
+    }
+
     public int getCap() {
         return cap;
     }

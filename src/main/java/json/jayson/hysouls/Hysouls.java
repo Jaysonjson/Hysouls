@@ -14,6 +14,7 @@ import json.jayson.hysouls.essence_attribute.EssenceAttributes;
 import json.jayson.hysouls.interactions.OpenLevelPageInteraction;
 import json.jayson.hysouls.interactions.SecondarySoulEssenceInteraction;
 import json.jayson.hysouls.systems.EssenceDamageSystem;
+import json.jayson.hysouls.systems.EssenceNPCItemDropSystem;
 import json.jayson.hysouls.systems.EssenceParticleSystem;
 import json.jayson.hysouls.systems.EssenceSystem;
 import json.jayson.hysouls.util.EssenceUtil;
@@ -66,5 +67,6 @@ public class Hysouls extends JavaPlugin {
         getEntityStoreRegistry().registerSystem(new EssenceSystem.PlayerDeath());
         getEntityStoreRegistry().registerSystem(new EssenceParticleSystem());
         getEntityStoreRegistry().registerSystem(new EssenceDamageSystem());
+        getEntityStoreRegistry().registerSystem(new EssenceNPCItemDropSystem());
     }
 }

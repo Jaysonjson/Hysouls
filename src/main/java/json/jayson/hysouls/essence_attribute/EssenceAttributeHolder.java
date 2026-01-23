@@ -10,12 +10,14 @@ public interface EssenceAttributeHolder {
     int getLevel();
     int getDexterity();
     int getStrength();
+    int getLuck();
 
     void setVigor(int vigor);
     void setEndurance(int endurance);
     void setMind(int mind);
     void setDexterity(int dexterity);
     void setStrength(int strength);
+    void setLuck(int luck);
 
     default void setLevel(int level) {
         Hysouls.LOGGER.atWarning().log("Tried to set level to something that cant set level");

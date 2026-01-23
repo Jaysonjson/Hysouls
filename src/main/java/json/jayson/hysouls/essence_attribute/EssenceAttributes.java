@@ -90,6 +90,20 @@ public class EssenceAttributes {
 
     });
 
+    public static EssenceAttribute LUCK = add(new EssenceAttribute("Luck", 35) {
+
+        @Override
+        public int get(EssenceAttributeHolder stated) {
+            return stated.getLuck();
+        }
+
+        @Override
+        public void set(EssenceAttributeHolder stated, int value) {
+            stated.setLuck(value);
+        }
+
+    });
+
 
     public static int emptyStat() {
         return -1;
