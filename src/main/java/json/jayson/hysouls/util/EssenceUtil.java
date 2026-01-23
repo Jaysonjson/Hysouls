@@ -35,4 +35,8 @@ public class EssenceUtil {
         }
     }
 
+    //TODO not hardcode this
+    public static boolean isSoulExtractorWeapon(String itemId) {
+        return itemId.equalsIgnoreCase("Weapon_Battleaxe_Soul") || itemId.equalsIgnoreCase("Weapon_Daggers_Soul") || itemId.equalsIgnoreCase("Weapon_Mace_Soul") || itemId.equalsIgnoreCase("Weapon_Sword_Soul");
+    }
 }

@@ -22,6 +22,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import json.jayson.hysouls.SoulEssenceMap;
 import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceComponent;
+import json.jayson.hysouls.util.EssenceUtil;
 import json.jayson.hysouls.util.Pair;
 
 import javax.annotation.Nonnull;
@@ -41,18 +42,28 @@ public class EssenceSystem {
             if (damageInfo != null && damageInfo.getSource() instanceof Damage.EntitySource entitySource) {
                 if(entitySource.getRef().isValid()) {
                     Ref<EntityStore> entityStoreRef = entitySource.getRef();
+                    Player player = store.getComponent(entityStoreRef, Player.getComponentType());
+                    if(player == null) return;
                     EssenceComponent essenceComponent = entityStoreRef.getStore().getComponent(entityStoreRef, ComponentTypes.ESSENCES);
-                    if(essenceComponent != null) {
-                        EntityStatMap statMap = ref.getStore().getComponent(ref, EntityStatsModule.get().getEntityStatMapComponentType());
-                        int extra = 0;
-                        EssenceComponent victimEssenceComponent = ref.getStore().getComponent(ref, ComponentTypes.ESSENCES);
-                        if(victimEssenceComponent != null) {
-                            extra = victimEssenceComponent.getEssences();
-                        }
-                        if(statMap != null) {
-                            essenceComponent.setEssences(entityStoreRef, (int) (essenceComponent.getEssences() + extra + + statMap.get(DefaultEntityStatTypes.getHealth()).getMax()));
+                    if(essenceComponent == null) return;
+
+                    EntityStatMap statMap = ref.getStore().getComponent(ref, EntityStatsModule.get().getEntityStatMapComponentType());
+                    int extra = 0;
+                    EssenceComponent victimEssenceComponent = ref.getStore().getComponent(ref, ComponentTypes.ESSENCES);
+                    if(victimEssenceComponent != null) {
+                        extra = victimEssenceComponent.getEssences();
+                    }
+                    if(statMap == null) return;
+                    int essencesGained = (int) (extra + statMap.get(DefaultEntityStatTypes.getHealth()).getMax());
+                    if(player.getInventory() != null && player.getInventory().getActiveHotbarItem() != null) {
+                        if (EssenceUtil.isSoulExtractorWeapon(player.getInventory().getActiveHotbarItem().getItemId())) {
+                            TransformComponent transformComponent = ref.getStore().getComponent(ref, TransformComponent.getComponentType());
+                            if(transformComponent == null) return;
+                            SoulEssenceMap.drop(essencesGained, store, transformComponent.getPosition(), commandBuffer);
+                            return;
                         }
                     }
+                    essenceComponent.setEssences(entityStoreRef, essenceComponent.getEssences() + essencesGained);
                 }
             }
         }
@@ -87,11 +98,9 @@ public class EssenceSystem {
                 }
 
                 if(dropEssences) {
-                    for (Pair<String, Integer> pair : SoulEssenceMap.getFor(essences)) {
-                        ItemStack itemStack = new ItemStack(pair.key(), pair.value());
-                        Holder<EntityStore> itemEntityHolder = ItemComponent.generateItemDrop(store, itemStack, ref.getStore().getComponent(ref, TransformComponent.getComponentType()).getPosition(), Vector3f.ZERO, 0, 0, 0);
-                        commandBuffer.addEntity(itemEntityHolder, AddReason.SPAWN);
-                    }
+                    TransformComponent transformComponent = ref.getStore().getComponent(ref, TransformComponent.getComponentType());
+                    if(transformComponent == null) return;
+                    SoulEssenceMap.drop(essences, store, transformComponent.getPosition(), commandBuffer);
                 }
             }
         }

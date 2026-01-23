@@ -1,0 +1,23 @@
+{
+  "Input": [
+    {
+      "ItemId": "Ingredient_Soul_Essence",
+      "Quantity": 15
+    }
+  ],
+  "BenchRequirement": [
+    {
+      "Type": "Crafting",
+      "Id": "Arcanebench",
+      "Categories": [
+        "Arcane_Misc"
+      ],
+      "RequiredTierLevel": 0
+    }
+  ],
+  "PrimaryOutput": {
+    "ItemId": "Ingredient_Life_Essence",
+    "Quantity": 1
+  },
+  "TimeSeconds": 0
+}

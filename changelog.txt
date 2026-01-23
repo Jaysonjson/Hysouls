@@ -1,3 +1,16 @@
 - Added Luck Attribute (Capped at 35)
  - Luck increases chance to drop extra loot
  - Each level = 1%
+
+- Fixed Attribute Command not adding a space between available attributes
+- Added Soul Essence recipes to Arcanist Workbench
+ - 20 Soul Essences craft to 1 Life Essence
+ - 20 Soul Essences and 12 Ice Blocks craft to 1 Ice Essence
+ - 20 Soul Essences and 1 Cindercloth craft to 4 Fire Essence
+ - And also the soul essences tiers down (Singularity to Vast, Vast to Grand, etc.)
+
+
+- Added Soul Extractor Weapons, they are currently still iron-tiered and also use iron stats, I will update them once I have a texture/model for them and an unique item for them to craft
+ - when an entity is killed with a Soul Extractor weapon, they instead drop their essences as Soul Essences
+
+I am still thinking of a way to actually convert static Essences to Soul Essences, but currently the only way to get them if you die (if you have essences in your inventory) or by using the Soul Extractor Weaponset

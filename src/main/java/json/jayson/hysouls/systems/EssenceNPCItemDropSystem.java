@@ -8,7 +8,6 @@ import com.hypixel.hytale.server.core.asset.type.gameplay.DeathConfig;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.inventory.Inventory;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
-import com.hypixel.hytale.server.core.modules.entity.AllLegacyLivingEntityTypesQuery;
 import com.hypixel.hytale.server.core.modules.entity.component.HeadRotation;
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
 import com.hypixel.hytale.server.core.modules.entity.damage.Damage;
@@ -76,7 +75,7 @@ public class EssenceNPCItemDropSystem extends DeathSystems.OnDeathSystem {
                 Random random = new Random();
                 for (ItemStack itemStack : itemsToDrop) {
                     if(random.nextFloat() <= attributeComponent.getLuck() / 100.0f) {
-                        itemStack = itemStack.withQuantity(random.nextInt(itemStack.getQuantity()));
+                        itemStack = itemStack.withQuantity(random.nextInt(1, itemStack.getQuantity()));
                         Holder<EntityStore> itemEntityHolder = ItemComponent.generateItemDrop(store, itemStack, dropPosition, headRotation.clone(), 0, 0, 0);
                         commandBuffer.addEntity(itemEntityHolder, AddReason.SPAWN);
                     }

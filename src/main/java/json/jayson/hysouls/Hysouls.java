@@ -6,6 +6,7 @@ import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import com.hypixel.hytale.server.npc.systems.NPCDamageSystems;
 import json.jayson.hysouls.commands.HysoulsCommandBase;
 import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceAttributeComponent;
@@ -68,5 +69,6 @@ public class Hysouls extends JavaPlugin {
         getEntityStoreRegistry().registerSystem(new EssenceParticleSystem());
         getEntityStoreRegistry().registerSystem(new EssenceDamageSystem());
         getEntityStoreRegistry().registerSystem(new EssenceNPCItemDropSystem());
+
     }
 }

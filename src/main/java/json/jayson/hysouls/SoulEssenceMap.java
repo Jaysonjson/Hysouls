@@ -1,7 +1,16 @@
 package json.jayson.hysouls;
 
+import com.hypixel.hytale.component.AddReason;
+import com.hypixel.hytale.component.CommandBuffer;
+import com.hypixel.hytale.component.Holder;
+import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.math.vector.Vector3d;
+import com.hypixel.hytale.math.vector.Vector3f;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
+import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
+import com.hypixel.hytale.server.core.modules.entity.item.ItemComponent;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import json.jayson.hysouls.util.Pair;
 
 import java.util.ArrayList;
@@ -20,6 +29,14 @@ public class SoulEssenceMap {
         map.put(100, "Ingredient_Soul_Essence_Concentrated");
         map.put(1, "Ingredient_Soul_Essence");
 
+    }
+
+    public static void drop(int essences, Store<EntityStore> store, Vector3d position, CommandBuffer<EntityStore> buffer) {
+        for (Pair<String, Integer> pair : SoulEssenceMap.getFor(essences)) {
+            ItemStack itemStack = new ItemStack(pair.key(), pair.value());
+            Holder<EntityStore> itemEntityHolder = ItemComponent.generateItemDrop(store, itemStack, position, Vector3f.ZERO, 0, 0, 0);
+            buffer.addEntity(itemEntityHolder, AddReason.SPAWN);
+        }
     }
 
     public static ArrayList<Pair<String, Integer>> getFor(int essences) {

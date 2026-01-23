@@ -19,3 +19,8 @@ items.Ingredient_Soul_Essence_Vast.name = Vast Soul Essence
 items.Ingredient_Soul_Essence_Vast.description = An amalgamation equivalent to <color is="#ffffff">1 000 000 Essences of Soul</color>.
 items.Ingredient_Soul_Essence_Singularity.name = Soul Essence Singularity
 items.Ingredient_Soul_Essence_Singularity.description = An amalgamation equivalent to <color is="#ffffff">100 000 000 Essences of Soul</color>.
+items.Weapon_Soul_Extractor.name = This Weapon drops <color is="#ffffff">Essences</color> as <color is="#ffffff">Soul Essences</color> when used against an Enemy
+items.Weapon_Sword_Soul.name = Soul Sword
+items.Weapon_Mace_Soul.name = Soul Mace
+items.Weapon_Daggers_Soul.name = Soul Mace
+items.Weapon_Battleaxe_Soul.name = Soul Battleaxe

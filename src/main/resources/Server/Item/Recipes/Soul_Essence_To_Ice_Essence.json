@@ -1,0 +1,26 @@
+{
+  "Input": [
+    {
+      "ItemId": "Ingredient_Soul_Essence",
+      "Quantity": 20
+    },
+    {
+      "ItemId": "Rock_Ice",
+      "Quantity": 12
+    }
+  ],
+  "BenchRequirement": [
+    {
+      "Type": "Crafting",
+      "Id": "Arcanebench",
+      "Categories": [
+        "Arcane_Misc"
+      ],
+      "RequiredTierLevel": 0
+    }
+  ],
+  "PrimaryOutput": {
+    "ItemId": "Ingredient_Ice_Essence"
+  },
+  "TimeSeconds": 0
+}

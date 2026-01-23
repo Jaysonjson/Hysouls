@@ -1,0 +1,27 @@
+{
+  "Input": [
+    {
+      "ItemId": "Ingredient_Soul_Essence",
+      "Quantity": 20
+    },
+    {
+      "ItemId": "Ingredient_Fabric_Scrap_Cindercloth",
+      "Quantity": 1
+    }
+  ],
+  "BenchRequirement": [
+    {
+      "Type": "Crafting",
+      "Id": "Arcanebench",
+      "Categories": [
+        "Arcane_Misc"
+      ],
+      "RequiredTierLevel": 0
+    }
+  ],
+  "PrimaryOutput": {
+    "ItemId": "Ingredient_Fire_Essence",
+    "Quantity": 4
+  },
+  "TimeSeconds": 0
+}
