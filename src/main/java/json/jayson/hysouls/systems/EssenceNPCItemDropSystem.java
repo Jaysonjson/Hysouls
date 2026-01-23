@@ -76,6 +76,7 @@ public class EssenceNPCItemDropSystem extends DeathSystems.OnDeathSystem {
                 Random random = new Random();
                 for (ItemStack itemStack : itemsToDrop) {
                     if(random.nextFloat() <= attributeComponent.getLuck() / 100.0f) {
+                        itemStack = itemStack.withQuantity(random.nextInt(itemStack.getQuantity()));
                         Holder<EntityStore> itemEntityHolder = ItemComponent.generateItemDrop(store, itemStack, dropPosition, headRotation.clone(), 0, 0, 0);
                         commandBuffer.addEntity(itemEntityHolder, AddReason.SPAWN);
                     }

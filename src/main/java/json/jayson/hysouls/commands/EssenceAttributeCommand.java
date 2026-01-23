@@ -48,7 +48,7 @@ public class EssenceAttributeCommand extends AbstractCommandCollection {
             if(essenceAttribute == null) {
                 StringBuilder valids = new StringBuilder();
                 for (String s : EssenceAttributes.getAttributeMap().keySet()) {
-                    valids.append(s.toLowerCase());
+                    valids.append(s.toLowerCase()).append(" ");
                 }
                 playerRef.sendMessage(Message.raw("Couldnt find essence attribute, valid attributes are: " + valids));
                 return;

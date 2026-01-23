@@ -2,17 +2,17 @@ $Common = "../../Common.ui";
 
 @LeftArrow = PatchStyle(TexturePath: "../LeftArrow.png");
 
-Group #luckGroup {
+Group #LuckGroup {
     LayoutMode: Left;
     Anchor: (Height: 44);
 
     Label {
-      Text: "luck";
+      Text: "Luck";
       Anchor: (Width: 220, Height: 44);
       Style: (FontSize: 18, RenderBold: true, VerticalAlignment: Center);
     }
 
-    Label #Currentluck {
+    Label #CurrentLuck {
       Text: "0";
       Anchor: (Width: 100, Height: 44);
       Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
@@ -27,18 +27,18 @@ Group #luckGroup {
       Anchor: (Width: 80);
     }
 
-    $Common.@SmallSecondaryTextButton #luckMinus {
+    $Common.@SmallSecondaryTextButton #LuckMinus {
       Text: "-";
       Anchor: (Width: 35, Height: 35);
     }
 
-    Label #Nextluck {
+    Label #NextLuck {
       Text: "99";
       Anchor: (Width: 80, Height: 44);
       Style: (FontSize: 18, VerticalAlignment: Center, HorizontalAlignment: Center);
     }
 
-    $Common.@SmallSecondaryTextButton #luckPlus {
+    $Common.@SmallSecondaryTextButton #LuckPlus {
       Text: "+";
       Anchor: (Width: 35, Height: 35);
     }
