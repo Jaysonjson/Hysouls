@@ -122,7 +122,7 @@ Anchor: (Width: 665, Height: 610);
 }
 
 $Common.@Container {
-    Anchor: (Right: 130, Width: 500, Height: 305);
+    Anchor: (Right: 130, Width: 500, Height: 300);
 
     #Title {
         Group {

@@ -102,7 +102,7 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
                 builder.set("#NextStamina.TextSpans", Message.raw(dformat.format(calculateNextStat(essenceAttributeComponent, DefaultEntityStatTypes.getStamina()))));
                 builder.set("#NextMana.TextSpans", Message.raw(dformat.format(calculateNextStat(essenceAttributeComponent, DefaultEntityStatTypes.getMana()))));
                 builder.set("#NextDamage.TextSpans", Message.raw(dformat.format(currentDamage + calculateLinear(this, EssenceAttributeModifier.Type.DMG_BUFF))));
-                builder.set("#CurrentDropChance.TextSpans", Message.raw(dformat.format(currentDropChance  + "%")));
+                builder.set("#CurrentDropChance.TextSpans", Message.raw(dformat.format(currentDropChance) + "%"));
                 builder.set("#NextDropChance.TextSpans", Message.raw(dformat.format(currentDropChance + calculateLinear(this,  EssenceAttributeModifier.Type.EXTRA_DROP_CHANCE)) + "%"));
 
             }
