@@ -22,5 +22,5 @@ items.Ingredient_Soul_Essence_Singularity.description = An amalgamation equivale
 items.Weapon_Soul_Extractor.name = This Weapon drops <color is="#ffffff">Essences</color> as <color is="#ffffff">Soul Essences</color> when used against an Enemy
 items.Weapon_Sword_Soul.name = Soul Sword
 items.Weapon_Mace_Soul.name = Soul Mace
-items.Weapon_Daggers_Soul.name = Soul Mace
+items.Weapon_Daggers_Soul.name = Soul Daggers
 items.Weapon_Battleaxe_Soul.name = Soul Battleaxe

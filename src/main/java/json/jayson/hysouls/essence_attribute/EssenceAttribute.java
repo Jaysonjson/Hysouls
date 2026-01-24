@@ -74,6 +74,16 @@ public abstract class EssenceAttribute {
         }
     }
 
+    public float getExtraDropChance(EssenceAttributeHolder input) {
+        float chance = 0;
+        for (EssenceAttributeModifier modifier : modifiers) {
+            if(modifier.getType() == EssenceAttributeModifier.Type.EXTRA_DROP_CHANCE) {
+                chance += get(input) * modifier.getValue() / 100;
+            }
+        }
+        return chance;
+    }
+
     public float getExtraDamage(EssenceAttributeHolder input) {
         float extraDamage = 0;
         for (EssenceAttributeModifier modifier : modifiers) {

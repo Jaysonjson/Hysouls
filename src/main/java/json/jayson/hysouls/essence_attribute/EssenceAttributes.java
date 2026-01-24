@@ -90,7 +90,8 @@ public class EssenceAttributes {
 
     });
 
-    public static EssenceAttribute LUCK = add(new EssenceAttribute("Luck", 35) {
+    public static EssenceAttribute LUCK = add(new EssenceAttribute("Luck", 35,
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.EXTRA_DROP_CHANCE, 1)) {
 
         @Override
         public int get(EssenceAttributeHolder stated) {

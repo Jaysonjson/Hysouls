@@ -143,6 +143,16 @@ public class EssenceAttributeComponent implements Component<EntityStore>, Essenc
         }
     }
 
+    public float extraDropChance() {
+        float dropChance = 0;
+
+        for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
+            dropChance += value.getExtraDropChance(this);
+        }
+
+        return dropChance;
+    }
+
     @Override
     public @Nullable Component<EntityStore> clone() {
         return new EssenceAttributeComponent(getVigor(), getEndurance(), getMind(), getDexterity(), getStrength(), getLuck());

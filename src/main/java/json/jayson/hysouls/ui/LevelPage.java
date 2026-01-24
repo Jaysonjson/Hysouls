@@ -90,7 +90,8 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
                     value.levelUiText(builder, essenceAttributeComponent, this);
                 }
 
-                float currentDamage = calculateDamage(essenceAttributeComponent);
+                float currentDamage = calculateLinear(essenceAttributeComponent, EssenceAttributeModifier.Type.DMG_BUFF);
+                float currentDropChance = calculateLinear(essenceAttributeComponent, EssenceAttributeModifier.Type.EXTRA_DROP_CHANCE);
                 DecimalFormat dformat = new DecimalFormat("#0.0");
 
                 builder.set("#CurrentHealth.TextSpans", Message.raw(dformat.format(calculateStat(essenceAttributeComponent, DefaultEntityStatTypes.getHealth()))));
@@ -100,17 +101,20 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
                 builder.set("#NextHealth.TextSpans", Message.raw(dformat.format(calculateNextStat(essenceAttributeComponent, DefaultEntityStatTypes.getHealth()))));
                 builder.set("#NextStamina.TextSpans", Message.raw(dformat.format(calculateNextStat(essenceAttributeComponent, DefaultEntityStatTypes.getStamina()))));
                 builder.set("#NextMana.TextSpans", Message.raw(dformat.format(calculateNextStat(essenceAttributeComponent, DefaultEntityStatTypes.getMana()))));
-                builder.set("#NextDamage.TextSpans", Message.raw(dformat.format(currentDamage + calculateDamage(this))));
+                builder.set("#NextDamage.TextSpans", Message.raw(dformat.format(currentDamage + calculateLinear(this, EssenceAttributeModifier.Type.DMG_BUFF))));
+                builder.set("#CurrentDropChance.TextSpans", Message.raw(dformat.format(currentDropChance  + "%")));
+                builder.set("#NextDropChance.TextSpans", Message.raw(dformat.format(currentDropChance + calculateLinear(this,  EssenceAttributeModifier.Type.EXTRA_DROP_CHANCE)) + "%"));
+
             }
         }
     }
 
 
-    public float calculateDamage(EssenceAttributeHolder holder) {
+    public float calculateLinear(EssenceAttributeHolder holder, EssenceAttributeModifier.Type type) {
         float dmg = 0;
         for (EssenceAttribute value : EssenceAttributes.getAttributeMap().values()) {
             for (EssenceAttributeModifier modifier : value.getModifiers()) {
-                if(modifier.getType() == EssenceAttributeModifier.Type.DMG_BUFF) {
+                if(modifier.getType() == type) {
                     dmg += value.get(holder) * modifier.getValue();
                 }
             }

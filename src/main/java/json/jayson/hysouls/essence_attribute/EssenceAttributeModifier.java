@@ -49,7 +49,8 @@ public class EssenceAttributeModifier {
     public enum Type {
         STAT_BUFF,
         STAT_DEBUFF,
-        DMG_BUFF
+        DMG_BUFF,
+        EXTRA_DROP_CHANCE
     }
 
     public enum Target {
