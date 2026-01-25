@@ -8,9 +8,9 @@
   "BenchRequirement": [
     {
       "Type": "Crafting",
-      "Id": "Arcanebench",
+      "Id": "Bonfire",
       "Categories": [
-        "Arcane_Misc"
+        "Bonfire_Soul"
       ],
       "RequiredTierLevel": 0
     }

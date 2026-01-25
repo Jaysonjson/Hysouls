@@ -29,3 +29,4 @@ items.Estus_Flask_Empty.description = Seems empty...
 items.Estus_Flask_Full.name = Estus Flask
 items.Bonfire.name = Bonfire
 benchCategories.bonfire.estus = Estus
+benchCategories.bonfire.soul = Soul Essences

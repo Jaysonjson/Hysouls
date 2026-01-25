@@ -1,5 +1,14 @@
+- Fix crash when using no item to do damage (whoops)
+- Added Bonfire and Estus Flasks
+ - You regain your full HP when using a bonfire
+ - estus flasks also replenish
+
 - Bonfire now has an UI
  - UI has 3 Buttons:
     - Level Up (Opens the Level Up Page)
     - Crafting (Opens a crafting page)
     - Rest (Currently only closes the UI)
+
+- moved recipes to bonfire UI
+
+- Bonfire will get a custom model later

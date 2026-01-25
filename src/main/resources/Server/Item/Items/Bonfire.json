@@ -10,8 +10,9 @@
         "ResourceTypeId": "Wood_Trunk"
       },
       {
-        "Quantity": 3,
-        "ResourceTypeId": "Rock"
+        "Quantity": 4,
+        "ResourceTypeId": "",
+        "ItemId": "Ingredient_Bar_Iron"
       }
     ],
     "BenchRequirement": [
@@ -24,7 +25,7 @@
       }
     ]
   },
-  "Icon": "Icons/ItemsGenerated/Bench_WorkBench.png",
+  "Icon": "Icons/ItemsGenerated/Bonfire.png",
   "Categories": [
     "Furniture.Benches"
   ],
@@ -32,14 +33,14 @@
     "Material": "Solid",
     "DrawType": "Model",
     "Opacity": "Transparent",
-    "CustomModel": "Blocks/Benches/Workbench.blockymodel",
+    "CustomModel": "Blocks/Benches/Campfire_Off.blockymodel",
     "CustomModelTexture": [
       {
-        "Texture": "Blocks/Benches/Workbench_Texture.png",
+        "Texture": "Blocks/Benches/Campfire_Off_Texture.png",
         "Weight": 1
       }
     ],
-    "HitboxType": "Bench_Workbench",
+    "HitboxType": "Block_Half",
     "VariantRotation": "NESW",
     "Bench": {
       "Type": "Crafting",
@@ -140,15 +141,15 @@
   },
   "PlayerAnimationsId": "Block",
   "IconProperties": {
-    "Scale": 0.42,
+    "Scale": 0.58823,
     "Rotation": [
       22.5,
-      45.0,
+      45,
       22.5
     ],
     "Translation": [
-      12.9,
-      -11.7
+      0,
+      -13.5
     ]
   },
   "Tags": {
