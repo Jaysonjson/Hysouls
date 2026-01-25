@@ -141,10 +141,10 @@
     ],
     "BenchRequirement": [
       {
-        "Id": "Workbench",
+        "Id": "Bonfire",
         "Type": "Crafting",
         "Categories": [
-          "Workbench_Survival"
+          "Bonfire_Estus"
         ]
       }
     ]

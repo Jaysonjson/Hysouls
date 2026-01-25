@@ -1,106 +1,113 @@
 {
   "TranslationProperties": {
     "Name": "server.items.Bonfire.name",
-    "Description": "server.items.Bonfire.description"
+    "Description": ""
   },
-  "Categories": [
-    "Blocks.Deco"
-  ],
   "Recipe": {
-    "TimeSeconds": 1,
     "Input": [
       {
-        "ItemId": "Ingredient_Stick",
-        "Quantity": 4
+        "Quantity": 4,
+        "ResourceTypeId": "Wood_Trunk"
       },
       {
-        "ResourceTypeId": "Rubble",
-        "Quantity": 2
+        "Quantity": 3,
+        "ResourceTypeId": "Rock"
       }
     ],
     "BenchRequirement": [
       {
-        "Id": "Workbench",
         "Type": "Crafting",
         "Categories": [
-          "Workbench_Survival"
-        ]
+          "Tools"
+        ],
+        "Id": "Fieldcraft"
       }
     ]
   },
+  "Icon": "Icons/ItemsGenerated/Bench_WorkBench.png",
+  "Categories": [
+    "Furniture.Benches"
+  ],
   "BlockType": {
     "Material": "Solid",
     "DrawType": "Model",
-    "ParticleColor": "#6b3820",
     "Opacity": "Transparent",
-    "CustomModel": "Blocks/Benches/Campfire_Billycan.blockymodel",
+    "CustomModel": "Blocks/Benches/Workbench.blockymodel",
     "CustomModelTexture": [
       {
-        "Weight": 1,
-        "Texture": "Blocks/Benches/Campfire_Billycan_Texture.png"
+        "Texture": "Blocks/Benches/Workbench_Texture.png",
+        "Weight": 1
       }
     ],
-    "CustomModelScale": 1,
-    "HitboxType": "Bench_Campfire",
-    "Flags": {
-      "IsStackable": false
-    },
+    "HitboxType": "Bench_Workbench",
+    "VariantRotation": "NESW",
     "Bench": {
       "Type": "Crafting",
       "Categories": [
         {
           "Id": "Bonfire_Estus",
-          "Icon": "Icons/CraftingCategories/Arcane/Bench_Memories.png",
-          "Name": "server.benchCategories.estus"
+          "Icon": "Icons/CraftingCategories/Estus_Flask_Full.png",
+          "Name": "server.benchCategories.bonfire.estus"
+        },
+        {
+          "Id": "Bonfire_Soul",
+          "Name": "server.benchCategories.bonfire.soul",
+          "Icon": "Icons/CraftingCategories/Ingredient_Soul_Essence.png"
         }
       ],
-      "Id": "Bonfire",
-      "LocalOpenSoundEventId": "SFX_Campfire_Open_Local",
-      "LocalCloseSoundEventId": "SFX_Campfire_Close_Local",
-      "EndSoundEventId": "SFX_Campfire_Processing_End",
-      "FailedSoundEventId": "SFX_Campfire_Processing_Failed"
+      "LocalOpenSoundEventId": "SFX_Workbench_Open",
+      "LocalCloseSoundEventId": "SFX_Workbench_Close",
+      "CompletedSoundEventId": "SFX_Workbench_Craft",
+      "FailedSoundEventId": "SFX_Generic_Crafting_Failed",
+      "BenchUpgradeSoundEventId": "SFX_Workbench_Upgrade_Start_Default",
+      "BenchUpgradeCompletedSoundEventId": "SFX_Workbench_Upgrade_Complete_Default",
+      "Id": "Bonfire"
     },
     "State": {
-      "Id": "processingBench",
+      "Id": "crafting",
       "Definitions": {
-        "Processing": {
-          "Looping": true,
-          "Light": {
-            "Color": "#ecb"
-          },
-          "CustomModel": "Blocks/Benches/Campfire_Billycan.blockymodel",
-          "CustomModelTexture": [
-            {
-              "Weight": 1,
-              "Texture": "Blocks/Benches/Campfire_Billycan_Texture.png"
-            }
-          ],
-          "AmbientSoundEventId": "SFX_Campfire_Processing",
-          "Particles": [
-            {
-              "SystemId": "Campfire_New_Cartoon",
-              "Scale": 1
-            }
-          ]
+        "CraftCompleted": {
+          "CustomModelAnimation": "Blocks/Benches/Workbench_Crafting.blockyanim",
+          "Looping": true
         },
-        "ProcessCompleted": {
-          "Light": {
-            "Color": "#ecb"
-          },
-          "CustomModel": "Blocks/Benches/Campfire_Billycan.blockymodel",
+        "CraftCompletedInstant": {
+          "CustomModelAnimation": "Blocks/Benches/Workbench_Crafting.blockyanim"
+        },
+        "Tier2": {
+          "CustomModel": "Blocks/Benches/Workbench2.blockymodel",
           "CustomModelTexture": [
             {
-              "Weight": 1,
-              "Texture": "Blocks/Benches/Campfire_Billycan_Texture.png"
+              "Texture": "Blocks/Benches/Workbench2_Texture.png",
+              "Weight": 1
             }
           ],
-          "Looping": true,
-          "Particles": [
-            {
-              "SystemId": "Campfire_New_Cartoon",
-              "Scale": 1
+          "HitboxType": "Bench_Workbench2",
+          "State": {
+            "Id": "crafting",
+            "Definitions": {
+              "CraftCompleted": {
+                "CustomModelAnimation": "Blocks/Benches/Workbench2_Crafting.blockyanim"
+              }
             }
-          ]
+          }
+        },
+        "Tier3": {
+          "CustomModel": "Blocks/Benches/Workbench3.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Benches/Workbench3_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "Bench_Workbench3",
+          "State": {
+            "Id": "crafting",
+            "Definitions": {
+              "CraftCompleted": {
+                "CustomModelAnimation": "Blocks/Benches/Workbench3_Crafting.blockyanim"
+              }
+            }
+          }
         }
       }
     },
@@ -109,8 +116,8 @@
         "GatherType": "Benches"
       }
     },
-    "CustomModelAnimation": "Blocks/Animations/Fire/Fire_Burn.blockyanim",
     "BlockParticleSetId": "Wood",
+    "ParticleColor": "#6e4a2f",
     "Support": {
       "Down": [
         {
@@ -118,14 +125,14 @@
         }
       ]
     },
-    "BlockSoundSetId": "Campfire",
-    "VariantRotation": "NESW",
-    "Looping": true,
+    "BlockSoundSetId": "Wood",
+    "RandomRotation": "None",
     "Interactions": {
       "Use": {
         "Interactions": [
           {
-            "Type": "Bonfire"
+            "Type": "Bonfire",
+            "ViewDistance": 6
           }
         ]
       }
@@ -133,23 +140,31 @@
   },
   "PlayerAnimationsId": "Block",
   "IconProperties": {
-    "Scale": 0.58823,
-    "Translation": [
-      -3.9,
-      -14.1
-    ],
+    "Scale": 0.42,
     "Rotation": [
       22.5,
-      45,
+      45.0,
       22.5
+    ],
+    "Translation": [
+      12.9,
+      -11.7
     ]
   },
-  "Icon": "Icons/ItemsGenerated/Bench_Campfire.png",
   "Tags": {
     "Type": [
       "Bench"
     ]
   },
   "MaxStack": 1,
-  "ItemSoundSetId": "ISS_Blocks_Wood"
+  "ItemSoundSetId": "ISS_Blocks_Wood",
+  "Interactions": {
+    "Use": {
+      "Interactions": [
+        {
+          "Type": "Bonfire"
+        }
+      ]
+    }
+  }
 }
