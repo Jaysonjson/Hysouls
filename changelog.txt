@@ -1,1 +1,6 @@
-- Added Extra Drop Chance texts to level up menu
+- Fix crash when using no item to do damage (whoops)
+- Added Bonfire and Estus Flasks
+ - You regain your full HP when using a bonfire
+ - estus flasks also replenish
+
+I had to release this update fast because I just found out about the crash, the bonfire will become its own model and UI later on

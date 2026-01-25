@@ -1,0 +1,35 @@
+$Common = "../Common.ui";
+
+@LeftArrow = PatchStyle(TexturePath: "LeftArrow.png");
+
+$Common.@PageOverlay {
+  $Common.@Container {
+    Anchor: (Left: 130, Width: 300, Height: 610);
+
+    #Title {
+      Group {
+        $Common.@Title {
+          @Text = "Bonfire";
+        }
+      }
+    }
+
+    #Content {
+      Group {
+        Anchor: (Height: 60);
+        $Common.@TextButton #LevelUpButton {
+          Text: "Level Up";
+          Anchor: (Width: 250, Height: 45);
+        }
+      }
+
+      Group {
+        Anchor: (Height: 60);
+        $Common.@TextButton #RestButton {
+          Text: "Rest";
+          Anchor: (Width: 250, Height: 45);
+        }
+      }
+    }
+  }
+}

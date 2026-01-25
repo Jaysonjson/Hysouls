@@ -40,7 +40,6 @@ public class SoulEssenceMap {
     }
 
     public static ArrayList<Pair<String, Integer>> getFor(int essences) {
-        System.out.println(map.keySet());
         ArrayList<Pair<String, Integer>> list = new ArrayList<>();
         for (Integer i : getMap().keySet()) {
             if (essences <= 0) break;

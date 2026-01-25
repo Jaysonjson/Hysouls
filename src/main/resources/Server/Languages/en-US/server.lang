@@ -24,3 +24,7 @@ items.Weapon_Sword_Soul.name = Soul Sword
 items.Weapon_Mace_Soul.name = Soul Mace
 items.Weapon_Daggers_Soul.name = Soul Daggers
 items.Weapon_Battleaxe_Soul.name = Soul Battleaxe
+items.Estus_Flask_Empty.name = Estus Flask
+items.Estus_Flask_Empty.description = Seems empty...
+items.Estus_Flask_Full.name = Estus Flask
+items.Bonfire.name = Bonfire

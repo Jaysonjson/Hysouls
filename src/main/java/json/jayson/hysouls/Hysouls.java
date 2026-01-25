@@ -1,6 +1,8 @@
 package json.jayson.hysouls;
 
+import com.hypixel.hytale.builtin.mounts.interactions.SeatingInteraction;
 import com.hypixel.hytale.logger.HytaleLogger;
+import com.hypixel.hytale.server.core.entity.AnimationUtils;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
@@ -12,6 +14,7 @@ import json.jayson.hysouls.components.ComponentTypes;
 import json.jayson.hysouls.components.EssenceAttributeComponent;
 import json.jayson.hysouls.components.EssenceComponent;
 import json.jayson.hysouls.essence_attribute.EssenceAttributes;
+import json.jayson.hysouls.interactions.BonfireInteraction;
 import json.jayson.hysouls.interactions.OpenLevelPageInteraction;
 import json.jayson.hysouls.interactions.SecondarySoulEssenceInteraction;
 import json.jayson.hysouls.systems.EssenceDamageSystem;
@@ -38,6 +41,7 @@ public class Hysouls extends JavaPlugin {
     protected void setup() {
         getCodecRegistry(Interaction.CODEC).register("OpenLevelUpUI", OpenLevelPageInteraction.class, OpenLevelPageInteraction.CODEC);
         getCodecRegistry(Interaction.CODEC).register("SoulEssence", SecondarySoulEssenceInteraction.class, SecondarySoulEssenceInteraction.CODEC);
+        getCodecRegistry(Interaction.CODEC).register("Bonfire", BonfireInteraction.class, BonfireInteraction.CODEC);
 
         ComponentTypes.ESSENCES = getEntityStoreRegistry().registerComponent(EssenceComponent.class, "Essences", EssenceComponent.CODEC);
         ComponentTypes.ESSENCE_ATTRIBUTE = getEntityStoreRegistry().registerComponent(EssenceAttributeComponent.class, "EssenceAttributes", EssenceAttributeComponent.CODEC);
@@ -69,6 +73,5 @@ public class Hysouls extends JavaPlugin {
         getEntityStoreRegistry().registerSystem(new EssenceParticleSystem());
         getEntityStoreRegistry().registerSystem(new EssenceDamageSystem());
         getEntityStoreRegistry().registerSystem(new EssenceNPCItemDropSystem());
-
     }
 }
