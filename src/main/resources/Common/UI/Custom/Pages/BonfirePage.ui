@@ -25,6 +25,14 @@ $Common.@PageOverlay {
 
       Group {
         Anchor: (Height: 60);
+        $Common.@TextButton #CraftingButton {
+          Text: "Craft";
+          Anchor: (Width: 250, Height: 45);
+        }
+      }
+
+      Group {
+        Anchor: (Height: 60);
         $Common.@TextButton #RestButton {
           Text: "Rest";
           Anchor: (Width: 250, Height: 45);

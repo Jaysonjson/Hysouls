@@ -52,7 +52,7 @@ public class BonfireInteraction extends SimpleInstantInteraction {
                 }
             }
             PlayerRef playerRef = interactionContext.getCommandBuffer().getComponent(ref, PlayerRef.getComponentType());
-            player.getPageManager().openCustomPage(ref, ref.getStore(), new BonfirePage(playerRef));
+            player.getPageManager().openCustomPage(ref, ref.getStore(), new BonfirePage(playerRef, interactionContext.getTargetBlock()));
 
         }
     }

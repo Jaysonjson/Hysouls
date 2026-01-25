@@ -1,0 +1,158 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Bench_Alchemy.name",
+    "Description": "server.items.Bench_Alchemy.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Bench_Alchemy.png",
+  "Categories": [
+    "Furniture.Benches"
+  ],
+  "Recipe": {
+    "TimeSeconds": 3,
+    "Input": [
+      {
+        "ResourceTypeId": "Rock",
+        "Quantity": 20
+      },
+      {
+        "ItemId": "Ingredient_Bar_Gold",
+        "Quantity": 5
+      },
+      {
+        "ItemId": "Ingredient_Sac_Venom",
+        "Quantity": 10
+      },
+      {
+        "ItemId": "Ingredient_Bone_Fragment",
+        "Quantity": 10
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Workbench",
+        "Type": "Crafting",
+        "Categories": [
+          "Workbench_Crafting"
+        ],
+        "RequiredTierLevel": 2
+      }
+    ]
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Benches/Alchemy.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Benches/Alchemy_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "HitboxType": "Bench_Alchemy",
+    "VariantRotation": "NESW",
+    "Bench": {
+      "Type": "Crafting",
+      "LocalOpenSoundEventId": "SFX_Alchemy_Bench_Open",
+      "LocalCloseSoundEventId": "SFX_Alchemy_Bench_Close",
+      "CompletedSoundEventId": "SFX_Alchemy_Bench_Craft",
+      "BenchUpgradeSoundEventId": "SFX_Workbench_Upgrade_Start_Default",
+      "BenchUpgradeCompletedSoundEventId": "SFX_Workbench_Upgrade_Complete_Default",
+      "Categories": [
+        {
+          "Id": "Alchemy_Potions",
+          "Icon": "Icons/CraftingCategories/Alchemy/Combat_Potions.png",
+          "Name": "server.benchCategories.combatPotions"
+        },
+        {
+          "Id": "Alchemy_Potions_Misc",
+          "Icon": "Icons/CraftingCategories/Alchemy/Misc_Potions.png",
+          "Name": "server.benchCategories.miscPotions"
+        },
+        {
+          "Id": "Alchemy_Bombs",
+          "Icon": "Icons/CraftingCategories/Alchemy/Bombs.png",
+          "Name": "server.benchCategories.bombs"
+        }
+      ],
+      "Id": "Bonfire",
+      "TierLevels": [
+        {
+          "CraftingTimeReductionModifier": 0.0,
+          "UpgradeRequirement": {
+            "Material": [
+              {
+                "ItemId": "Ingredient_Bar_Silver",
+                "Quantity": 20
+              },
+              {
+                "ItemId": "Ingredient_Bar_Gold",
+                "Quantity": 10
+              },
+              {
+                "ItemId": "Ingredient_Powder_Boom",
+                "Quantity": 10
+              },
+              {
+                "ItemId": "Ingredient_Bone_Fragment",
+                "Quantity": 50
+              }
+            ],
+            "TimeSeconds": 3
+          }
+        },
+        {
+          "CraftingTimeReductionModifier": 0.3
+        }
+      ]
+    },
+    "State": {
+      "Id": "crafting",
+      "Definitions": {
+        "CraftCompleted": {
+          "CustomModelAnimation": "Blocks/Benches/Alchemy_Crafting.blockyanim",
+          "Looping": true
+        },
+        "CraftCompletedInstant": {
+          "CustomModelAnimation": "Blocks/Benches/Alchemy_Crafting.blockyanim"
+        }
+      }
+    },
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Benches"
+      }
+    },
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#5C583E",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "BlockSoundSetId": "Stone"
+  },
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.435,
+    "Translation": [
+      11.4,
+      -18.6
+    ],
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Bench"
+    ]
+  },
+  "MaxStack": 1,
+  "ItemLevel": 9,
+  "ItemSoundSetId": "ISS_Blocks_Wood"
+}

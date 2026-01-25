@@ -46,43 +46,15 @@
       "IsStackable": false
     },
     "Bench": {
-      "Type": "Processing",
-      "AllowNoInputProcessing": true,
-      "Input": [
+      "Type": "Crafting",
+      "Categories": [
         {
-          "FilterValidIngredients": true
-        },
-        {
-          "FilterValidIngredients": true
+          "Id": "Bonfire_Estus",
+          "Icon": "Icons/CraftingCategories/Arcane/Bench_Memories.png",
+          "Name": "server.benchCategories.estus"
         }
       ],
-      "Fuel": [
-        {
-          "ResourceTypeId": "Fuel",
-          "Icon": "Icons/Processing/FuelSlotIcon.png"
-        }
-      ],
-      "ExtraOutput": {
-        "Outputs": [
-          {
-            "ItemId": "Ingredient_Charcoal"
-          }
-        ],
-        "PerFuelItemsConsumed": 2,
-        "IgnoredFuelSources": [
-          {
-            "ItemId": "Ingredient_Charcoal"
-          },
-          {
-            "ItemId": "Ingredient_Fibre"
-          },
-          {
-            "ItemId": "Ingredient_Tree_Sap"
-          }
-        ]
-      },
-      "OutputSlotsCount": 4,
-      "Id": "Campfire",
+      "Id": "Bonfire",
       "LocalOpenSoundEventId": "SFX_Campfire_Open_Local",
       "LocalCloseSoundEventId": "SFX_Campfire_Close_Local",
       "EndSoundEventId": "SFX_Campfire_Processing_End",
