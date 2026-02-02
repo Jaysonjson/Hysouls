@@ -6,6 +6,7 @@ import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import json.jayson.hysouls.util.DependencyManager;
 import json.jayson.hysouls.ui.EssenceHud;
@@ -49,11 +50,11 @@ public class EssenceComponent implements Component<EntityStore> {
         this.essences = souls;
         if (ref != null && ref.isValid()) {
             Player playerComponent = ref.getStore().getComponent(ref, Player.getComponentType());
-            if (playerComponent != null) {
-                EssenceHud hud = DependencyManager.getEssenceHud(playerComponent);
-                if(hud != null) {
-                    hud.setEssences(essences);
-                }
+            PlayerRef playerRef = ref.getStore().getComponent(ref, PlayerRef.getComponentType());
+            if (playerComponent == null && playerRef == null) return;
+            EssenceHud hud = DependencyManager.getEssenceHud(playerComponent, playerRef);
+            if(hud != null) {
+                hud.setEssences(essences);
             }
         }
     }

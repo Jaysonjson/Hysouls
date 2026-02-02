@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "json.jayson"
-version = "0.1.1"
+version = "0.1.2"
 val javaVersion = 25
 
 val appData = System.getenv("APPDATA") ?: ""
@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.buuz135:MultipleHUD:1.0.2")
+    implementation("com.buuz135:MultipleHUD:1.0.4")
     compileOnly(libs.jetbrains.annotations)
     compileOnly(libs.jspecify)
 

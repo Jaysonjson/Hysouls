@@ -16,14 +16,15 @@ public class DependencyManager {
     }
 
     @Nullable
-    public static EssenceHud getEssenceHud(Player player) {
+    public static EssenceHud getEssenceHud(Player player, PlayerRef playerRef) {
         if(player.getHudManager().getCustomHud() instanceof EssenceHud essenceHud) {
             return essenceHud;
         } else if(multiHud()) {
             if(player.getHudManager().getCustomHud() instanceof MultipleCustomUIHud multipleCustomUIHud) {
-                if(multipleCustomUIHud.getCustomHuds().get("HysoulsHud") instanceof EssenceHud essenceHud) {
-                    return essenceHud;
-                }
+                multipleCustomUIHud.remove("HysoulsHud");
+                EssenceHud essenceHud = new EssenceHud(playerRef, 0);
+                multipleCustomUIHud.add("HysoulsHud", essenceHud);
+                return essenceHud;
             }
         }
         return null;
