@@ -9,101 +9,29 @@ public class EssenceAttributes {
 
     public static EssenceAttribute VIGOR = add(new EssenceAttribute("Vigor",
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.2f, DefaultEntityStatTypes::getHealth),
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 5f, DefaultEntityStatTypes::getHealth)) {
-
-        @Override
-        public int get(EssenceAttributeHolder stated) {
-            return stated.getVigor();
-        }
-
-        @Override
-        public void set(EssenceAttributeHolder stated, int value) {
-            stated.setVigor(value);
-        }
-
-    });
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 5f, DefaultEntityStatTypes::getHealth)));
 
     public static EssenceAttribute ENDURANCE = add(new EssenceAttribute("Endurance",
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 0.75f, DefaultEntityStatTypes::getStamina),
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 5f, DefaultEntityStatTypes::getStamina)) {
-
-        @Override
-        public int get(EssenceAttributeHolder stated) {
-            return stated.getEndurance();
-        }
-
-        @Override
-        public void set(EssenceAttributeHolder stated, int value) {
-            stated.setEndurance(value);
-        }
-
-    });
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 5f, DefaultEntityStatTypes::getStamina)));
 
     public static EssenceAttribute MIND = add(new EssenceAttribute("Mind",
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.06f, DefaultEntityStatTypes::getMana),
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 1f, DefaultEntityStatTypes::getMana)
-            ) {
-
-        @Override
-        public int get(EssenceAttributeHolder stated) {
-            return stated.getMind();
-        }
-
-        @Override
-        public void set(EssenceAttributeHolder stated, int value) {
-            stated.setMind(value);
-        }
-
-    });
+            ));
 
     public static EssenceAttribute DEXTERITY = add(new EssenceAttribute("Dexterity",
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 0.5f, DefaultEntityStatTypes::getStamina)) {
-
-        @Override
-        public int get(EssenceAttributeHolder stated) {
-            return stated.getDexterity();
-        }
-
-        @Override
-        public void set(EssenceAttributeHolder stated, int value) {
-            stated.setDexterity(value);
-        }
-
-    });
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 0.5f, DefaultEntityStatTypes::getStamina)));
 
 
     public static EssenceAttribute STRENGTH = add(new EssenceAttribute("Strength",
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_BUFF, 1.05f, DefaultEntityStatTypes::getHealth),
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.STAT_DEBUFF, 1f, DefaultEntityStatTypes::getHealth),
             EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.DMG_BUFF, 0.45f)
-    ) {
-
-        @Override
-        public int get(EssenceAttributeHolder stated) {
-            return stated.getStrength();
-        }
-
-        @Override
-        public void set(EssenceAttributeHolder stated, int value) {
-            stated.setStrength(value);
-        }
-
-    });
+    ));
 
     public static EssenceAttribute LUCK = add(new EssenceAttribute("Luck", 35,
-            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.EXTRA_DROP_CHANCE, 1)) {
-
-        @Override
-        public int get(EssenceAttributeHolder stated) {
-            return stated.getLuck();
-        }
-
-        @Override
-        public void set(EssenceAttributeHolder stated, int value) {
-            stated.setLuck(value);
-        }
-
-    });
+            EssenceAttributeModifier.ofPlayer(EssenceAttributeModifier.Type.EXTRA_DROP_CHANCE, 1)));
 
 
     public static int emptyStat() {

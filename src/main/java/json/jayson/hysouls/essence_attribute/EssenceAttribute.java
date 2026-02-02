@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class EssenceAttribute {
+public class EssenceAttribute {
 
     private String named;
     private int cap = 99;
@@ -98,8 +98,12 @@ public abstract class EssenceAttribute {
         return new KeyedCodec<>(getNamed(), (Codec<T>) Codec.INTEGER);
     }
 
-    public abstract int get(EssenceAttributeHolder stated);
-    public abstract void set(EssenceAttributeHolder stated, int value);
+    public int get(EssenceAttributeHolder stated) {
+        return stated.getEssenceAttribute(getNamed());
+    }
+    public void set(EssenceAttributeHolder stated, int value) {
+        stated.setEssenceAttribute(getNamed(), value);
+    }
 
 
     /* Interface stuff */

@@ -26,23 +26,19 @@ import json.jayson.hysouls.essence_attribute.EssenceAttributeHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
 
 
 //Needs a major rework, plan is to make the UI dynamically with the EssenceStats in mind
 public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData> implements EssenceAttributeHolder {
 
     public int wantedLevel = 0;
-    public int wantedVigor = 0;
-    public int wantedEndurance = 0;
-    public int wantedMind = 0;
-    public int wantedDex = 0;
-    public int wantedStr = 0;
-    public int wantedLuck = 0;
     public int statueLevelCap;
 
     public LevelPage(@NotNull PlayerRef playerRef, int statueLevelCap) {
         super(playerRef, CustomPageLifetime.CanDismiss, LevelEventData.CODEC);
         this.statueLevelCap = statueLevelCap;
+        addDefaultEssenceAttributes(0);
     }
 
     @Override
@@ -178,19 +174,11 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
         sendUpdate(builder);
     }
 
-    @Override
-    public int getVigor() {
-        return wantedVigor;
-    }
+    private HashMap<String, Integer> essenceAttributes = new HashMap<>();
 
     @Override
-    public int getEndurance() {
-        return wantedEndurance;
-    }
-
-    @Override
-    public int getMind() {
-        return wantedMind;
+    public HashMap<String, Integer> getEssenceAttributes() {
+        return essenceAttributes;
     }
 
     @Override
@@ -198,55 +186,12 @@ public class LevelPage extends InteractiveCustomUIPage<LevelPage.LevelEventData>
         return wantedLevel;
     }
 
-    @Override
-    public int getDexterity() {
-        return wantedDex;
-    }
-
-    @Override
-    public int getStrength() {
-        return wantedStr;
-    }
-
-    @Override
-    public int getLuck() {
-        return wantedLuck;
-    }
 
     @Override
     public void setLevel(int level) {
         this.wantedLevel = level;
     }
 
-    @Override
-    public void setEndurance(int endurance) {
-        this.wantedEndurance = endurance;
-    }
-
-    @Override
-    public void setMind(int mind) {
-        this.wantedMind = mind;
-    }
-
-    @Override
-    public void setDexterity(int dexterity) {
-        wantedDex = dexterity;
-    }
-
-    @Override
-    public void setStrength(int strength) {
-        wantedStr = strength;
-    }
-
-    @Override
-    public void setLuck(int luck) {
-        this.wantedLuck = luck;
-    }
-
-    @Override
-    public void setVigor(int vigor) {
-        this.wantedVigor = vigor;
-    }
 
     public static class LevelEventData {
         public static final BuilderCodec<LevelEventData> CODEC = BuilderCodec.builder(LevelEventData.class, LevelEventData::new)
